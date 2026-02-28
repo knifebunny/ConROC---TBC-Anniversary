@@ -1,7 +1,6 @@
 package-as: ConROC
 
 move-folders:
-  ConROC: ConROC
   ConROC_Druid: ConROC_Druid
   ConROC_Hunter: ConROC_Hunter
   ConROC_Paladin: ConROC_Paladin
