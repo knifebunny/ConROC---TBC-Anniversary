@@ -1,100 +1,109 @@
 # ConROC – TBC Anniversary Edition
 
-**Conflict Rotation Optimizer Classic** is a World of Warcraft addon that provides real-time spell suggestions and visual rotation cues to help players optimise their gameplay.
+> **Conflict Rotation Optimizer Classic** — a World of Warcraft addon that provides real-time spell suggestions and visual rotation cues to help players optimise their gameplay.
 
-This repository is a fork of the original [ConROC by Vae2009](https://github.com/Vae2009/ConROC), rebuilt and maintained for **The Burning Crusade Classic Anniversary Edition (Interface 20504)**. Development continues with the kind permission of the original author.
+This is a fork of the original [ConROC by Vae2009](https://github.com/Vae2009/ConROC), completely rebuilt for **The Burning Crusade Classic Anniversary Edition**. Development continues with the kind permission and support of the original author.
 
-> 💡 **Special thanks to Vae2009** for creating ConROC and for generously allowing this project to carry it forward into TBC Classic. The original concept, core framework, and addon architecture are entirely his work.
-
----
-
-## What's New in This Fork
-
-This fork addresses significant compatibility issues that prevented the original addon from running correctly in TBC Anniversary Edition, including:
-
-- Full removal of Season of Discovery (SoD) content that contaminated the class modules
-- Replacement of retail-only API calls with TBC Classic compatible equivalents
-- Correct TBC spell IDs and ranks across all supported class modules
-- Spell rank flexibility — any rank of a suggested spell now satisfies the rotation requirement
-- Automatic talent-based spec detection replacing manual configuration
-- Interface version correctly targeting TBC Anniversary (20504)
+**Special thanks to [Vae2009](https://github.com/Vae2009)** for creating ConROC and for generously allowing this project to carry it forward into TBC Classic. The original concept, core framework, and addon architecture are entirely his work.
 
 ---
 
-## Supported Classes & Specs
+## Supported Classes
 
-All eight class modules have been fully rebuilt for TBC Classic:
-
-| Class | Supported Specs |
+| Class | Specs Supported |
 |-------|----------------|
-| **Warlock** | Affliction, Demonology, Destruction |
-| **Rogue** | Combat, Assassination, Subtlety |
-| **Paladin** | Holy, Protection, Retribution |
-| **Hunter** | Beast Mastery, Marksmanship, Survival |
-| **Priest** | Holy, Discipline, Shadow |
-| **Druid** | Balance, Feral (Cat & Bear), Restoration |
-| **Shaman** | Elemental, Enhancement, Restoration |
-| **Warrior** | Arms, Fury, Protection |
+| 🟢 Druid | Balance · Feral (Cat & Bear) · Restoration |
+| 🟡 Paladin | Holy · Protection · Retribution |
+| 🔴 Rogue | Assassination · Combat · Subtlety |
+| 🔵 Shaman | Elemental · Enhancement · Restoration |
+| 🟣 Warlock | Affliction · Demonology · Destruction |
+| ⚔️ Warrior | Arms · Fury · Protection |
+
+> Spec is detected automatically from your talent tree — no manual configuration needed.
 
 ---
 
 ## Installation
 
-1. Download the latest release from the [Releases](../../releases) page
-2. Extract the zip file
-3. Copy **all** extracted addon folders into your WoW addons directory:
-   ```
-   World of Warcraft\_classic_era_\Interface\AddOns\
-   ```
-4. Launch WoW and enable the addons in the **AddOns** menu on the character select screen
-5. Log in — ConROC will automatically detect your spec and begin suggesting rotations
+### Step 1 — Download
 
-> ⚠️ Make sure to enable **all** ConROC folders (the core addon plus your class module). Only the module for your class is required alongside the core.
+Go to the [Releases](../../releases) page and download the latest zip file.
+
+### Step 2 — Extract
+
+Extract the zip. Inside you will find a folder named something like `ConROC-TBC-v2.0.2` — open it to find the addon folders inside.
+
+### Step 3 — Copy to WoW
+
+Copy the folders you need into your WoW AddOns directory:
+
+```
+World of Warcraft\_classic_era_\Interface\AddOns\
+```
+
+You **always need two folders**:
+- `ConROC` — the core addon (required)
+- Your class folder — e.g. `ConROC_Paladin`, `ConROC_Warlock`, etc.
+
+You do **not** need to install class folders for classes you don't play.
+
+### Step 4 — Enable In Game
+
+At the character select screen, click **AddOns** and make sure both `ConROC` and your class module are ticked. Log in and ConROC will start working immediately.
 
 ---
 
-## How to Use
+## How It Works
 
-Once in game, ConROC displays a visual indicator showing your next recommended ability. The suggestion updates in real time based on your current buffs, debuffs, cooldowns, and talent spec.
+Once in game, ConROC displays a visual indicator showing your next recommended ability. Suggestions update in real time based on your current buffs, debuffs, cooldowns, resources, and talent spec.
 
 **Slash Commands:**
 
 | Command | Description |
 |---------|-------------|
 | `/conroc` | Toggle the addon on/off |
-| `/conroc menu` | Open the spell menu configuration |
-| `/ConROCPT` | Print your current talent tree and IDs (for debugging) |
+| `/conroc menu` | Open the spell configuration menu |
+| `/ConROCPT` | Print your talent tree with IDs (debugging) |
 
 ---
 
-## Reporting Issues
+## What Changed From the Original
 
-Found a bug or have a suggestion? Please open an [Issue](../../issues) and include:
+This fork resolves significant issues that prevented ConROC from running in TBC Anniversary:
+
+- Removed all Season of Discovery (SoD) content that contaminated the original class modules
+- Replaced retail-only WoW API calls with TBC Classic compatible equivalents
+- Correct TBC spell IDs and ranks implemented across all class modules
+- Spell rank flexibility — any rank of a suggested spell now satisfies the rotation, preventing stalls when using downranked spells for mana efficiency
+- Automatic talent-based spec detection across all classes
+- Interface version correctly set to `20504` (TBC Anniversary)
+
+See [CHANGELOG.md](CHANGELOG.md) for the full detail of changes per class.
+
+---
+
+## Reporting a Bug
+
+Please open an [Issue](../../issues) and include:
 
 - Your **class and spec**
-- What ConROC **suggested** vs what the **correct action** was
-- Your addon version (shown in the release zip filename)
-- Any error output from **BugSack** if applicable
+- What ConROC **suggested** vs what the **correct ability** was
+- Your addon **version** (from the release zip name)
+- Any **BugSack error output** if you have it
 
-The more detail you provide, the faster it can be investigated.
-
----
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for a full history of changes.
+The more detail you include, the faster it can be looked into.
 
 ---
 
 ## Credits
 
-| Contributor | Role |
-|-------------|------|
-| [Vae2009](https://github.com/Vae2009) | Original creator of ConROC — core framework, addon architecture, original class modules |
-| This fork | TBC Anniversary Edition compatibility rebuild, class module reconstruction, bug fixes |
+| | |
+|---|---|
+| **[Vae2009](https://github.com/Vae2009)** | Original creator — core framework, addon architecture, class modules |
+| **knifebunny** | TBC Anniversary Edition fork — compatibility rebuild, class module reconstruction, ongoing maintenance |
 
 ---
 
-## License
+## Licence
 
-This project follows the MIT licence established by the original ConROC project. Original copyright by Vae2009.
+MIT — original copyright by [Vae2009](https://github.com/Vae2009).
