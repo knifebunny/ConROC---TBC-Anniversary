@@ -4,6 +4,10 @@ ignore:
   - ConROC/chatgpt
   - "**/CHANGES.txt"
   - "**/.gitignore"
+  - CHANGELOG.md
+  - icon-tbc.png
+  - LICENSE
+  - README.md
 
 move-folders:
   ConROC_Druid: ConROC_Druid
