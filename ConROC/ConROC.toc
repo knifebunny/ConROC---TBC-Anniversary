@@ -1,14 +1,20 @@
 ## Title:-|cffFFFFFFConROC|r- Conflict Rotation Optimizer Classic
-## Notes: Rotation helper framework.
-## Version: 1.15.30
+## Notes: Rotation helper framework for TBC Anniversary.
+## Version: @project-version@
 ## Author: Vae
-## Interface: 11506
+## Interface: 20504
 ## SavedVariables: ConROCPreferences
 ## OptionalDependencies: Bartender4, ElvUI, ButtonForge
+## X-Curse-Project-ID: 1474412
 
 # Libraries
-Libs\Libs.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceBucket-3.0\AceBucket-3.0.xml
 
+# Locale
+Locale\locale.xml
+
+Bindings.xml
 core.lua
 buttons.lua
 helper.lua

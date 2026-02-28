@@ -1,0 +1,16 @@
+package-as: ConROC
+
+ignore:
+  - ConROC/chatgpt
+  - "**/CHANGES.txt"
+  - "**/.gitignore"
+
+move-folders:
+  ConROC_Druid: ConROC_Druid
+  ConROC_Hunter: ConROC_Hunter
+  ConROC_Paladin: ConROC_Paladin
+  ConROC_Priest: ConROC_Priest
+  ConROC_Rogue: ConROC_Rogue
+  ConROC_Shaman: ConROC_Shaman
+  ConROC_Warlock: ConROC_Warlock
+  ConROC_Warrior: ConROC_Warrior
