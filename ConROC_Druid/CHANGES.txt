@@ -1,0 +1,10 @@
+lightweight tag 17a3ba725bdf5ba3f87433dd7a07f74020e972ff v1.15.23
+Author:	Vae <emuha17@gmail.com>
+Date:	Wed Feb 12 14:52:53 2025 -1000
+
+commit 17a3ba725bdf5ba3f87433dd7a07f74020e972ff
+Author: Vae <emuha17@gmail.com>
+Date:   Wed Feb 12 14:52:53 2025 -1000
+
+    Spellmenu Fix
+

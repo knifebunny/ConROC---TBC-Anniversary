@@ -1,0 +1,11 @@
+## Title:-|cffFFFFFFConROC|r- |cffFFF569Rogue|r
+## Version: 1.15.21
+## Author: Vae
+## Interface: 11506
+## SavedVariablesPerCharacter: ConROCRogueSpells
+## Dependencies: ConROC
+## LoadOnDemand: 1
+
+rogue_ids.lua
+rogue_spellmenu.lua
+rogue.lua

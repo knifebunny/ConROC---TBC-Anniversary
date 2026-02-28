@@ -1,0 +1,10 @@
+lightweight tag 3d0b8a5071eb535e90f1aa516bdab82df0517144 v1.15.23
+Author:	Vae <emuha17@gmail.com>
+Date:	Sat Feb 22 04:44:29 2025 -1000
+
+commit 3d0b8a5071eb535e90f1aa516bdab82df0517144
+Author: Vae <emuha17@gmail.com>
+Date:   Sat Feb 22 04:44:29 2025 -1000
+
+    Fix for stance checks and execute code
+
