@@ -1,0 +1,53 @@
+ConROC_Hunter v2.0.0 - TBC Anniversary Edition
+================================================
+
+COMPLETE REBUILD for TBC Classic (Anniversary Edition)
+
+CRITICAL FIXES:
+- Interface version corrected: 11506 → 20504 (TBC Anniversary)
+- Removed ALL Season of Discovery contamination
+
+SoD CONTAMINATION REMOVED:
+- Removed entire ids.Engrave section (SoD rune engraving system)
+- Removed entire ids.Runes section (SoD rune abilities)
+- Removed all SoD trap variants (FrostTrapSoD, FreezingTrapSoD, ExplosiveTrapSoD,
+  ImmolationTrapSoD) and associated SoD rank tables
+- Removed all SoD Raptor Strike variants (RaptorStrikeSoD ranks)
+- Removed all WyvernStrike SoD entries
+- Removed ids.Buff.LockandLoad and ids.Buff.RaptorFury (SoD buffs)
+- Removed all ConROC.Seasons.IsSoD and ConROC:RuneEquipped conditionals
+  from UpdateSpellID() - now TBC-only, no branching
+- Removed entire SoD rotation branch from Damage() function
+- Removed SoD rune variables from rotation: Carve, ChimeraShot, ExplosiveShot,
+  FlankingStrike, HeartoftheLion, KillCommand, KillShot, LoneWolf, WyvernStrike
+- Removed _LockandLoad_BUFF variable and all Lock and Load trap combo logic
+- Removed _can_Execute variable (unused in TBC rotation)
+- Removed AspectoftheFalcon SoD rune from indicators and spellmenu
+- Removed SoD-specific spellmenu entries: ChimeraShot, HeartoftheLion,
+  KillShot, FlankingStrike, Carve, WyvernStrike
+
+BUGS FIXED:
+- Fixed JustCasted() function: was comparing spellID to ability object reference
+  instead of the actual spell ID (75 = Auto Shot). Fixed to spellID == 75
+- Fixed Enum.PowerType.Mana (retail API) → UnitPower('target', 0)
+  (correct Classic/TBC API for mana power type)
+- Fixed HasWindfury() function removed - was only used in SoD WingClip proc path
+  which no longer exists in TBC rotation
+
+TBC-SPECIFIC ADDITIONS:
+- Added Aspect of the Hawk Rank 7 (38784) - TBC level 64 rank
+- Added Arcane Shot Rank 9 (27019) - TBC level 60 rank
+- Added Multi Shot Rank 5 (27021) - TBC level 60 rank
+- Added Volley Rank 4 (27022) - TBC level 60 rank
+- Added Serpent Sting Rank 10 (27016) - TBC level 60 rank
+- Updated UpdateSpellID() to include all new TBC ranks in rank checks
+- Corrected Aspect of the Viper reqLevel in spellmenu (1 → 20)
+
+ROTATION CLEANUP:
+- Ranged rotation restructured: Hunter's Mark → Cooldowns (BW/RF) →
+  Aimed Shot → Sting → AoE shots → Arcane Shot filler → Auto Shot
+- Pre-pull opener preserved: Hunter's Mark + Aimed Shot cast when out of combat
+- Melee rotation preserved and clean: Counterattack > Mongoose Bite >
+  Intimidation > Scatter Shot > Wing Clip > Raptor Strike > Auto Attack
+- Removed all Chimera Shot, Kill Shot, and Lock and Load trap combos
+  that were incorrectly present in the non-SoD rotation branch
