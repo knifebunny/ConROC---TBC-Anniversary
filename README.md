@@ -13,7 +13,9 @@ This is a fork of the original [ConROC by Vae2009](https://github.com/Vae2009/Co
 | Class | Specs Supported |
 |-------|----------------|
 | 🟢 Druid | Balance · Feral (Cat & Bear) · Restoration |
+| 🏹 Hunter | Beast Mastery · Marksmanship · Survival |
 | 🟡 Paladin | Holy · Protection · Retribution |
+| 🩺 Priest | Discipline · Holy · Shadow |
 | 🔴 Rogue | Assassination · Combat · Subtlety |
 | 🔵 Shaman | Elemental · Enhancement · Restoration |
 | 🟣 Warlock | Affliction · Demonology · Destruction |
