@@ -1,0 +1,10 @@
+lightweight tag fd86970bb117407bc7cbd23454fa18bc084aca61 v1.15.30
+Author:	Vae <emuha17@gmail.com>
+Date:	Fri Feb 14 10:59:34 2025 -1000
+
+commit fd86970bb117407bc7cbd23454fa18bc084aca61
+Author: Vae <emuha17@gmail.com>
+Date:   Fri Feb 14 10:59:34 2025 -1000
+
+    Fixed Next window options.
+
