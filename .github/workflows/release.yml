@@ -1,0 +1,30 @@
+name: Release ConROC
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: write
+
+env:
+  CF_API_KEY: ${{ secrets.CF_API_KEY }}
+  GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: BigWigsMods/packager@v2
+```
+
+A couple of important things to also do:
+
+**Add your Project ID to your TOC file** — this is the cleanest approach as it means the workflow doesn't need explicit args. Add this line to `ConROC.toc`:
+```
+## X-Curse-Project-ID: 1474412
