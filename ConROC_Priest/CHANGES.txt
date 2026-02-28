@@ -1,0 +1,41 @@
+v2.0.0
+- Updated interface version to 20504 (TBC Anniversary Edition)
+- REMOVED: All Season of Discovery (SoD) contamination
+  - Removed ids.Engrave and ids.Runes tables entirely
+  - Removed SoD-only rune abilities: VoidPlague, MindSpike, TwistedFaith, MindSear,
+    Homunculi, SharedPain, PowerWordBarrier, Dispersion
+  - Removed WotLK ability: Penance (does not exist in TBC)
+  - Removed WotLK buff: Hymn of Hope (64904)
+- FIXED: Shadowfiend moved from Runes to Ability with correct TBC spell ID (34433)
+- FIXED: Vampiric Touch moved from Runes to Ability with correct TBC spell IDs
+  (Rank 1=34914, Rank 2=34916, Rank 3=34917)
+- FIXED: Shadow Word: Death moved from Runes to Ability with correct TBC spell IDs
+  (Rank 1=32379, Rank 2=32996)
+- FIXED: Critical bug - rotation was gated on ConROC.Seasons.IsSoD; TBC players
+  were always falling into the else branch. Removed the SoD branch entirely and
+  rewrote as a clean TBC-only rotation.
+- FIXED: Bug - _Shadowform_FORM was set to false (not true) after suggesting
+  Shadowform, breaking the entire Shadowform detection and rotation flow
+- FIXED: Bug - ShadowWeaving rank update used uninitialized global variable
+  ShadowWeavingRank instead of local _ShadowWeavingRank in elseif branches
+- ADDED: TBC spell ranks missing from vanilla:
+  - Inner Fire Rank 7 (25431)
+  - Mana Burn Rank 6 (25259)
+  - Power Word Fortitude Rank 7 (25389)
+  - Power Word Shield Ranks 11-12 (25217, 25218)
+  - Shadow Protection Rank 4 (25433)
+  - Shadow Word: Death Rank 1-2 (32379, 32996)
+  - Vampiric Touch Ranks 1-3 (34914, 34916, 34917)
+  - Mind Flay Rank 7 (25387)
+  - Smite Rank 9 (25364)
+  - Resurrection Rank 6 (20771)
+  - Prayer of Healing Rank 6 (32815)
+  - Flash Heal Rank 8 (25235)
+- UPDATED: Rotation logic for Shadow spec (Shadowform):
+  Priority order: Shadowform -> HexofWeakness -> Devouring Plague -> Vampiric Touch
+  -> Shadow Word: Pain -> Vampiric Embrace -> Shadow Word: Death -> Mind Blast
+  -> Mind Flay filler
+- UPDATED: Spellmenu cleaned of all SoD entries (VoidPlague, MindSpike, Homunculi,
+  Penance removed); Shadowfiend and ShadowWordDeath now reference ids.Ability
+- UPDATED: Defaults table corrected to reflect valid TBC abilities only
+- ADDED: Devouring Plague to spellmenu (Undead Priests only)
