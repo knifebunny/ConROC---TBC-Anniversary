@@ -6,6 +6,16 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.1.0] – First CurseForge Release
+
+This is the first fully functional release published to CurseForge. Previous versions were available via GitHub only and had outstanding issues preventing correct installation and operation.
+
+### Fixed
+- `LibRangeCheck-3.0` now correctly loads by including it in the TOC — resolves the `Cannot find a library instance of "LibRangeCheck-3.0"` error on startup
+- Removed `Bindings.xml` from the TOC — it is auto-discovered by the WoW client and listing it caused an `Unrecognized XML: Binding` warning by loading it as a UI XML file
+
+---
+
 ## [2.0.2] – Hotfix Release
 
 ### Fixed

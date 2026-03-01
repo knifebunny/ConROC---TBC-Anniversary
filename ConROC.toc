@@ -8,13 +8,14 @@
 ## X-Curse-Project-ID: 1474412
 
 # Libraries
+Libs\LibStub\LibStub.lua
+Libs\LibRangeCheck-3.0\LibRangeCheck-3.0.lua
 Libs\AceAddon-3.0\AceAddon-3.0.xml
 Libs\AceBucket-3.0\AceBucket-3.0.xml
 
 # Locale
 Locale\locale.xml
 
-Bindings.xml
 core.lua
 buttons.lua
 helper.lua
