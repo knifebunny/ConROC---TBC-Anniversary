@@ -6,6 +6,18 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.3.0] – Auto AoE Detection
+
+### Added
+
+- **Auto AoE Detection** – Automatically switches between Single Target and AoE rotation when a configurable number of enemies are detected within range. Configurable via `/ConROC`: enable/disable toggle, enemy count threshold (2–6, default 3), and detection range (Melee, 10, 20, 25, or 30 yards). Manual Single/AoE button clicks override automatic switching for 5 seconds.
+
+### Fixed
+
+- **Nameplate alpha restoration** – `nameplateNotSelectedAlpha` was not being saved before combat forced nameplates on, causing it to be incorrectly restored to the `nameplateSelectedAlpha` value on combat end. Both CVars are now saved and restored independently.
+
+---
+
 ## [2.2.0] – Mage Module
 
 ### Added
