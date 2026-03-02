@@ -118,6 +118,7 @@ function ConROC:forceNameplates()
 	if defaultEnemyNameplates ~= 1 then
 		defaultNameplateMinAlpha = GetCVar("nameplateMinAlpha")
 		defaultNameplateMaxAlpha = GetCVar("nameplateMaxAlpha")
+		defaultNameplateNotSelectedAlpha = GetCVar("nameplateNotSelectedAlpha")
 		defaultNameplateSelectedAlpha = GetCVar("nameplateSelectedAlpha")
   		--SetCVar("nameplateOtherMinAlpha", ConROC.db.profile.nameplatesMinAlpha)
 		--SetCVar("nameplateOtherMaxAlpha", ConROC.db.profile.nameplatesMaxAlpha)
@@ -131,7 +132,7 @@ function ConROC:restoreNameplates()
 	-- Restore default settings 
 	--SetCVar("nameplateMinAlpha", defaultNameplateMinAlpha) 
 	--SetCVar("nameplateMaxAlpha", defaultNameplateMaxAlpha)
-	SetCVar("nameplateNotSelectedAlpha", defaultNameplateSelectedAlpha)
+	SetCVar("nameplateNotSelectedAlpha", defaultNameplateNotSelectedAlpha)
 	SetCVar("nameplateSelectedAlpha", defaultNameplateSelectedAlpha)
 	SetCVar('nameplateShowEnemies', defaultEnemyNameplates)
 end
@@ -309,6 +310,35 @@ function ConROC:Targets(spellID)
 		end
 	--print(number_in_range)
 	return number_in_range, target_in_range;
+end
+
+-- Automatically switches the AOE/Single button based on nearby enemy count.
+-- Called every rotation tick from InvokeNextSpell(). Does nothing when autoAoE
+-- is disabled, or when the player has manually toggled within the last 5 seconds.
+function ConROC:UpdateAutoAoE()
+	if not ConROC.db.profile.autoAoE then return end
+
+	-- Respect a recent manual button press for 5 seconds
+	if ConROC.lastManualAoEToggle and (GetTime() - ConROC.lastManualAoEToggle) < 5 then
+		return
+	end
+
+	local range     = ConROC.db.profile.autoAoERange     or "10"
+	local threshold = ConROC.db.profile.autoAoEThreshold or 3
+
+	local enemies, _ = ConROC:Targets(range)
+
+	if enemies >= threshold then
+		if not ConROC_AoEButton:IsVisible() then
+			ConROC_AoEButton:Show()
+			ConROC_SingleButton:Hide()
+		end
+	else
+		if ConROC_AoEButton:IsVisible() then
+			ConROC_AoEButton:Hide()
+			ConROC_SingleButton:Show()
+		end
+	end
 end
 
 function ConROC:UnitAura(spellID, timeShift, unit, filter, isWeapon)

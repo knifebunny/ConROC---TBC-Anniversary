@@ -194,6 +194,7 @@ SlashCmdList["CONROCTOGGLE"] = function()
         ConROC_AoEButton:Hide()
         ConROC_SingleButton:Show()
     end
+    ConROC.lastManualAoEToggle = GetTime();
 end
 
 function ConROC:DisplayToggleFrame()
@@ -294,6 +295,7 @@ function ConROC:DisplayToggleFrame()
 		otbutton:SetScript("OnMouseUp", function (self, otbutton, up)
 				self:Hide();
 				ConROC_AoEButton:Show();
+				ConROC.lastManualAoEToggle = GetTime();
 		end)
 
 	local tbutton = CreateFrame("Button", 'ConROC_AoEButton', ConROCButtonFrame)
@@ -333,6 +335,7 @@ function ConROC:DisplayToggleFrame()
 		tbutton:SetScript("OnMouseUp", function (self, tbutton, up)
 				self:Hide();
 				ConROC_SingleButton:Show();
+				ConROC.lastManualAoEToggle = GetTime();
 		end)
 end
 

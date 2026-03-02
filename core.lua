@@ -115,6 +115,9 @@ local defaultOptions = {
 		nameplateNotSelectedAlpha = tonumber(GetCVarDefault("nameplateNotSelectedAlpha")),
 		nameplatesMinAlpha = tonumber(GetCVarDefault("nameplateMinAlpha")),
 		nameplatesMaxAlpha = tonumber(GetCVarDefault("nameplateMaxAlpha")),
+		autoAoE          = false,
+		autoAoEThreshold = 3,
+		autoAoERange     = "10",
 	}
 }	
 
@@ -278,6 +281,44 @@ local options = {
 				end
 			end,
 			get = function(info) return ConROC.db.profile._Unlock_ConROC end
+		},
+		autoAoEHeader = {
+			order = 9,
+			type = 'header',
+			name = 'Auto AOE Detection',
+		},
+		autoAoE = {
+			name = 'Enable Auto AOE Mode',
+			desc = 'Automatically switches to AOE rotation when enough enemies are detected nearby. Manual button clicks override this for 5 seconds.',
+			type = 'toggle',
+			width = 'full',
+			order = 9.1,
+			set = function(info, val)
+				ConROC.db.profile.autoAoE = val;
+			end,
+			get = function(info) return ConROC.db.profile.autoAoE end
+		},
+		autoAoEThreshold = {
+			name = 'Enemy Count Threshold',
+			desc = 'Number of enemies within range required to activate AOE mode.',
+			type = 'range',
+			width = 'double',
+			order = 9.2,
+			min = 2,
+			max = 6,
+			step = 1,
+			set = function(info, val) ConROC.db.profile.autoAoEThreshold = val end,
+			get = function(info) return ConROC.db.profile.autoAoEThreshold end
+		},
+		autoAoERange = {
+			name = 'Detection Range',
+			desc = 'Range in yards used to count nearby enemies.',
+			type = 'select',
+			width = 'normal',
+			order = 9.3,
+			values = { ["Melee"] = "Melee (5 yds)", ["10"] = "10 yards", ["20"] = "20 yards", ["25"] = "25 yards", ["30"] = "30 yards" },
+			set = function(info, val) ConROC.db.profile.autoAoERange = val end,
+			get = function(info) return ConROC.db.profile.autoAoERange end
 		},
 		spacer10 = {
 			order = 10,
@@ -1224,6 +1265,7 @@ ConROC.CHARACTER_POINTS_CHANGED = ConROC.ButtonFetch;
 ConROC.UPDATE_MACROS = ConROC.ButtonFetch;
 
 function ConROC:InvokeNextSpell()
+	ConROC:UpdateAutoAoE();
 	local oldSkill = self.Spell;
 
 	local timeShift, currentSpell, gcd = ConROC:EndCast();
