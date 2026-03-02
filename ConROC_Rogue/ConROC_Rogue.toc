@@ -1,7 +1,7 @@
 ## Title:-|cffFFFFFFConROC|r- |cffFFF569Rogue|r
 ## Version: @project-version@
 ## Author: Vae
-## Interface: 20504
+## Interface: 20505
 ## SavedVariablesPerCharacter: ConROCRogueSpells
 ## Dependencies: ConROC
 ## LoadOnDemand: 1

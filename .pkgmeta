@@ -3,6 +3,7 @@ package-as: ConROC
 move-folders:
   ConROC/ConROC_Druid: ConROC_Druid
   ConROC/ConROC_Hunter: ConROC_Hunter
+  ConROC/ConROC_Mage: ConROC_Mage
   ConROC/ConROC_Paladin: ConROC_Paladin
   ConROC/ConROC_Priest: ConROC_Priest
   ConROC/ConROC_Rogue: ConROC_Rogue

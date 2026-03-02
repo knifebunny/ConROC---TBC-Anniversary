@@ -1,0 +1,11 @@
+## Title:-|cffFFFFFFConROC|r- |cff69CCF0Mage|r
+## Version: @project-version@
+## Author: Vae
+## Interface: 20505
+## SavedVariablesPerCharacter: ConROCMageSpells
+## Dependencies: ConROC
+## LoadOnDemand: 1
+
+mage_ids.lua
+mage_spellmenu.lua
+mage.lua

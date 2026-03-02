@@ -1,7 +1,7 @@
 ## Title:-|cffFFFFFFConROC|r- |cffABD473Hunter|r
 ## Version: @project-version@
 ## Author: Vae
-## Interface: 20504
+## Interface: 20505
 ## SavedVariablesPerCharacter: ConROCHunterSpells
 ## Dependencies: ConROC
 ## LoadOnDemand: 1
