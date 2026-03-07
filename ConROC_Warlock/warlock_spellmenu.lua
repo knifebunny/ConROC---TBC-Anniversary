@@ -50,9 +50,11 @@ local defaults = {
 	["ConROC_Caster_Filler_Incinerate"] = false,
 	["ConROC_Caster_Filler_SearingPain"] = false,
 	["ConROC_Caster_Mana_LifeTap"] = false,
+	["ConROC_Caster_Mana_DarkPact"] = false,
 	["ConROC_Caster_Mana_DrainMana"] = false,
 	["ConROC_Caster_AoE_RainofFire"] = true,
 	["ConROC_Caster_AoE_Hellfire"] = true,
+	["ConROC_Caster_AoE_SeedofCorruption"] = true,
 	["ConROC_Caster_Option_SoulShard"] = 5,
 	["ConROC_Caster_Option_AoE"] = false,
 	["ConROC_Caster_Option_UseWand"] = false,
@@ -83,9 +85,11 @@ local defaults = {
 	["ConROC_PvP_Filler_Incinerate"] = false,
 	["ConROC_PvP_Filler_SearingPain"] = false,
 	["ConROC_PvP_Mana_LifeTap"] = false,
+	["ConROC_PvP_Mana_DarkPact"] = false,
 	["ConROC_PvP_Mana_DrainMana"] = false,
 	["ConROC_PvP_AoE_RainofFire"] = true,
 	["ConROC_PvP_AoE_Hellfire"] = true,
+	["ConROC_PvP_AoE_SeedofCorruption"] = true,
 	["ConROC_PvP_Option_SoulShard"] = 5,
 	["ConROC_PvP_Option_AoE"] = false,
 	["ConROC_PvP_Option_UseWand"] = false,
@@ -232,7 +236,7 @@ function ConROC:RotationChoices()
 			frameName = "Fillers",
 			spells = {
 				{spellID = ids.Ability.ShadowBolt, spellCheckbox = "Filler_ShadowBolt", reqLevel = 1, type="spell"},
-				{spellID = ids.Runes.Incinerate, spellCheckbox = "Filler_Incinerate", reqLevel = 1, type="spell"},
+				{spellID = ConROC.Seasons.IsSoD and ids.Runes.Incinerate or ids.Ability.Incinerate, spellCheckbox = "Filler_Incinerate", reqLevel = 1, type="spell"},
 				{spellID = ids.Ability.SearingPain, spellCheckbox = "Filler_SearingPain", reqLevel = 18, type="spell"},
 			},
 			groupType = "radioButtons"
@@ -241,6 +245,7 @@ function ConROC:RotationChoices()
 			frameName = "Mana",
 			spells = {
 				{spellID = ids.Ability.LifeTap, spellCheckbox = "Mana_LifeTap", reqLevel = 1, type="spell"},
+				{spellID = ids.Ability.DarkPact, spellCheckbox = "Mana_DarkPact", reqLevel = 40, type="spell"},
 				{spellID = ids.Ability.DrainMana, spellCheckbox = "Mana_DrainMana", reqLevel = 24, type="spell"},
 			},
 			groupType = "checkBoxes"
@@ -250,6 +255,7 @@ function ConROC:RotationChoices()
 			spells = {
 				{spellID = ids.Ability.RainofFire, spellCheckbox = "AoE_RainofFire", reqLevel = 20, type="spell"},
 				{spellID = ids.Ability.Hellfire, spellCheckbox = "AoE_Hellfire", reqLevel = 30, type="spell"},
+				{spellID = ids.Ability.SeedofCorruption, spellCheckbox = "AoE_SeedofCorruption", reqLevel = 70, type="spell"},
 			},
 			groupType = "checkBoxes"
 	  	},

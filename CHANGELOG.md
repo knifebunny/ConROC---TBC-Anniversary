@@ -6,6 +6,23 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.5.0] – Warlock Module Overhaul
+
+### Fixed
+
+- **Warlock – Incubus summoning broken** – `SummonIncubus` was never declared via `AbilityReady()` and the summon condition referenced the undefined variable `sumIncRDY`. Added the missing ability declaration and corrected the variable name to `_SummonIncubus_RDY`. Incubus summoning now works correctly when selected in the Demons menu.
+- **Warlock – Fillers never fired in TBC rotation** – The non-SoD Shadow Bolt and Searing Pain filler checks referenced `ConROC_SM_Spell_ShadowBolt` and `ConROC_SM_Spell_SearingPain`, which are globals that do not exist. The spellmenu defines them as `ConROC_SM_Filler_*`. Both references corrected; the TBC rotation no longer always falls through to the Waiting Spell icon.
+
+### Added
+
+- **Warlock – Incinerate filler in TBC rotation** – Incinerate (TBC spell IDs 29722/32231) was missing from both the spell ID table and the non-SoD rotation. Added to `ids.Ability`, `ids.Rank`, and `UpdateSpellID()`. The non-SoD rotation now uses the TBC spell instead of the SoD rune version, and the Incinerate filler option between Shadow Bolt and Searing Pain now works correctly in both game modes.
+- **Warlock – PvE Conflagrate** – Conflagrate was only suggested in the PvP section. Destruction warlocks in PvE now have Conflagrate suggested immediately after Immolate is applied, consuming the Immolate debuff as intended by the talent design.
+- **Warlock – Seed of Corruption** – Seed of Corruption (spell ID 27243) was completely absent from the module. Added to `ids.Ability`, the AoE rotation (fires alongside Rain of Fire when AoE mode is active with 3+ enemies in range), and the AoEs spellmenu section with a dedicated checkbox. Enabled by default.
+- **Warlock – Dark Pact mana recovery** – Dark Pact was defined in the spell IDs but never used. Added to the mana recovery section (after Life Tap in priority) with a checkbox in the Mana spellmenu group. Triggers when a pet is active and mana falls below 30%, providing an alternative to Life Tap that does not cost player health. Disabled by default.
+- **Warlock – Amplify Curse guard** – Amplify Curse was suggested for any hostile NPC target regardless of whether a curse actually needed to be applied. The condition now checks that at least one selected curse is not already active on the target before spending the Amplify Curse cooldown.
+
+---
+
 ## [2.4.1] – Dominos ActionButton_CalculateAction Fix
 
 ### Fixed

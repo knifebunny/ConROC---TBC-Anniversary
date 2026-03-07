@@ -34,6 +34,7 @@ ids.Ability = {
 	Fear = 5782,
 	HowlofTerror = 5484,
 	LifeTap = 1454,
+	SeedofCorruption = 27243,
 	SiphonLife = 18265,
 	UnstableAffliction = 30108,
 --Demonology
@@ -65,6 +66,7 @@ ids.Ability = {
 	Conflagrate = 17962,
 	Hellfire = 1949,
 	Immolate = 348,
+	Incinerate = 29722,
 	RainofFire = 5740,
 	SearingPain = 5676,
 	ShadowBolt = 686,
@@ -143,6 +145,7 @@ ids.Rank = {
 	LifeTapRank4 = 11687,
 	LifeTapRank5 = 11688,
 	LifeTapRank6 = 11689,
+	SeedofCorruptionRank1 = 27243,
 	SiphonLifeRank1 = 18265,
 	SiphonLifeRank2 = 18879,
 	SiphonLifeRank3 = 18880,
@@ -250,6 +253,8 @@ ids.Rank = {
 	ShadowburnRank4 = 18869,
 	ShadowburnRank5 = 18870,
 	ShadowburnRank6 = 18871,
+	IncinerateRank1 = 29722,
+	IncinerateRank2 = 32231,
 	SoulFireRank1 = 6353,
 	SoulFireRank2 = 17924,
 }
@@ -538,6 +543,9 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank4) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank4;
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank3) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank3;
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank2) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank2; end
+
+	if IsSpellKnown(ids.Rank.IncinerateRank2) then ids.Ability.Incinerate = ids.Rank.IncinerateRank2;
+	elseif IsSpellKnown(ids.Rank.IncinerateRank1) then ids.Ability.Incinerate = ids.Rank.IncinerateRank1; end
 
 	if IsSpellKnown(ids.Rank.SoulFireRank2) then ids.Ability.SoulFire = ids.Rank.SoulFireRank2; end
 

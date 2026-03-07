@@ -114,6 +114,7 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
     local _CurseofWeakness, _CurseofWeakness_RDY = ConROC:AbilityReady(Ability.CurseofWeakness, timeShift);
 		local _CurseofWeakness_DEBUFF = ConROC:TargetAura(_CurseofWeakness);
 	local _DeathCoil, _DeathCoil_RDY = ConROC:AbilityReady(Ability.DeathCoil, timeShift);
+	local _DarkPact, _DarkPact_RDY = ConROC:AbilityReady(Ability.DarkPact, timeShift);
 	local _DrainMana, _DrainMana_RDY = ConROC:AbilityReady(Ability.DrainMana, timeShift);
 	local _DrainSoul, _DrainSoul_RDY = ConROC:AbilityReady(Ability.DrainSoul, timeShift);
 	local _Fear, _Fear_RDY = ConROC:AbilityReady(Ability.Fear, timeShift);
@@ -125,12 +126,14 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 	local _SummonFelhunter, _SummonFelhunter_RDY = ConROC:AbilityReady(Ability.SummonFelhunter, timeShift);
 	local _SummonImp, _SummonImp_RDY = ConROC:AbilityReady(Ability.SummonImp, timeShift);
 	local _SummonSuccubus, _SummonSuccubus_RDY = ConROC:AbilityReady(Ability.SummonSuccubus, timeShift);
+	local _SummonIncubus, _SummonIncubus_RDY = ConROC:AbilityReady(Ability.SummonIncubus, timeShift);
 	local _SummonVoidwalker, _SummonVoidwalker_RDY = ConROC:AbilityReady(Ability.SummonVoidwalker, timeShift);
 	local _Conflagrate, _Conflagrate_RDY = ConROC:AbilityReady(Ability.Conflagrate, timeShift);
 	local _Hellfire, _Hellfire_RDY = ConROC:AbilityReady(Ability.Hellfire, timeShift);
 	local _Immolate, _Immolate_RDY = ConROC:AbilityReady(Ability.Immolate, timeShift);
 		local _Immolate_DEBUFF = ConROC:TargetAura(_Immolate, timeShift);
 	local _RainofFire, _RainofFire_RDY = ConROC:AbilityReady(Ability.RainofFire, timeShift);
+	local _SeedofCorruption, _SeedofCorruption_RDY = ConROC:AbilityReady(Ability.SeedofCorruption, timeShift);
 	local _SearingPain, _SearingPain_RDY = ConROC:AbilityReady(Ability.SearingPain, timeShift);
 	local _ShadowBolt, _ShadowBolt_RDY = ConROC:AbilityReady(Ability.ShadowBolt, timeShift);
 		local _ShadowTrance_BUFF = ConROC:Aura(Buff.ShadowTrance, timeShift);
@@ -151,6 +154,9 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 		local _ImmolationAura_FORM = ConROC:Form(_ImmolationAura);
 	local _Incinerate, _Incinerate_RDY = ConROC:AbilityReady(Runes.Incinerate, timeShift);
         local _Incinerate_BUFF = ConROC:Aura(_Incinerate, timeShift);
+	if not ConROC.Seasons.IsSoD and Ability.Incinerate then
+		_Incinerate, _Incinerate_RDY = ConROC:AbilityReady(Ability.Incinerate, timeShift);
+	end
 	local _Menace, _Menace_RDY = ConROC:AbilityReady(Runes.Menace, timeShift);
 	local _Metamorphosis, _Metamorphosis_RDY = ConROC:AbilityReady(Runes.Metamorphosis, timeShift);
 		local _Metamorphosis_FORM = ConROC:Form(_Metamorphosis);
@@ -205,6 +211,13 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 				break;
 			end
 
+			if ConROC:CheckBox(ConROC_SM_Mana_DarkPact) and _DarkPact_RDY and _Pet_summoned and _Mana_Percent < 30 then
+				tinsert(ConROC.SuggestedSpells, _DarkPact);
+				_Mana_Percent = _Mana_Percent + 10;
+				_Queue = _Queue + 1;
+				break;
+			end
+
 			--Demons--
 			if ConROC:CheckBox(ConROC_SM_Demon_Felhunter) and _SummonFelhunter_RDY and not _Pet_summoned then
 				tinsert(ConROC.SuggestedSpells, _SummonFelhunter);
@@ -227,7 +240,7 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 				break;
 			end
 
-			if ConROC:CheckBox(ConROC_SM_Demon_Incubus) and sumIncRDY and not _Pet_summoned then
+			if ConROC:CheckBox(ConROC_SM_Demon_Incubus) and _SummonIncubus_RDY and not _Pet_summoned then
 				tinsert(ConROC.SuggestedSpells, _SummonIncubus);
 				_Pet_summoned = true;
 				_Queue = _Queue + 1;
@@ -676,8 +689,17 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 					end
 				end
 
-				-- Amplify Curse for NPCs/Bosses (not players)
-				if not _is_PC and _AmplifyCurse_RDY and _is_Enemy then
+				-- Amplify Curse for NPCs/Bosses (not players) - only if a curse needs applying
+				if not _is_PC and _AmplifyCurse_RDY and _is_Enemy and (
+					(ConROC:CheckBox(ConROC_SM_Curse_Agony) and not _CurseofAgony_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Weakness) and not _CurseofWeakness_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Doom) and not _CurseofDoom_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Elements) and not _CurseoftheElements_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Shadow) and not _CurseofShadow_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Recklessness) and not _CurseofRecklessness_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Tongues) and not _CurseofTongues_DEBUFF) or
+					(ConROC:CheckBox(ConROC_SM_Curse_Exhaustion) and not _CurseofExhaustion_DEBUFF)
+				) then
 					tinsert(ConROC.SuggestedSpells, _AmplifyCurse);
 					_Queue = _Queue + 1;
 					break;
@@ -831,6 +853,12 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 					break;
 				end
 
+				if ConROC:CheckBox(ConROC_SM_AoE_SeedofCorruption) and ConROC_AoEButton:IsVisible() and _SeedofCorruption_RDY and _enemies_in_30yrds >= 3 then
+					tinsert(ConROC.SuggestedSpells, _SeedofCorruption);
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				if ConROC:CheckBox(ConROC_SM_Debuff_UnstableAffliction) and _UnstableAffliction_RDY and not _UnstableAffliction_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
 					tinsert(ConROC.SuggestedSpells, _UnstableAffliction);
 					_UnstableAffliction_DEBUFF = true;
@@ -859,19 +887,32 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 					break;
 				end
 
+				if _Conflagrate_RDY and _Immolate_DEBUFF then
+					tinsert(ConROC.SuggestedSpells, _Conflagrate);
+					_Immolate_DEBUFF = false;
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				if ConROC:CheckBox(ConROC_SM_Option_UseWand) and _Has_Wand and (_Mana_Percent <= 20 or _Target_Percent_Health <= 5) then
 					tinsert(ConROC.SuggestedSpells, Caster.Shoot);
 					_Queue = _Queue + 1;
 					break;
 				end
 
-				if ConROC:CheckBox(ConROC_SM_Spell_ShadowBolt) and _ShadowBolt_RDY then
+				if ConROC:CheckBox(ConROC_SM_Filler_ShadowBolt) and _ShadowBolt_RDY then
 					tinsert(ConROC.SuggestedSpells, _ShadowBolt);
 					_Queue = _Queue + 1;
 					break;
 				end
 
-				if ConROC:CheckBox(ConROC_SM_Spell_SearingPain) and _SearingPain_RDY then
+				if ConROC:CheckBox(ConROC_SM_Filler_Incinerate) and _Incinerate_RDY then
+					tinsert(ConROC.SuggestedSpells, _Incinerate);
+					_Queue = _Queue + 1;
+					break;
+				end
+
+				if ConROC:CheckBox(ConROC_SM_Filler_SearingPain) and _SearingPain_RDY then
 					tinsert(ConROC.SuggestedSpells, _SearingPain);
 					_Queue = _Queue + 1;
 					break;
