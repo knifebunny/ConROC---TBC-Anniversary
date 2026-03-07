@@ -6,6 +6,14 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.5.1] – Warlock Demonic Sacrifice
+
+### Added
+
+- **Warlock – Demonic Sacrifice rotation support** – Demonic Sacrifice (Demonology talent, tier 5) was defined in the spell IDs but never used in the rotation. Added a "Sacrifice" checkbox section to the spellmenu below the Demons radio group. When enabled, the addon tracks all four sacrifice buffs (Burning Wish, Fel Stamina, Touch of Shadow, Fel Energy) and manages the summon-then-sacrifice cycle automatically: summons the selected pet when no sacrifice buff is active, suggests Demonic Sacrifice once the pet is out, and skips pet summoning while the buff persists. Pet-dependent abilities (Dark Pact, Spell Lock, Health Funnel, Soul Link) are naturally suppressed when no pet is present. Disabled by default.
+
+---
+
 ## [2.5.0] – Warlock Module Overhaul
 
 ### Fixed

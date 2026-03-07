@@ -30,6 +30,7 @@ local defaults = {
 	["ConROC_Caster_Demon_Succubus"] = false,
 	["ConROC_Caster_Demon_Felhunter"] = false,
 	["ConROC_Caster_Demon_Felguard"] = false,
+	["ConROC_Caster_Demon_DemonicSacrifice"] = false,
 	["ConROC_Caster_Armor_DemonArmor"] = true,
 	["ConROC_Caster_Armor_FelArmor"] = false,
 	["ConROC_Caster_Curse_Weakness"] = false,
@@ -65,6 +66,7 @@ local defaults = {
 	["ConROC_PvP_Demon_Succubus"] = false,
 	["ConROC_PvP_Demon_Felhunter"] = false,
 	["ConROC_PvP_Demon_Felguard"] = false,
+	["ConROC_PvP_Demon_DemonicSacrifice"] = false,
 	["ConROC_PvP_Armor_DemonArmor"] = true,
 	["ConROC_PvP_Armor_FelArmor"] = false,
 	["ConROC_PvP_Curse_Weakness"] = false,
@@ -198,6 +200,13 @@ function ConROC:RotationChoices()
 			},
 			groupType = "radioButtons"
 	  	},
+	  	{
+			frameName = "Sacrifice",
+			spells = {
+				{spellID = ids.Ability.DemonicSacrifice, spellCheckbox = "Demon_DemonicSacrifice", reqLevel = 1, type="spell"},
+			},
+			groupType = "checkBoxes"
+		},
 	  	{
 			frameName = "Armors",
 			spells = {

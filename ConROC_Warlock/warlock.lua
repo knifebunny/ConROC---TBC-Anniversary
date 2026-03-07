@@ -139,6 +139,12 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 		local _ShadowTrance_BUFF = ConROC:Aura(Buff.ShadowTrance, timeShift);
 	local _Shadowburn, _Shadowburn_RDY = ConROC:AbilityReady(Ability.Shadowburn, timeShift);
 	local _SoulFire, _SoulFire_RDY = ConROC:AbilityReady(Ability.SoulFire, timeShift);
+	local _DemonicSacrifice, _DemonicSacrifice_RDY = ConROC:AbilityReady(Ability.DemonicSacrifice, timeShift);
+		local _BurningWish_BUFF = ConROC:Aura(Buff.BurningWish, timeShift);
+		local _FelStamina_BUFF = ConROC:Aura(Buff.FelStamina, timeShift);
+		local _TouchofShadow_BUFF = ConROC:Aura(Buff.TouchofShadow, timeShift);
+		local _FelEnergy_BUFF = ConROC:Aura(Buff.FelEnergy, timeShift);
+		local _DemonicSacrifice_ACTIVE = _BurningWish_BUFF or _FelStamina_BUFF or _TouchofShadow_BUFF or _FelEnergy_BUFF;
 
 --Runed
 	local _Backdraft_BUFF = ConROC:Aura(Buff.Backdraft, timeShift);
@@ -172,6 +178,9 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 
 --Conditions		
 	local _Pet_summoned = ConROC:CallPet();
+	if ConROC:CheckBox(ConROC_SM_Demon_DemonicSacrifice) and _DemonicSacrifice_ACTIVE then
+		_Pet_summoned = true;
+	end
 	local assist = ConROC:PetAssist();
 	local tarHasMana = UnitPower('target', Enum.PowerType.Mana);
 	local _is_Casting = UnitCastingInfo('target') or UnitChannelInfo('target');
@@ -257,6 +266,14 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 			if ConROC:CheckBox(ConROC_SM_Demon_Felguard) and _SummonFelguard_RDY and not _Pet_summoned then
 				tinsert(ConROC.SuggestedSpells, _SummonFelguard);
 				_Pet_summoned = true;
+				_Queue = _Queue + 1;
+				break;
+			end
+
+			--Demonic Sacrifice--
+			if ConROC:CheckBox(ConROC_SM_Demon_DemonicSacrifice) and _DemonicSacrifice_RDY and ConROC:CallPet() and not _DemonicSacrifice_ACTIVE then
+				tinsert(ConROC.SuggestedSpells, _DemonicSacrifice);
+				_Pet_summoned = false;
 				_Queue = _Queue + 1;
 				break;
 			end
