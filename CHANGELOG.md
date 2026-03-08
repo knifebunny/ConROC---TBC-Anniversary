@@ -6,6 +6,28 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.6.0] – Priest Module Overhaul
+
+### Fixed
+
+- **Priest – Shadowform rotation fired without a hostile target** – The Shadowform damage rotation (debuffs, Mind Blast, Mind Flay, etc.) was suggested even with no hostile target selected. Added an `_is_Enemy` guard to the Shadowform rotation block, matching the non-Shadowform branch which already had this check. Shadowform entry itself remains ungated so you can enter Shadowform before pulling.
+- **Priest – Shadowfiend never suggested in rotation** – Shadowfiend had a checkbox and burst indicator but was never actually inserted into `SuggestedSpells`. Added to both Shadowform and non-Shadowform rotation branches, triggering when mana drops below 70%.
+- **Priest – Devouring Plague missing from non-Shadowform rotation** – Undead priests in Holy or Discipline specs could not get Devouring Plague suggestions. Added the same checkbox-gated logic used in the Shadowform branch.
+- **Priest – Power Word: Shield suggested out of combat** – The defense module suggested PW:S unconditionally, including out of combat. Added an `_in_combat` guard so the shield is only suggested during combat.
+- **Priest – Duplicate `CheckScrollbarVisibility` function** – A second `local function CheckScrollbarVisibility()` definition shadowed the correct first one (which included the open-button visibility check and frame width logic). Removed the duplicate.
+- **Priest – `flashMessage()` recursive timer spam** – The wand warning timer looped indefinitely every 4 seconds even after unchecking "Use Wand" or switching roles. Added a `ConROC:CheckBox(ConROC_SM_Option_UseWand)` guard to the early-return check so the timer stops when the option is disabled.
+- **Priest – Caster role defaulted to Smite filler** – The Caster (DPS) role defaulted to Smite as the filler spell. Changed to Mind Flay, which is the correct Shadow spec filler for the primary DPS use case.
+- **Priest – Healer role had no default filler** – Both Smite and Mind Flay were disabled by default for the Healer role, leaving no filler suggestion. Smite is now enabled by default (benefits from Holy talents).
+
+### Added
+
+- **Priest – Silence interrupt indicator** – Silence was declared but never used. Added `AbilityInterrupt` indicator that lights up when the target is casting an interruptible spell, matching the pattern used by all other class modules with interrupts.
+- **Priest – Berserking burst indicator** – The Troll racial Berserking was loaded but never referenced. Added a burst indicator that lights up during combat with a hostile target.
+- **Priest – Fade in defense rotation** – Fade was declared but never suggested. Now appears in the defense rotation when in combat and in a party (threat reduction is meaningless solo).
+- **Priest – Psychic Scream in defense rotation** – Emergency defensive suggestion when surrounded by melee enemies (1+) at low health (30% or below).
+
+---
+
 ## [2.5.1] – Warlock Demonic Sacrifice
 
 ### Added

@@ -138,6 +138,8 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 
 	ConROC:AbilityBurst(_InnerFocus, _InnerFocus_RDY and _MindBlast_RDY and _is_Enemy);
 	ConROC:AbilityBurst(_Shadowfiend, ConROC:CheckBox(ConROC_SM_Spell_Shadowfiend) and _Shadowfiend_RDY and _is_Enemy and _Mana_Percent < 70);
+	ConROC:AbilityBurst(_Berserking, _Berserking_RDY and _is_Enemy and _in_combat);
+	ConROC:AbilityInterrupt(_Silence, ConROC:Interrupt() and _Silence_RDY);
 
 --Rotations
 	repeat
@@ -150,8 +152,8 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				break;
 			end
 
-			-- Shadow spec rotation (in Shadowform)
-			if _Shadowform_FORM then
+			-- Shadow spec rotation (in Shadowform) - requires hostile target
+			if _Shadowform_FORM and _is_Enemy then
 				-- Pre-combat opener: Mind Blast
 				if not _in_combat then
 					if _MindBlast_RDY and currentSpell ~= _MindBlast then
@@ -198,6 +200,14 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF then
 					tinsert(ConROC.SuggestedSpells, _VampiricEmbrace);
 					_VampiricEmbrace_DEBUFF = true;
+					_Queue = _Queue + 1;
+					break;
+				end
+
+				-- Shadowfiend (mana recovery when below threshold)
+				if ConROC:CheckBox(ConROC_SM_Spell_Shadowfiend) and _Shadowfiend_RDY and _Mana_Percent < 70 then
+					tinsert(ConROC.SuggestedSpells, _Shadowfiend);
+					_Shadowfiend_RDY = false;
 					_Queue = _Queue + 1;
 					break;
 				end
@@ -262,6 +272,14 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 					break;
 				end
 
+				-- Devouring Plague (Undead Priests only)
+				if ConROC:CheckBox(ConROC_SM_Debuff_DevouringPlague) and _DevouringPlague_RDY and not _DevouringPlague_DEBUFF then
+					tinsert(ConROC.SuggestedSpells, _DevouringPlague);
+					_DevouringPlague_DEBUFF = true;
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				if ConROC:CheckBox(ConROC_SM_Debuff_ShadowWordPain) and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
 					tinsert(ConROC.SuggestedSpells, _ShadowWordPain);
 					_ShadowWordPain_DEBUFF = true;
@@ -272,6 +290,14 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF then
 					tinsert(ConROC.SuggestedSpells, _VampiricEmbrace);
 					_VampiricEmbrace_DEBUFF = true;
+					_Queue = _Queue + 1;
+					break;
+				end
+
+				-- Shadowfiend (mana recovery when below threshold)
+				if ConROC:CheckBox(ConROC_SM_Spell_Shadowfiend) and _Shadowfiend_RDY and _Mana_Percent < 70 then
+					tinsert(ConROC.SuggestedSpells, _Shadowfiend);
+					_Shadowfiend_RDY = false;
 					_Queue = _Queue + 1;
 					break;
 				end
@@ -352,7 +378,15 @@ function ConROC.Priest.Defense(_, timeShift, currentSpell, gcd)
 		tinsert(ConROC.SuggestedDefSpells, _ShadowProtection);
 	end
 
-	if _PowerWordShield_RDY and not _PowerWordShield_BUFF and not _WeakendSoul_DEBUFF then
+	if _Fade_RDY and _in_combat and _party_size > 0 then
+		tinsert(ConROC.SuggestedDefSpells, _Fade);
+	end
+
+	if _PsychicScream_RDY and _in_combat and _enemies_in_melee >= 1 and _Player_Percent_Health <= 30 then
+		tinsert(ConROC.SuggestedDefSpells, _PsychicScream);
+	end
+
+	if _in_combat and _PowerWordShield_RDY and not _PowerWordShield_BUFF and not _WeakendSoul_DEBUFF then
 		tinsert(ConROC.SuggestedDefSpells, _PowerWordShield);
 	end
 return nil;

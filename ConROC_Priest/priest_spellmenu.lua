@@ -37,8 +37,8 @@ local defaults = {
 	["ConROC_Caster_Buff_DivineSpirit"] = true,
 	["ConROC_Caster_Spell_Shadowfiend"] = true,
 	["ConROC_Caster_Spell_ShadowWordDeath"] = true,
-	["ConROC_Caster_Filler_Smite"] = true,
-	["ConROC_Caster_Filler_MindFlay"] = false,
+	["ConROC_Caster_Filler_Smite"] = false,
+	["ConROC_Caster_Filler_MindFlay"] = true,
 	["ConROC_Caster_Option_AoED"] = false,
 	["ConROC_Caster_Option_AoE"] = false,
 	["ConROC_Caster_Option_UseWand"] = false,
@@ -55,7 +55,7 @@ local defaults = {
 	["ConROC_Healer_Buff_DivineSpirit"] = true,
 	["ConROC_Healer_Spell_Shadowfiend"] = false,
 	["ConROC_Healer_Spell_ShadowWordDeath"] = false,
-	["ConROC_Healer_Filler_Smite"] = false,
+	["ConROC_Healer_Filler_Smite"] = true,
 	["ConROC_Healer_Filler_MindFlay"] = false,
 	["ConROC_Healer_Option_AoED"] = false,
 	["ConROC_Healer_Option_AoE"] = false,
@@ -1061,38 +1061,17 @@ function ConROC:SpellMenuUpdate()
     end
 end
 function flashMessage()
-	if HasWandEquipped() then
+	if HasWandEquipped() or not ConROC:CheckBox(ConROC_SM_Option_UseWand) then
 		return
 	end
 	ConROC:DisplayErrorMessage("You should equip a wand!", 3.0, 0.5, 0.5, 1.0)
 	if not HasWandEquipped() then
-		C_Timer.After(4, function()
+		C_Timer.After(5, function()
 			flashMessage()
 		end);
 	end
 end
 
--- create a function to update the scrollbar visibility
-
-local function CheckScrollbarVisibility()
-    local scrollChildHeight = math.ceil(ConROCScrollChild:GetHeight())
-    local containerHeight = math.ceil(ConROCScrollFrame:GetHeight())
-    if scrollChildHeight <= containerHeight then
-    	ConROCScrollbar:Hide()
-        ConROCScrollContainer:SetHeight(math.ceil(ConROCScrollChild:GetHeight())+16)
-    	ConROCSpellmenuFrame:SetHeight(math.ceil(ConROCScrollContainer:GetHeight())+68)
-		ConROCScrollFrame:SetPoint("TOPLEFT", 8, -8)
-		ConROCScrollFrame:SetPoint("BOTTOMRIGHT", -28, 8)
-    	ConROCScrollChild:SetWidth(ConROCScrollFrame:GetWidth())
-    else
-    	ConROCScrollbar:Show()
-    	ConROCSpellmenuFrame:SetHeight(300)
-    	ConROCScrollContainer:SetHeight(237)
-		ConROCScrollFrame:SetPoint("TOPLEFT", 8, -8)
-		ConROCScrollFrame:SetPoint("BOTTOMRIGHT", -28, 8)
-    	ConROCScrollChild:SetWidth(ConROCScrollFrame:GetWidth())
-    end
-end
 
 function ConROC:RoleProfile()
 
