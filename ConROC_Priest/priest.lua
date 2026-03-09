@@ -165,7 +165,7 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Troll racial debuff
-				if ConROC:CheckBox(ConROC_SM_Debuff_HexofWeakness) and _HexofWeakness_RDY and not _HexofWeakness_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_HexofWeakness) and _HexofWeakness_RDY and not _HexofWeakness_DEBUFF and ConROC.lastSpellId ~= _HexofWeakness then
 					tinsert(ConROC.SuggestedSpells, _HexofWeakness);
 					_HexofWeakness_DEBUFF = true;
 					_Queue = _Queue + 1;
@@ -173,7 +173,7 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Devouring Plague (Undead Priests only)
-				if ConROC:CheckBox(ConROC_SM_Debuff_DevouringPlague) and _DevouringPlague_RDY and not _DevouringPlague_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_DevouringPlague) and _DevouringPlague_RDY and not _DevouringPlague_DEBUFF and ConROC.lastSpellId ~= _DevouringPlague then
 					tinsert(ConROC.SuggestedSpells, _DevouringPlague);
 					_DevouringPlague_DEBUFF = true;
 					_Queue = _Queue + 1;
@@ -189,7 +189,7 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Shadow Word: Pain
-				if ConROC:CheckBox(ConROC_SM_Debuff_ShadowWordPain) and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_ShadowWordPain) and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF and ConROC.lastSpellId ~= _ShadowWordPain then
 					tinsert(ConROC.SuggestedSpells, _ShadowWordPain);
 					_ShadowWordPain_DEBUFF = true;
 					_Queue = _Queue + 1;
@@ -197,7 +197,7 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Vampiric Embrace (one-time debuff buff)
-				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF and ConROC.lastSpellId ~= _VampiricEmbrace then
 					tinsert(ConROC.SuggestedSpells, _VampiricEmbrace);
 					_VampiricEmbrace_DEBUFF = true;
 					_Queue = _Queue + 1;
@@ -265,7 +265,7 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 					end
 				end
 
-				if ConROC:CheckBox(ConROC_SM_Debuff_HexofWeakness) and _HexofWeakness_RDY and not _HexofWeakness_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_HexofWeakness) and _HexofWeakness_RDY and not _HexofWeakness_DEBUFF and ConROC.lastSpellId ~= _HexofWeakness then
 					tinsert(ConROC.SuggestedSpells, _HexofWeakness);
 					_HexofWeakness_DEBUFF = true;
 					_Queue = _Queue + 1;
@@ -273,21 +273,21 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Devouring Plague (Undead Priests only)
-				if ConROC:CheckBox(ConROC_SM_Debuff_DevouringPlague) and _DevouringPlague_RDY and not _DevouringPlague_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_DevouringPlague) and _DevouringPlague_RDY and not _DevouringPlague_DEBUFF and ConROC.lastSpellId ~= _DevouringPlague then
 					tinsert(ConROC.SuggestedSpells, _DevouringPlague);
 					_DevouringPlague_DEBUFF = true;
 					_Queue = _Queue + 1;
 					break;
 				end
 
-				if ConROC:CheckBox(ConROC_SM_Debuff_ShadowWordPain) and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_ShadowWordPain) and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF and ConROC.lastSpellId ~= _ShadowWordPain then
 					tinsert(ConROC.SuggestedSpells, _ShadowWordPain);
 					_ShadowWordPain_DEBUFF = true;
 					_Queue = _Queue + 1;
 					break;
 				end
 
-				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF then
+				if ConROC:CheckBox(ConROC_SM_Debuff_VampiricEmbrace) and _VampiricEmbrace_RDY and not _VampiricEmbrace_DEBUFF and ConROC.lastSpellId ~= _VampiricEmbrace then
 					tinsert(ConROC.SuggestedSpells, _VampiricEmbrace);
 					_VampiricEmbrace_DEBUFF = true;
 					_Queue = _Queue + 1;

@@ -370,6 +370,7 @@ function ConROC:UnitAura(spellID, timeShift, unit, filter, isWeapon)
 		end
 	else
 		-- Iterating through unit auras
+		local nameMatchAura = nil;
 		for i = 1, 40 do
 			local aura = C_UnitAuras.GetAuraDataByIndex(unit, i, filter)
 			if not aura then
@@ -378,6 +379,9 @@ function ConROC:UnitAura(spellID, timeShift, unit, filter, isWeapon)
 
 			if aura.name == spellName then
 				alreadyUp = true;
+				if not nameMatchAura then
+					nameMatchAura = aura;
+				end
 			end
 
 			if aura.spellId == spellID then
@@ -386,6 +390,15 @@ function ConROC:UnitAura(spellID, timeShift, unit, filter, isWeapon)
 					local dur = expirationTime - GetTime() - timeShift
 					return true, aura.applications or 1, dur, alreadyUp;
 				end
+			end
+		end
+
+		-- Fallback: if no spell ID match but name matched, use the name-matched aura
+		if nameMatchAura then
+			local expirationTime = nameMatchAura.expirationTime
+			if expirationTime and (expirationTime - GetTime()) > timeShift then
+				local dur = expirationTime - GetTime() - timeShift
+				return true, nameMatchAura.applications or 1, dur, alreadyUp;
 			end
 		end
 	end

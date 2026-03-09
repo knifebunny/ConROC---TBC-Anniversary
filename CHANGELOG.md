@@ -6,6 +6,15 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.6.1] – Priest SWP Debuff Detection Fix
+
+### Fixed
+
+- **Priest – Shadow Word: Pain rotation stuck loop** – The rotation repeatedly recommended Shadow Word: Pain even when the debuff was already active on the target. The root cause was in the core `UnitAura()` debuff detection (helper.lua), which matched auras exclusively by spell ID. In TBC Classic, the debuff's `aura.spellId` can differ from the castable spell ID due to rank ID remapping, causing the check to return false even though the debuff was present by name. Added a name-based fallback: when no spell ID match is found but the spell name matches, the name-matched aura is used instead. This fix benefits all class modules, not just Priest.
+- **Priest – Missing `lastSpellId` guard on instant-cast debuffs** – Added `ConROC.lastSpellId` checks to all instant-cast debuff conditions (Shadow Word: Pain, Devouring Plague, Hex of Weakness, Vampiric Embrace) in both Shadow and Holy/Disc rotations. This prevents re-recommending a debuff during the brief window between cast completion and aura detection, matching the pattern already used by the Hunter module for Serpent Sting.
+
+---
+
 ## [2.6.0] – Priest Module Overhaul
 
 ### Fixed
