@@ -6,6 +6,17 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.7.1] – Action Bar Spell Detection Fix
+
+### Fixed
+
+- **Spell detection broken on Blizzard default action bars** – `AddStandardButton()` used `C_Spell.GetSpellInfo()` to resolve spell IDs from action bar slots, which can return nil on TBC Anniversary. Rewrote the function to use the spell ID directly from `GetActionInfo()`, matching the reliable pattern already used by `DefAddStandardButton()`. This fixes the "Spell not found on action bars" error when using the default Blizzard UI.
+- **Macro detection used wrong variable on Blizzard bars** – When a macro occupied a Blizzard action bar slot, `GetMacroSpell()` was called with the slot number instead of the macro index returned by `GetActionInfo()`. Fixed to use the correct macro index with a name-based fallback.
+- **Missing action slot fallback** – Added a nil/zero guard with `ActionButton_CalculateAction` fallback for the main action bar slot lookup, matching `DefAddStandardButton()`. Improves reliability during stance and form page switches.
+- **DefFetchDiabolic and DefFetchAzeriteUI called wrong registration function** – Both defensive fetch functions called `AddStandardButton()` instead of `DefAddStandardButton()`, writing spells to the offensive `Spells` table instead of the `DefSpells` table. Defense rotation suggestions now register correctly for DiabolicUI and AzeriteUI users.
+
+---
+
 ## [2.7.0] – Shaman Module Review
 
 ### Fixed

@@ -1776,42 +1776,78 @@ function ConROC:AddButton(spellID, button, hotkey)
 end
 
 function ConROC:AddStandardButton(button, hotkey)
-	local type = button:GetAttribute('type');
-	if type then
-		local actionType = button:GetAttribute(type);
+	local buttonType = button:GetAttribute('type');
+	if buttonType then
 		local id;
 		local spellId;
 
-        if type == 'action' then
-            local slot = button:GetAttribute('action') or button.action
-            if HasAction(slot) then
-                type, id = GetActionInfo(slot);
-            else
-                return;
-            end
-        end
+		if buttonType == 'action' then
+			local slot = button:GetAttribute('action') or button.action
+			if not slot or slot == 0 then
+				slot = ActionButton_CalculateAction and ActionButton_CalculateAction(button) or 0;
+			end
 
-        if type == 'macro' then
-			spellId = GetMacroSpell(actionType);
-            if not spellId then
-                local slot = button:GetAttribute('action') or button.action
-                local macroName = GetActionText(slot)
-                id = GetMacroIndexByName(macroName)
-                spellId = GetMacroSpell(id)
-            end
-        elseif type == 'item' then
-            spellId = C_Item.GetItemSpell(id)
-        elseif type == 'spell' then
-			local spellInfo = C_Spell.GetSpellInfo(id)
-            spellId = spellInfo and spellInfo.spellID
-        end
+			if HasAction(slot) then
+				local actionType;
+				actionType, id = GetActionInfo(slot);
+				if actionType == 'spell' then
+					spellId = id;
+				elseif actionType == 'macro' then
+					spellId = GetMacroSpell(id);
+					if not spellId then
+						local macroName = GetActionText(slot);
+						if macroName then
+							local macroIdx = GetMacroIndexByName(macroName);
+							if macroIdx then
+								spellId = GetMacroSpell(macroIdx);
+							end
+						end
+					end
+				elseif actionType == 'item' then
+					spellId = C_Item.GetItemSpell(id);
+				end
+			else
+				return;
+			end
+		elseif buttonType == 'macro' then
+			local macroRef = button:GetAttribute('macro');
+			spellId = GetMacroSpell(macroRef);
+			if not spellId then
+				local slot = button:GetAttribute('action') or button.action;
+				if slot then
+					local macroName = GetActionText(slot);
+					if macroName then
+						id = GetMacroIndexByName(macroName);
+						if id then
+							spellId = GetMacroSpell(id);
+						end
+					end
+				end
+			end
+		elseif buttonType == 'item' then
+			local itemRef = button:GetAttribute('item');
+			if itemRef then
+				spellId = C_Item.GetItemSpell(itemRef);
+			end
+		elseif buttonType == 'spell' then
+			local spellRef = button:GetAttribute('spell');
+			if spellRef then
+				if C_Spell and C_Spell.GetSpellInfo then
+					local spellInfo = C_Spell.GetSpellInfo(spellRef);
+					spellId = spellInfo and spellInfo.spellID;
+				end
+				if not spellId then
+					spellId = select(7, GetSpellInfo(spellRef));
+				end
+			end
+		end
 
 		if spellId then
-            self:AddButton(spellId, button, hotkey)
-        end
-    end
+			self:AddButton(spellId, button, hotkey)
+		end
+	end
 
-	if not type and button and button.HasAction then
+	if not buttonType and button and button.HasAction then
 		local id, _, HasAction, spellID = button:HasAction()
 		if spellID then
 			self:AddButton(spellID, button)
@@ -2321,7 +2357,7 @@ function ConROC:DefFetchDiabolic()
         for i = 1, 12 do
             local button = _G[barName .. 'Button' .. i];
             if button then
-                self:AddStandardButton(button);
+                self:DefAddStandardButton(button);
             end
         end
     end
@@ -2340,7 +2376,7 @@ function ConROC:DefFetchAzeriteUI()
     for i = 1, 24 do
         local button = _G['AzeriteUI_ClassicActionButton' .. i];
         if button then
-            self:AddStandardButton(button);
+            self:DefAddStandardButton(button);
         end
     end
 end
