@@ -1,7 +1,7 @@
 -- Widget created by Yssaril
 --[===[@debug@
 local DataVersion = 9001 -- dev version always overwrites everything else :)
---@end-debug@]===]
+--@end-debug@]==]]===]
 --@non-debug@
 local DataVersion = 51
 --@end-non-debug@
@@ -11,7 +11,11 @@ if not AGSMW then
   return	-- already loaded and no upgrade necessary
 end
 
-LoadAddOn("LibSharedMedia-3.0")
+local LoadAddOn = LoadAddOn or (C_AddOns and C_AddOns.LoadAddOn)
+if LoadAddOn then
+    LoadAddOn("LibSharedMedia-3.0")
+end
+
 local AceGUI = LibStub("AceGUI-3.0")
 local Media = LibStub("LibSharedMedia-3.0")
 
