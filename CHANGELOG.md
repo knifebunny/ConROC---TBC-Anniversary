@@ -6,6 +6,23 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.10.0] – Shaman Module Overhaul
+
+### Fixed
+
+- **Shaman – Windfury Weapon Rank 5 not recognised (user-reported)** – `ids.Rank` only defined up to `WindfuryWeaponRank4 = 16362` (level 60 Classic). The TBC rank (`WindfuryWeaponRank5 = 25505`) was missing entirely. `UpdateSpellID()` never checked for it, so `ids.Ability.WindfuryWeapon` always resolved to the Rank 4 spell ID. The imbue system then cast Rank 4, detected the Rank 4 enchant ID (1669) instead of the expected Rank 5 enchant ID (2636), and continuously prompted "Put Windfury Weapon on your mainhand weapon". Added the Rank 5 definition and prioritised it in the `IsSpellKnown` chain.
+- **Shaman – Nearly all spells capped at Classic-era ranks (level 56-60)** – The entire `ids.Rank` table and `UpdateSpellID()` function only covered spell ranks trainable up to level 60. At level 70, the addon was suggesting Rank 10 Lightning Bolt instead of Rank 12, Rank 4 Chain Lightning instead of Rank 5, Rank 7 Earth Shock instead of Rank 8, etc. Added approximately 30 missing TBC-level ranks across all three trees: Chain Lightning R5, Earth Shock R8, Lightning Bolt R11-12, Flame Shock R7, Frost Shock R5, Fire Nova Totem R6-7, Stoneclaw Totem R7, Flametongue Weapon R7, Frostbrand Weapon R6, Lightning Shield R8-9, Searing Totem R7, Stoneskin Totem R7-8, Strength of Earth R6, Grace of Air R3, Windfury Totem R4, Chain Heal R4-5, Healing Wave R11-12, Lesser Healing Wave R7, Healing Stream Totem R6, Mana Spring Totem R5, Water Shield R2. All rank chains in `UpdateSpellID()` extended to TBC maximum.
+- **Shaman – Maelstrom Weapon stacks never detected (SoD)** – `_MaelstromWeapon_COUNT` was read via `ConROC:TargetAura(Debuff.MaelstromWeapon)`, which checks the *target* for harmful auras. Maelstrom Weapon is a buff on the *player*. The function always returned 0 stacks, so every `>= 5` check silently failed and the SoD Enhancement rotation never suggested instant Lightning Bolt, Chain Lightning, or Lava Burst with Maelstrom Weapon procs — the core mechanic of the spec. Changed to `ConROC:Aura()` to check the player.
+- **Shaman – All three talent trees used Classic Era indices** – `GetTalentInfo(tab, index)` reads different positions in TBC vs Classic Era. The Elemental tree had 15 entries (Classic layout) instead of 18 (TBC); Enhancement had 16 instead of 22; Restoration had 15 instead of 19. TBC 41-point talents (Totem of Wrath, Shamanistic Rage, Earth Shield) and mid-tree additions (Lightning Overload, Dual Wield, Unleashed Rage, etc.) were absent. All talent checks (ElementalFocus, ElementalDevastation used for Earth Shock R1 proc fishing) were silently reading the wrong talent. Rebuilt all three talent tables from scratch against the TBC talent tree layout.
+- **Shaman – Debug print statements in dead code** – The unused `getEnchantmentID()` helper function contained four `print()` calls that would spam chat if ever invoked. Removed the entire dead function and its commented-out test block.
+- **Shaman – Non-SoD defense rotation only suggested Lightning Shield** – Water Shield (trainable at level 62 in TBC) and Shamanistic Rage (Enhancement talent) were only available via `Runes.*` references in the SoD branch. The non-SoD (TBC) defense path had no shield choice and no rage recovery cooldown. Added Water Shield and Shamanistic Rage to the TBC defense rotation.
+
+### Added
+
+- **Shaman – TBC abilities: Bloodlust, Heroism, Water Shield, Earth Shield, Shamanistic Rage, Totem of Wrath** – Added spell IDs to `ids.Ability` for all core TBC-only abilities. Bloodlust (2825, Horde) and Heroism (32182, Alliance) are integrated into the non-SoD damage rotation as highest priority in-combat suggestion. Water Shield (24398) with Rank 2 (33736) and Shamanistic Rage (30823) added to the TBC defense rotation. Earth Shield (974) and Totem of Wrath (30706) added for future rotation use.
+
+---
+
 ## [2.9.0] – Druid Module Overhaul
 
 ### Fixed

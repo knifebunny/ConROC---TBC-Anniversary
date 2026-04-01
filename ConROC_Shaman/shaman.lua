@@ -173,13 +173,20 @@ function ConROC.Shaman.Damage(_, timeShift, currentSpell, gcd)
     local _StrengthofEarthTotem_DUR = ConROC.totemVariables.soeTotemEXP - GetTime();
 	local _WindfuryTotem_DUR = ConROC.totemVariables.wfTotemEXP - GetTime();
 
+--TBC Abilities
+	local _Bloodlust, _Bloodlust_RDY = ConROC:AbilityReady(Ability.Bloodlust, timeShift);
+	local _Heroism, _Heroism_RDY = ConROC:AbilityReady(Ability.Heroism, timeShift);
+	local _ShamanisticRage, _ShamanisticRage_RDY = ConROC:AbilityReady(Ability.ShamanisticRage, timeShift);
+	local _WaterShield, _WaterShield_RDY = ConROC:AbilityReady(Ability.WaterShield, timeShift);
+		local _WaterShield_BUFF = ConROC:Aura(_WaterShield, timeShift);
+
 --Runes
     local _EarthShield, _EarthShield_RDY = ConROC:AbilityReady(Runes.EarthShield, timeShift);
         local _EarthShield_BUFF = ConROC:Aura(_EarthShield, timeShift);
     local _FeralSpirit, _FeralSpirit_RDY = ConROC:AbilityReady(Runes.FeralSpirit, timeShift);
     local _LavaBurst, _LavaBurst_RDY = ConROC:AbilityReady(Runes.LavaBurst, timeShift);
     local _LavaLash, _LavaLash_RDY = ConROC:AbilityReady(Runes.LavaLash, timeShift);
-        local _, _MaelstromWeapon_COUNT = ConROC:TargetAura(Debuff.MaelstromWeapon, timeShift);
+        local _, _MaelstromWeapon_COUNT = ConROC:Aura(Debuff.MaelstromWeapon, timeShift);
     local _MoltenBlast, _MoltenBlast_RDY = ConROC:AbilityReady(Runes.MoltenBlast, timeShift);
         local _PowerSurge_BUFF = ConROC:Aura(Buff.PowerSurge, timeShift);
 
@@ -450,6 +457,15 @@ function ConROC.Shaman.Damage(_, timeShift, currentSpell, gcd)
                     end
                 end
             else--not SoD
+                if (_Bloodlust_RDY or _Heroism_RDY) and _in_combat then
+                    local _blSpell = _Bloodlust_RDY and _Bloodlust or _Heroism;
+                    tinsert(ConROC.SuggestedSpells, _blSpell);
+                    _Bloodlust_RDY = false;
+                    _Heroism_RDY = false;
+                    _Queue = _Queue + 1;
+                    break;
+                end
+
                 if ConROC:CheckBox(ConROC_SM_Role_Melee) then
                     if _LightningBolt_RDY and not _target_in_melee then
                         tinsert(ConROC.SuggestedSpells, _LightningBolt);
@@ -594,64 +610,43 @@ function ConROC.Shaman.Defense(_, timeShift, currentSpell, gcd)
 	local _LightningShield, _LightningShield_RDY = ConROC:AbilityReady(Ability.LightningShield, timeShift);
 		local _LightningShield_BUFF = ConROC:Aura(_LightningShield, timeShift);
 
-    local _ShamanisticRage, _ShamanisticRage_RDY = ConROC:AbilityReady(Runes.ShamanisticRage, timeShift);
-	local _WaterShield, _WaterShield_RDY = ConROC:AbilityReady(Runes.WaterShield, timeShift);
-        local _WaterShield_BUFF = ConROC:Aura(_WaterShield, timeShift);
+    local _ShamanisticRage_Rune, _ShamanisticRage_Rune_RDY = ConROC:AbilityReady(Runes.ShamanisticRage, timeShift);
+	local _WaterShield_Rune, _WaterShield_Rune_RDY = ConROC:AbilityReady(Runes.WaterShield, timeShift);
+        local _WaterShield_Rune_BUFF = ConROC:Aura(_WaterShield_Rune, timeShift);
+	local _ShamanisticRage_TBC, _ShamanisticRage_TBC_RDY = ConROC:AbilityReady(Ability.ShamanisticRage, timeShift);
+	local _WaterShield_TBC, _WaterShield_TBC_RDY = ConROC:AbilityReady(Ability.WaterShield, timeShift);
+		local _WaterShield_TBC_BUFF = ConROC:Aura(_WaterShield_TBC, timeShift);
 
---Indicators	
+--Indicators
 
 --Warnings
 
---Rotations	
+--Rotations
     if ConROC.Seasons.IsSoD then
         if ConROC:CheckBox(ConROC_SM_Shield_LightningShield) and _LightningShield_RDY and not _LightningShield_BUFF then
             tinsert(ConROC.SuggestedDefSpells, _LightningShield);
         end
 
-        if ConROC:CheckBox(ConROC_SM_Shield_WaterShield) and _WaterShield_RDY and not _WaterShield_BUFF then
-            tinsert(ConROC.SuggestedDefSpells, _WaterShield);
+        if ConROC:CheckBox(ConROC_SM_Shield_WaterShield) and _WaterShield_Rune_RDY and not _WaterShield_Rune_BUFF then
+            tinsert(ConROC.SuggestedDefSpells, _WaterShield_Rune);
         end
 
-        if _ShamanisticRage_RDY then
-            tinsert(ConROC.SuggestedDefSpells, _ShamanisticRage);
+        if _ShamanisticRage_Rune_RDY then
+            tinsert(ConROC.SuggestedDefSpells, _ShamanisticRage_Rune);
         end
     else
-        if _LightningShield_RDY and not _LightningShield_BUFF then
+        if _WaterShield_TBC_RDY and not _WaterShield_TBC_BUFF and not _LightningShield_BUFF then
+            tinsert(ConROC.SuggestedDefSpells, _WaterShield_TBC);
+        elseif _LightningShield_RDY and not _LightningShield_BUFF and not _WaterShield_TBC_BUFF then
             tinsert(ConROC.SuggestedDefSpells, _LightningShield);
+        end
+
+        if _ShamanisticRage_TBC_RDY and _in_combat then
+            tinsert(ConROC.SuggestedDefSpells, _ShamanisticRage_TBC);
         end
     end
 return nil;
 end
-
-local function getEnchantmentID(spellID)
-    local spellName = GetSpellInfo(spellID)
-    local subtext = GetSpellSubtext(spellID)
-    print(spellName);
-    print(spellName.."("..subtext..")");
-    -- Check if spellName is in the table
-    local enchantmentRow = ids.wpnEnchantments[spellName]
-
-    if enchantmentRow then
-        -- Extract rank as a number
-        local rank = tonumber(subtext and subtext:match("(%d+)"))
-
-        -- Check if rank is in the row
-        if rank and enchantmentRow[rank] then
-            return enchantmentRow[rank]
-        else
-            print("Invalid rank or rank not found in the row.")
-        end
-    else
-        print("Spell not found in the enchantments table.")
-    end
-end
-
--- Test the function with your spell ID
---[[local enchantmentID = getEnchantmentID(Enh_Ability.FlametongueWeaponRank9)
-
-if enchantmentID then
-    print("Enchantment ID:", enchantmentID)
-end--]]
 
 function ConROC:ChooseImbue(spellID, isMainhand, enchantID)
 	if isMainhand then
