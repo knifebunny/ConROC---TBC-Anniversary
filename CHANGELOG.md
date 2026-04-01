@@ -6,6 +6,26 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.11.0] – TBC Talent Tree Indices for All Remaining Classes
+
+### Fixed
+
+- **Hunter, Paladin, Priest, Rogue, Warlock, Warrior – All talent trees used Classic Era indices** – Every remaining class module was using Classic Era `GetTalentInfo(tab, index)` positions instead of TBC. Talent checks were silently reading the wrong talent, and TBC-exclusive talents (41-point capstones, new mid-tree additions) were completely absent. Rebuilt all talent tables from scratch against the TBC 2.4.3 talent tree layout:
+  - **Hunter** – Beast Mastery: 16→21 talents, Marksmanship: 14→20, Survival: 16→23. Added: The Beast Within, Serpent's Swiftness, Focused Fire, Silencing Shot, Readiness, Expose Weakness, and more. Removed Classic-only Improved Eyes of the Beast.
+  - **Paladin** – Holy: 14→20 talents, Protection: 15→21, Retribution: 15→22. Added: Divine Illumination, Avenger's Shield, Crusader Strike, Sanctified Seals, Fanaticism, and more. Consecration removed as talent (became trainable in TBC).
+  - **Priest** – Discipline: 15→22 talents, Holy: 16→21, Shadow: 16→21. Added: Pain Suppression, Circle of Healing, Vampiric Touch, Misery, Empowered Healing, and more.
+  - **Rogue** – Assassination: 15→21 talents, Combat: 19→24, Subtlety: 17→22. Added: Mutilate, Surprise Attacks, Shadowstep, Cheat Death, Combat Potency, and more. Improved Backstab renamed to Puncturing Wounds; Improved Slice and Dice moved from Assassination to Combat.
+  - **Warlock** – Affliction: 17→21 talents, Demonology: 17→22, Destruction: 16→21. Added: Unstable Affliction, Summon Felguard, Shadowfury, Shadow and Flame, Contagion, and more. Removed Classic-only Improved Drain Mana and Improved Drain Life.
+  - **Warrior** – Arms: 18→23 talents, Fury: 17→21, Protection: 17→22. Added: Endless Rage, Rampage, Devastate, Second Wind, Blood Frenzy, and more. Sweeping Strikes moved from Arms to Fury; Tactical Mastery moved from Arms to Protection; Death Wish moved from Fury to Arms.
+- **Warrior – Death Wish talent check used wrong tree** – `TalentChosen(Spec.Fury, Fury_Talent.DeathWish)` referenced the Fury tree, but Death Wish moved to the Arms tree in TBC. The Recklessness cooldown coordination logic always evaluated to "no Death Wish talent" and fired Recklessness independently. Fixed to `TalentChosen(Spec.Arms, Arms_Talent.DeathWish)`.
+
+### Notes
+
+- These changes fix the talent index tables only. Full module overhauls (rotation logic, TBC spell rank coverage, spellmenu additions, SoD cleanup) for these six classes are planned for future releases.
+- All talent indices sourced from TBC 2.4.3 game data. Run `/script ConROC:PopulateTalentIDs()` in-game on each class to verify.
+
+---
+
 ## [2.10.0] – Shaman Module Overhaul
 
 ### Fixed

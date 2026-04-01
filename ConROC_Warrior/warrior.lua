@@ -190,7 +190,7 @@ function ConROC.Warrior.Damage(_, timeShift, currentSpell, gcd)
 
 	ConROC:AbilityBurst(_SweepingStrikes, _SweepingStrikes_RDY and _in_stance == Stance.Battle and _enemies_in_melee >= 2);
 	ConROC:AbilityBurst(_DeathWish, _DeathWish_RDY and _in_combat and not ConROC:TarYou());
-	ConROC:AbilityBurst(_Recklessness, _Recklessness_RDY and _in_combat and not ConROC:TarYou() and ((not ConROC:TalentChosen(Spec.Fury, Fury_Talent.DeathWish)) or (ConROC:TalentChosen(Spec.Fury, Fury_Talent.DeathWish) and _DeathWish_RDY)));
+	ConROC:AbilityBurst(_Recklessness, _Recklessness_RDY and _in_combat and not ConROC:TarYou() and ((not ConROC:TalentChosen(Spec.Arms, Arms_Talent.DeathWish)) or (ConROC:TalentChosen(Spec.Arms, Arms_Talent.DeathWish) and _DeathWish_RDY)));
 	ConROC:AbilityBurst(_BerserkerRage, _BerserkerRage_RDY and _Rage <= 30 and _in_stance == Stance.Berserker);
 
 	ConROC:AbilityRaidBuffs(_CommandingShout, ConROC:CheckBox(ConROC_SM_Shout_CommandingShout) and _CommandingShout_RDY and not ConROC:RaidBuff(Runes.CommandingShout));
