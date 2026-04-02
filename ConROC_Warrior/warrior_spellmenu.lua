@@ -138,7 +138,7 @@ function ConROC:RotationChoices()
 			frameName = "Shouts and Debuffs",
 			spells = {
 				{spellID = ids.Ability.BattleShout, spellCheckbox = "Shout_BattleShout", reqLevel = 1, type = "spell"},
-				{spellID = ids.Runes.CommandingShout, spellCheckbox = "Shout_CommandingShout", reqLevel = 1, type = "spell"},
+				{spellID = ids.Ability.CommandingShout, spellCheckbox = "Shout_CommandingShout", reqLevel = 68, type = "spell"},
 				{spellID = ids.Ability.DemoralizingShout, spellCheckbox = "Shout_DemoralizingShout", reqLevel = 14, type = "spell"},
 				{spellID = ids.Ability.Bloodrage, spellCheckbox = "Shout_Bloodrage", reqLevel = 10, type = "spell"},
 				{spellID = ids.Ability.Rend, spellCheckbox = "Debuff_Rend", reqLevel = 4, type = "spell"},

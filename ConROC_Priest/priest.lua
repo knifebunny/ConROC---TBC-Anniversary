@@ -118,6 +118,10 @@ function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
 	local _VampiricTouch, _VampiricTouch_RDY = ConROC:AbilityReady(Ability.VampiricTouch, timeShift);
 		local _VampiricTouch_DEBUFF = ConROC:TargetAura(_VampiricTouch, timeShift);
 
+	--TBC Abilities
+	local _PrayerofMending, _PrayerofMending_RDY = ConROC:AbilityReady(Ability.PrayerofMending, timeShift);
+	local _BindingHeal, _BindingHeal_RDY = ConROC:AbilityReady(Ability.BindingHeal, timeShift);
+
 	local _ShadowWeaving_BUFF, _ShadowWeaving_COUNT = ConROC:Aura(Buff.ShadowWeaving, timeShift);
 
 --Conditions
@@ -369,6 +373,10 @@ function ConROC.Priest.Defense(_, timeShift, currentSpell, gcd)
 	local _ShadowProtection, _ShadowProtection_RDY = ConROC:AbilityReady(Ability.ShadowProtection, timeShift);
 		local _ShadowProtection_BUFF = ConROC:Aura(_ShadowProtection, timeShift);
 
+	--TBC Abilities
+	local _PrayerofMending, _PrayerofMending_RDY = ConROC:AbilityReady(Ability.PrayerofMending, timeShift);
+	local _BindingHeal, _BindingHeal_RDY = ConROC:AbilityReady(Ability.BindingHeal, timeShift);
+
 --Rotations
 	if _InnerFire_RDY and not _InnerFire_BUFF then
 		tinsert(ConROC.SuggestedDefSpells, _InnerFire);
@@ -388,6 +396,14 @@ function ConROC.Priest.Defense(_, timeShift, currentSpell, gcd)
 
 	if _in_combat and _PowerWordShield_RDY and not _PowerWordShield_BUFF and not _WeakendSoul_DEBUFF then
 		tinsert(ConROC.SuggestedDefSpells, _PowerWordShield);
+	end
+
+	if ConROC:CheckBox(ConROC_SM_Spell_PrayerofMending) and _PrayerofMending_RDY and _in_combat then
+		tinsert(ConROC.SuggestedDefSpells, _PrayerofMending);
+	end
+
+	if ConROC:CheckBox(ConROC_SM_Spell_BindingHeal) and _BindingHeal_RDY and _in_combat and _Player_Percent_Health <= 70 then
+		tinsert(ConROC.SuggestedDefSpells, _BindingHeal);
 	end
 return nil;
 end

@@ -165,6 +165,7 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
     local _CatForm_COST = manaBase * (.55 * (1.0 - (.1 * select(2, ConROC:TalentChosen(Spec.Restoration, Resto_Talent.NaturalShapeshifter)))))
     local _Rake_COST = 40;
     local _Claw_COST = 45;
+    local _MangleCat_COST = 45;
     local _Shred_COST = 60;
 
     if ConROC:TalentChosen(Spec.Feral, Feral_Talent.Ferocity) then
@@ -173,6 +174,7 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
         _Swipe_COST = _Swipe_COST - ferocityBonus;
         _Rake_COST = _Rake_COST - ferocityBonus;
         _Claw_COST = _Claw_COST - ferocityBonus;
+        _MangleCat_COST = _MangleCat_COST - ferocityBonus;
     end
 
     if ConROC:TalentChosen(Spec.Feral, Feral_Talent.ShreddingAttacks) then
@@ -200,7 +202,7 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                         break;
                     end
 
-                    if _Ravage_RDY and _Energy >= 60 and _Combo < _Combo_Max and not ConROC:TarYou() then
+                    if _Ravage_RDY and _Energy >= 60 and _Combo < _Combo_Max then
                         tinsert(ConROC.SuggestedSpells, _Ravage);
                         _is_stealthed = false;
                         _Energy = _Energy - 60;
@@ -209,7 +211,7 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                         break;
                     end
 
-                    if _Shred_RDY and _Energy >= 60 and _Combo < _Combo_Max and not ConROC:TarYou() then
+                    if _Shred_RDY and _Energy >= _Shred_COST and _Combo < _Combo_Max then
                         tinsert(ConROC.SuggestedSpells, _Shred);
                         _is_stealthed = false;
                         _Energy = _Energy - 60;
@@ -241,11 +243,12 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                         break;
                     end
 
-                    -- Mangle (Cat): maintain debuff for bleed bonus (60s)
-                    if _MangleCat_RDY and _MangleCat_DUR <= 1.5 then
+                    -- Mangle (Cat): maintain debuff for bleed bonus (12s)
+                    if _MangleCat_RDY and _Energy >= _MangleCat_COST and (_MangleCat_DUR == nil or _MangleCat_DUR <= 1.5) then
                         tinsert(ConROC.SuggestedSpells, _MangleCat);
                         _MangleCat_RDY = false;
-                        _MangleCat_DUR = 60;
+                        _MangleCat_DUR = 12;
+                        _Energy = _Energy - _MangleCat_COST;
                         _Combo = _Combo + 1;
                         _Queue = _Queue + 1;
                         break;
@@ -261,7 +264,7 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                     end
 
                     -- Ferocious Bite: 5cp dump finisher (when Rip is up or not using Rip)
-                    if _FerociousBite_RDY and _Combo >= 5 then
+                    if ConROC:CheckBox(ConROC_SM_Ability_FerociousBite) and _FerociousBite_RDY and _Combo >= 5 then
                         if ConROC:TalentChosen(Spec.Restoration, Resto_Talent.Furor) and _CatForm_COST <= _Mana and _Energy - 35 <= 8 then
                             ConROCPowerShift:Show();
                         end
@@ -283,8 +286,8 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                         break;
                     end
 
-                    -- Shred: primary combo builder from behind
-                    if _Shred_RDY and _Energy >= _Shred_COST and _Combo < _Combo_Max and not ConROC:TarYou() then
+                    -- Shred: primary combo builder (requires being behind target)
+                    if ConROC:CheckBox(ConROC_SM_Ability_Shred) and _Shred_RDY and _Energy >= _Shred_COST and _Combo < _Combo_Max then
                         if ConROC:TalentChosen(Spec.Restoration, Resto_Talent.Furor) and _CatForm_COST <= _Mana and _Energy - _Shred_COST <= 8 then
                             ConROCPowerShift:Show();
                         end
@@ -296,16 +299,17 @@ function ConROC.Druid.Damage(_, timeShift, currentSpell, gcd)
                     end
 
                     -- Mangle (Cat): combo builder when Shred unavailable
-                    if _MangleCat_RDY and _Combo < _Combo_Max then
+                    if _MangleCat_RDY and _Energy >= _MangleCat_COST and _Combo < _Combo_Max then
                         tinsert(ConROC.SuggestedSpells, _MangleCat);
                         _MangleCat_RDY = false;
+                        _Energy = _Energy - _MangleCat_COST;
                         _Combo = _Combo + 1;
                         _Queue = _Queue + 1;
                         break;
                     end
 
                     -- Claw: fallback combo builder (no Mangle talented)
-                    if _Claw_RDY and _Energy >= _Claw_COST and _Combo < _Combo_Max and (not IsSpellKnownOrOverridesKnown(_MangleCat) or ConROC:TarYou()) then
+                    if _Claw_RDY and _Energy >= _Claw_COST and _Combo < _Combo_Max and not IsSpellKnownOrOverridesKnown(_MangleCat) then
                         if ConROC:TalentChosen(Spec.Restoration, Resto_Talent.Furor) and _CatForm_COST <= _Mana and _Energy - _Claw_COST <= 8 then
                             ConROCPowerShift:Show();
                         end

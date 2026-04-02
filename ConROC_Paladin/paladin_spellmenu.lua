@@ -232,7 +232,6 @@ function ConROC:RotationChoices()
 	    frameName = "Seals",
 	    spells = {
 	    	{spellID = ids.Ability.SealofRighteousness, spellCheckbox = "Seal_Righteousness", reqLevel = 1, type="spell"},
-	    	{spellID = ids.Runes.SealofMartyrdom, spellCheckbox = "Seal_Martyrdom", reqLevel = 1, type="spell"},
 	    	{spellID = ids.Ability.SealoftheCrusader, spellCheckbox = "Seal_Crusader", reqLevel = 6, type="spell"},
 	    	{spellID = ids.Ability.SealofCommand, spellCheckbox = "Seal_Command", reqLevel = 20, type="spell"},
 	    	{spellID = ids.Ability.SealofJustice, spellCheckbox = "Seal_Justice", reqLevel = 22, type="spell"},

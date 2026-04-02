@@ -198,6 +198,8 @@ function ConROC:RotationChoices()
 	    	{spellID = ids.Ability.RapidFire, spellCheckbox = "Ability_RapidFire", reqLevel = 26, type = "spell"},
 	    	{spellID = ids.Ability.BestialWrath, spellCheckbox = "Ability_BestialWrath", reqLevel = 40, type = "spell"},
 	    	{spellID = ids.Ability.SteadyShot, spellCheckbox = "Ability_SteadyShot", reqLevel = 62, type = "spell"},
+	    	{spellID = ids.Ability.ArcaneShot, spellCheckbox = "Ability_ArcaneShot", reqLevel = 6, type = "spell"},
+	    	{spellID = ids.Ability.KillCommand, spellCheckbox = "Ability_KillCommand", reqLevel = 66, type = "spell"},
 	    	{spellID = ids.Ability.MultiShot, spellCheckbox = "Ability_MultiShot", reqLevel = 18, type = "spell"},
 	    	{spellID = ids.Ability.RaptorStrike, spellCheckbox = "Ability_RaptorStrike", reqLevel = 1, type = "spell"},
 	    	{spellID = ids.Ability.MongooseBite, spellCheckbox = "Ability_MongooseBite", reqLevel = 16, type = "spell"},

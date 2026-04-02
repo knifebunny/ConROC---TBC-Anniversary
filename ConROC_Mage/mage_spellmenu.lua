@@ -150,12 +150,14 @@ function ConROC:RotationChoices()
 	    spells = {
 	      {spellID = ids.Ability.IceArmor, spellCheckbox = "Armor_Ice", reqLevel = 1, type="spell"},
 	      {spellID = ids.Ability.MageArmor, spellCheckbox = "Armor_Mage", reqLevel = 34, type="spell"},
+	      {spellID = ids.Ability.MoltenArmor, spellCheckbox = "Armor_Molten", reqLevel = 62, type="spell"},
 	    },
 	    groupType = "radioButtons"
 	  	},
 	  	{
 	    frameName = "Filler",
 	    spells = {
+	      {spellID = ids.Ability.ArcaneBlast, spellCheckbox = "Filler_ArcaneBlast", reqLevel = 64, type="spell"},
 	      {spellID = ids.Ability.Fireball, spellCheckbox = "Filler_Fireball", reqLevel = 1, type="spell"},
 	      {spellID = ids.Ability.Frostbolt, spellCheckbox = "Filler_Frostbolt", reqLevel = 4, type="spell"},
 	      {spellID = ids.Ability.ArcaneMissiles, spellCheckbox = "Filler_ArcaneMissiles", reqLevel = 8, type="spell"}
@@ -169,6 +171,13 @@ function ConROC:RotationChoices()
 	    	{spellID = ids.Ability.ArcanePower, spellCheckbox = "CD_ArcanePower", reqLevel = 40, type="spell"},
 	    	{spellID = ids.Ability.Combustion, spellCheckbox = "CD_Combustion", reqLevel = 40, type="spell"},
 	    	{spellID = ids.Ability.IcyVeins, spellCheckbox = "CD_IcyVeins", reqLevel = 40, type="spell"},
+	    },
+	    groupType = "checkBoxes"
+	  	},
+	  	{
+	    frameName = "Spells",
+	    spells = {
+	    	{spellID = ids.Ability.IceLance, spellCheckbox = "Spell_IceLance", reqLevel = 66, type="spell"},
 	    },
 	    groupType = "checkBoxes"
 	  	},

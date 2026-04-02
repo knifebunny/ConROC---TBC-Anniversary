@@ -44,7 +44,6 @@ local defaults = {
 	["ConROC_Caster_Curse_None"] = false,
 	["ConROC_Caster_Debuff_Immolate"] = true,
 	["ConROC_Caster_Debuff_UnstableAffliction"] = false,
-	["ConROC_Caster_Debuff_Shadowflame"] = false,
 	["ConROC_Caster_Debuff_Corruption"] = true,
 	["ConROC_Caster_Debuff_SiphonLife"] = true,
 	["ConROC_Caster_Filler_ShadowBolt"] = true,
@@ -80,7 +79,6 @@ local defaults = {
 	["ConROC_PvP_Curse_None"] = false,
 	["ConROC_PvP_Debuff_Immolate"] = true,
 	["ConROC_PvP_Debuff_UnstableAffliction"] = false,
-	["ConROC_PvP_Debuff_Shadowflame"] = false,
 	["ConROC_PvP_Debuff_Corruption"] = true,
 	["ConROC_PvP_Debuff_SiphonLife"] = true,
 	["ConROC_PvP_Filler_ShadowBolt"] = true,
@@ -195,7 +193,7 @@ function ConROC:RotationChoices()
 				{spellID = ids.Ability.SummonIncubus, spellCheckbox = "Demon_Incubus", reqLevel = 20, type="spell"},
 				{spellID = ids.Ability.SummonSuccubus, spellCheckbox = "Demon_Succubus", reqLevel = 20, type="spell"},
 				{spellID = ids.Ability.SummonFelhunter, spellCheckbox = "Demon_Felhunter", reqLevel = 30, type="spell"},
-				{spellID = ids.Runes.SummonFelguard, spellCheckbox = "Demon_Felguard", reqLevel = 1, type="spell"},
+				{spellID = ids.Ability.SummonFelguard, spellCheckbox = "Demon_Felguard", reqLevel = 50, type="spell"},
 				{spellID = "None", spellCheckbox = "Demon_None", reqLevel = 1, type="none"}
 			},
 			groupType = "radioButtons"
@@ -211,7 +209,7 @@ function ConROC:RotationChoices()
 			frameName = "Armors",
 			spells = {
 				{spellID = ids.Ability.DemonArmor, spellCheckbox = "Armor_DemonArmor", reqLevel = 1, type = "spell"},
-				{spellID = ids.Runes.FelArmor, spellCheckbox = "Armor_FelArmor", reqLevel = 1, type = "spell"},
+				{spellID = ids.Ability.FelArmor, spellCheckbox = "Armor_FelArmor", reqLevel = 62, type = "spell"},
 			},
 			groupType = "radioButtons"
 		},
@@ -235,7 +233,6 @@ function ConROC:RotationChoices()
 			spells = {
 				{spellID = ids.Ability.Immolate, spellCheckbox = "Debuff_Immolate", reqLevel = 1, type = "spell"},
 				{spellID = ids.Ability.UnstableAffliction, spellCheckbox = "Debuff_UnstableAffliction", reqLevel = 50, type = "spell"},
-				{spellID = ids.Runes.Shadowflame, spellCheckbox = "Debuff_Shadowflame", reqLevel = 1, type = "spell"},
 				{spellID = ids.Ability.Corruption, spellCheckbox = "Debuff_Corruption", reqLevel = 4, type = "spell"},
 				{spellID = ids.Ability.SiphonLife, spellCheckbox = "Debuff_SiphonLife", reqLevel = 30, type = "spell"},
 			},
@@ -245,7 +242,7 @@ function ConROC:RotationChoices()
 			frameName = "Fillers",
 			spells = {
 				{spellID = ids.Ability.ShadowBolt, spellCheckbox = "Filler_ShadowBolt", reqLevel = 1, type="spell"},
-				{spellID = ConROC.Seasons.IsSoD and ids.Runes.Incinerate or ids.Ability.Incinerate, spellCheckbox = "Filler_Incinerate", reqLevel = 1, type="spell"},
+				{spellID = ids.Ability.Incinerate, spellCheckbox = "Filler_Incinerate", reqLevel = 64, type="spell"},
 				{spellID = ids.Ability.SearingPain, spellCheckbox = "Filler_SearingPain", reqLevel = 18, type="spell"},
 			},
 			groupType = "radioButtons"
@@ -271,7 +268,6 @@ function ConROC:RotationChoices()
 	  	{
 			frameName = "Options",
 			spells = {
-				--{spellID = ids.Runes.Metamorphosis, spellCheckbox = "Option_Metamorphosis", reqLevel = 60, type="spell"},
 				{spellID = ids.Ability.DrainSoul, spellCheckbox = "Option_SoulShard", reqLevel = 10, type = "textfield", icon = 6265, customName = "Minimum Soul Shards"},
 				--{spellID = "Use Prepull actions", spellCheckbox = "Option_PrePull", reqLevel = 15, type="custom", icon=237511, customName="Use Prepull actions"},
 				{spellID = "AoE Toggle Button", spellCheckbox = "Option_AoE", reqLevel = 20, type = "aoetoggler"},

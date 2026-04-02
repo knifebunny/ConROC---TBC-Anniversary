@@ -26,7 +26,7 @@ function ConROC:UNIT_SPELLCAST_SUCCEEDED(event, unitID, lineID, spellID)
 	ConROC:JustCasted(spellID);
 end
 
-local Racial, Spec, Caster, Ability, Rank, Arc_Talent, Fire_Talent, Frost_Talent, Engrave, Runes, Buff, Debuff = ids.Racial, ids.Spec, ids.Caster, ids.Ability, ids.Rank, ids.Arcane_Talent, ids.Fire_Talent, ids.Frost_Talent, ids.Engrave, ids.Runes, ids.Buff, ids.Debuff;
+local Racial, Spec, Caster, Ability, Rank, Arc_Talent, Fire_Talent, Frost_Talent, Buff, Debuff = ids.Racial, ids.Spec, ids.Caster, ids.Ability, ids.Rank, ids.Arcane_Talent, ids.Fire_Talent, ids.Frost_Talent, ids.Buff, ids.Debuff;
 local wChillEXP = 0;
 local fVulEXP = 0;
 local fStrikeEXP = 0;
@@ -135,6 +135,10 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 		local _FrostNova_DEBUFF = ConROC:TargetAura(_FrostNova);
 	local _IcyVeins, _IcyVeins_RDY = ConROC:AbilityReady(Ability.IcyVeins, timeShift);
 
+--TBC Abilities
+	local _ArcaneBlast, _ArcaneBlast_RDY = ConROC:AbilityReady(Ability.ArcaneBlast, timeShift);
+	local _IceLance, _IceLance_RDY = ConROC:AbilityReady(Ability.IceLance, timeShift);
+
 	local _Chilled_DEBUFF = ConROC:TargetAura(Debuff.Chilled, timeShift);
 	local _WintersChill_DEBUFF, _WintersChill_COUNT = ConROC:TargetAura(Debuff.WintersChill);
 		local _WintersChill_DUR = wChillEXP - GetTime();
@@ -172,90 +176,7 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 				break;
 			end
 
-			if ConROC.Seasons.IsSoD then -- SoD rotation (dead code on TBC servers)
-				if ConROC:CheckBox(ConROC_SM_Rune_IcyVeins) and _IcyVeins_RDY then
-					tinsert(ConROC.SuggestedSpells, Runes.IcyVeins);
-					_IcyVeins_RDY = false;
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Rune_LivingFlame) and ConROC:AbilityReady(Runes.LivingFlame, timeShift) then
-					tinsert(ConROC.SuggestedSpells, Runes.LivingFlame);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Rune_LivingBomb) and ConROC:AbilityReady(Runes.LivingBomb, timeShift) and not ConROC:TargetAura(Runes.LivingBomb, timeShift) and ((_Target_Percent_Health >= 5 and ConROC:Raidmob()) or (_Target_Percent_Health >= 20 and not ConROC:Raidmob())) then
-					tinsert(ConROC.SuggestedSpells, Runes.LivingBomb);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Rune_ArcaneBlast) and ConROC:AbilityReady(Runes.ArcaneBlast, timeShift) then
-					local _, arcBlastCount = ConROC:TargetAura(Runes.ArcaneBlast);
-					if arcBlastCount < ConROC_SM_Rune_ArcaneBlastCount:GetNumber() then
-						tinsert(ConROC.SuggestedSpells, Runes.ArcaneBlast);
-						_Queue = _Queue + 1;
-						break;
-					end
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Rune_ArcaneSurge) and ConROC:AbilityReady(Runes.ArcaneSurge, timeShift) then
-					tinsert(ConROC.SuggestedSpells, Runes.ArcaneSurge);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC_AoEButton:IsVisible() then
-					if ConROC:CheckBox(ConROC_SM_AoE_ArcaneExplosion) and _ArcaneExplosion_RDY and _target_in_melee then
-						tinsert(ConROC.SuggestedSpells, _ArcaneExplosion);
-						_Queue = _Queue + 1;
-						break;
-					end
-					if ConROC:CheckBox(ConROC_SM_AoE_Flamestrike) and _Flamestrike_RDY and not _target_in_melee and _Flamestrike_DUR <= 2 then
-						tinsert(ConROC.SuggestedSpells, _Flamestrike);
-						_Queue = _Queue + 1;
-						break;
-					end
-					if ConROC:CheckBox(ConROC_SM_AoE_Blizzard) and _Blizzard_RDY and not _target_in_melee then
-						tinsert(ConROC.SuggestedSpells, _Blizzard);
-						_Queue = _Queue + 1;
-						break;
-					end
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Option_UseWand) and _Has_Wand and ((_Mana_Percent <= 10 and not _Evocation_RDY) or _Target_Percent_Health <= 5) then
-					tinsert(ConROC.SuggestedSpells, Caster.Shoot);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Filler_FrostfireBolt) and ConROC:AbilityReady(Runes.FrostfireBolt, timeShift) then
-					tinsert(ConROC.SuggestedSpells, Runes.FrostfireBolt);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Filler_Fireball) and _Fireball_RDY then
-					tinsert(ConROC.SuggestedSpells, _Fireball);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Filler_ArcaneMissiles) and _ArcaneMissiles_RDY then
-					tinsert(ConROC.SuggestedSpells, _ArcaneMissiles);
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if ConROC:CheckBox(ConROC_SM_Filler_Frostbolt) and _Frostbolt_RDY then
-					tinsert(ConROC.SuggestedSpells, _Frostbolt);
-					_Queue = _Queue + 1;
-					break;
-				end
-			else -- TBC / Classic rotation
-				-- PoM + Pyroblast opener
+			-- PoM + Pyroblast opener
 				if _Pyroblast_RDY and (not _in_combat or _PresenceofMind_BUFF) then
 					tinsert(ConROC.SuggestedSpells, _Pyroblast);
 					_in_combat = true;
@@ -335,6 +256,14 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 					break;
 				end
 
+				-- Ice Lance: instant cast, bonus damage on frozen targets
+				if ConROC:CheckBox(ConROC_SM_Spell_IceLance) and _IceLance_RDY and _FrostNova_DEBUFF then
+					tinsert(ConROC.SuggestedSpells, _IceLance);
+					_IceLance_RDY = false;
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				-- Fire Blast: execute range or when forced into melee
 				if _FireBlast_RDY and (_Target_Percent_Health <= 25 or _target_in_melee) and not ConROC_AoEButton:IsVisible() then
 					tinsert(ConROC.SuggestedSpells, _FireBlast);
@@ -366,6 +295,12 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 				end
 
 				-- Fillers
+				if ConROC:CheckBox(ConROC_SM_Filler_ArcaneBlast) and _ArcaneBlast_RDY then
+					tinsert(ConROC.SuggestedSpells, _ArcaneBlast);
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				if ConROC:CheckBox(ConROC_SM_Filler_Fireball) and _Fireball_RDY then
 					tinsert(ConROC.SuggestedSpells, _Fireball);
 					_Queue = _Queue + 1;
@@ -383,7 +318,6 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 					_Queue = _Queue + 1;
 					break;
 				end
-			end
 
 			tinsert(ConROC.SuggestedSpells, 26008); -- Waiting Spell Icon
 			_Queue = _Queue + 3;
@@ -409,6 +343,8 @@ function ConROC.Mage.Defense(_, timeShift, currentSpell, gcd)
 		local _MageArmor_BUFF = ConROC:Aura(_MageArmor, timeShift);
 	local _ManaShield, _ManaShield_RDY = ConROC:AbilityReady(Ability.ManaShield, timeShift);
 		local _ManaShield_BUFF = ConROC:Aura(_ManaShield, timeShift);
+	local _MoltenArmor, _MoltenArmor_RDY = ConROC:AbilityReady(Ability.MoltenArmor, timeShift);
+		local _MoltenArmor_BUFF = ConROC:Aura(_MoltenArmor, timeShift);
 
 --Rotations
 	if ConROC:CheckBox(ConROC_SM_Armor_Ice) and _IceArmor_RDY and not _IceArmor_BUFF then
@@ -417,6 +353,10 @@ function ConROC.Mage.Defense(_, timeShift, currentSpell, gcd)
 
 	if ConROC:CheckBox(ConROC_SM_Armor_Mage) and _MageArmor_RDY and not _MageArmor_BUFF then
 		tinsert(ConROC.SuggestedDefSpells, _MageArmor);
+	end
+
+	if ConROC:CheckBox(ConROC_SM_Armor_Molten) and _MoltenArmor_RDY and not _MoltenArmor_BUFF then
+		tinsert(ConROC.SuggestedDefSpells, _MoltenArmor);
 	end
 
 	if _FrostNova_RDY and _target_in_melee and _Target_Percent_Health >= 20 then

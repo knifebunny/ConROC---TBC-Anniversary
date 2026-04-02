@@ -24,7 +24,7 @@ function ConROC:UNIT_SPELLCAST_SUCCEEDED(event, unitID, lineID, spellID)
 	end
 end
 
-local Racial, Spec, Caster, Ability, Rank, Aff_Talent, Demo_Talent, Dest_Talent, Pet, Engrave, Runes, Buff, Debuff = ids.Racial, ids.Spec, ids.Caster, ids.Ability, ids.Rank, ids.Affliction_Talent, ids.Demonology_Talent, ids.Destruction_Talent, ids.Pet, ids.Engrave, ids.Runes, ids.Buff, ids.Debuff;
+local Racial, Spec, Caster, Ability, Rank, Aff_Talent, Demo_Talent, Dest_Talent, Pet, Buff, Debuff = ids.Racial, ids.Spec, ids.Caster, ids.Ability, ids.Rank, ids.Affliction_Talent, ids.Demonology_Talent, ids.Destruction_Talent, ids.Pet, ids.Buff, ids.Debuff;
 
 --Info
 local _Player_Spec, _Player_Spec_ID = ConROC:currentSpec();
@@ -146,30 +146,9 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 		local _FelEnergy_BUFF = ConROC:Aura(Buff.FelEnergy, timeShift);
 		local _DemonicSacrifice_ACTIVE = _BurningWish_BUFF or _FelStamina_BUFF or _TouchofShadow_BUFF or _FelEnergy_BUFF;
 
---Runed
-	local _Backdraft_BUFF = ConROC:Aura(Buff.Backdraft, timeShift);
-	local _ChaosBolt, _ChaosBolt_RDY = ConROC:AbilityReady(Runes.ChaosBolt, timeShift);
-	local _Decimation_BUFF = ConROC:Aura(Buff.Decimation, timeShift);
-	local _DemonCharge, _DemonCharge_RDY = ConROC:AbilityReady(Runes.DemonCharge, timeShift);
-		local _, _DemonCharge_RANGE = ConROC:Targets(_DemonCharge);
-	local _DemonicGrace, _DemonicGrace_RDY = ConROC:AbilityReady(Runes.DemonicGrace, timeShift);
-	local _DemonicHowl, _DemonicHowl_RDY = ConROC:AbilityReady(Runes.DemonicHowl, timeShift);
-    local _Haunt, _Haunt_RDY = ConROC:AbilityReady(Runes.Haunt, timeShift);
-        local _Haunt_DEBUFF = ConROC:TargetAura(_Haunt, timeShift);
-	local _ImmolationAura, _ImmolationAura_RDY = ConROC:AbilityReady(Runes.ImmolationAura, timeShift);
-		local _ImmolationAura_FORM = ConROC:Form(_ImmolationAura);
-	local _Incinerate, _Incinerate_RDY = ConROC:AbilityReady(Runes.Incinerate, timeShift);
-        local _Incinerate_BUFF = ConROC:Aura(_Incinerate, timeShift);
-	if not ConROC.Seasons.IsSoD and Ability.Incinerate then
-		_Incinerate, _Incinerate_RDY = ConROC:AbilityReady(Ability.Incinerate, timeShift);
-	end
-	local _Menace, _Menace_RDY = ConROC:AbilityReady(Runes.Menace, timeShift);
-	local _Metamorphosis, _Metamorphosis_RDY = ConROC:AbilityReady(Runes.Metamorphosis, timeShift);
-		local _Metamorphosis_FORM = ConROC:Form(_Metamorphosis);
-	local _ShadowCleave, _ShadowCleave_RDY = ConROC:AbilityReady(Runes.ShadowCleave, timeShift);
-	local _Shadowflame, _Shadowflame_RDY = ConROC:AbilityReady(Runes.Shadowflame, timeShift);
-		local _Shadowflame_DEBUFF = ConROC:TargetAura(_Shadowflame, timeShift);
-	local _SummonFelguard, _SummonFelguard_RDY = ConROC:AbilityReady(Runes.SummonFelguard, timeShift);
+	local _Incinerate, _Incinerate_RDY = ConROC:AbilityReady(Ability.Incinerate, timeShift);
+	local _Soulshatter, _Soulshatter_RDY = ConROC:AbilityReady(Ability.Soulshatter, timeShift);
+	local _SummonFelguard, _SummonFelguard_RDY = ConROC:AbilityReady(Ability.SummonFelguard, timeShift);
 	local _UnstableAffliction, _UnstableAffliction_RDY = ConROC:AbilityReady(Ability.UnstableAffliction, timeShift);
 		local _UnstableAffliction_DEBUFF = ConROC:TargetAura(_UnstableAffliction, timeShift);
 
@@ -186,14 +165,11 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 	local _is_Casting = UnitCastingInfo('target') or UnitChannelInfo('target');
 
 --Indicators
-	ConROC:AbilityMovement(_DemonCharge, _DemonCharge_RDY and _DemonCharge_RANGE);
-	ConROC:AbilityTaunt(_DemonicHowl, _DemonicHowl_RDY and _enemies_in_30yrds >= 3);
-	ConROC:AbilityTaunt(_Menace, _Menace_RDY and not ConROC:TarYou());
-
 	ConROC:AbilityBurst(_AmplifyCurse, _AmplifyCurse_RDY and (ConROC:CheckBox(ConROC_SM_Curse_Weakness) or ConROC:CheckBox(ConROC_SM_Curse_Agony)));
 	ConROC:AbilityBurst(_DeathCoil, _DeathCoil_RDY and _is_PC and _is_Enemy and _enemies_in_melee >= 1 and _Player_Percent_Health < 60);
 	ConROC:AbilityBurst(_Fear, _Fear_RDY and _is_PC and _is_Enemy and _enemies_in_melee >= 1 and not _Fear_DEBUFF);
 	ConROC:AbilityBurst(_HowlofTerror, _HowlofTerror_RDY and _is_PC and _is_Enemy and _enemies_in_melee >= 2);
+	ConROC:AbilityBurst(_Soulshatter, _Soulshatter_RDY and _in_combat and _party_size > 0);
 
     ConROC:AbilityInterrupt(_SpellLock, ConROC:Interrupt() and _SpellLock_RDY)
 
@@ -278,375 +254,7 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 				break;
 			end
 
-			--SoD--
-			if ConROC.Seasons.IsSoD then
-				if _Metamorphosis_FORM then
-					if _ImmolationAura_RDY and not _ImmolationAura_FORM then
-						tinsert(ConROC.SuggestedSpells, _ImmolationAura);
-						_ImmolationAura_FORM = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _Incinerate_RDY and not _Incinerate_BUFF then
-						tinsert(ConROC.SuggestedSpells, _Incinerate);
-						_Incinerate_BUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC_AoEButton:IsVisible() and _enemies_in_10yrds >= 3 then
-						if _RainofFire_RDY and ConROC:RuneEquipped(Engrave.LakeofFire , "chest") then
-							tinsert(ConROC.SuggestedSpells, _RainofFire);
-							_RainofFire_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _CurseoftheElements_RDY and not _CurseoftheElements_DEBUFF then
-							tinsert(ConROC.SuggestedSpells, _CurseoftheElements);
-							_CurseoftheElements_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _Shadowflame_RDY and currentSpell ~= _Shadowflame and not _Shadowflame_DEBUFF then
-							tinsert(ConROC.SuggestedSpells, _Shadowflame);
-							_Shadowflame_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _Hellfire_RDY and _enemies_in_10yrds >= 3 and _Player_Percent_Health >= 30 then
-							tinsert(ConROC.SuggestedSpells, _Hellfire);
-							_Hellfire_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						tinsert(ConROC.SuggestedSpells, 26008); --Waiting Spell Icon
-						_Queue = _Queue + 3;
-						break;
-					end
-
-					if _SearingPain_RDY and not _target_in_melee then
-						tinsert(ConROC.SuggestedSpells, _SearingPain);
-						_target_in_melee = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					--Curses--
-					if ConROC:CheckBox(ConROC_SM_Curse_Weakness) and _CurseofWeakness_RDY and not _CurseofWeakness_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofWeakness);
-						_CurseofWeakness_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Agony) and _CurseofAgony_RDY and not _CurseofAgony_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofAgony);
-						_CurseofAgony_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Recklessness) and _CurseofRecklessness_RDY and not _CurseofRecklessness_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofRecklessness);
-						_CurseofRecklessness_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Tongues) and _CurseofTongues_RDY and not _CurseofTongues_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofTongues);
-						_CurseofTongues_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Exhaustion) and _CurseofExhaustion_RDY and not _CurseofExhaustion_DEBUFF then
-						tinsert(ConROC.SuggestedSpells, _CurseofExhaustion);
-						_CurseofExhaustion_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Elements) and _CurseoftheElements_RDY and not _CurseoftheElements_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseoftheElements);
-						_CurseoftheElements_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Shadow) and _CurseofShadow_RDY and not _CurseofShadow_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofShadow);
-						_CurseofShadow_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Curse_Doom) and _CurseofDoom_RDY and not _CurseofDoom_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 75) or (not ConROC:Raidmob() and _Target_Percent_Health == 100)) then
-						tinsert(ConROC.SuggestedSpells, _CurseofDoom);
-						_CurseofDoom_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _DemonicGrace_RDY then
-						tinsert(ConROC.SuggestedSpells, _DemonicGrace);
-						_DemonicGrace_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _DrainLife_RDY and ConROC:RuneEquipped(Engrave.MasterChanneler, "chest") and not _DrainLife_DEBUFF and not ConROC:CreatureType("Mechanical") then
-						tinsert(ConROC.SuggestedSpells, _DrainLife);
-						_DrainLife_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Debuff_Immolate) and _Immolate_RDY and currentSpell ~= _Immolate and not _Immolate_DEBUFF and not _Shadowflame_DEBUFF and not _UnstableAffliction_DEBUFF then
-						tinsert(ConROC.SuggestedSpells, _Immolate);
-						_Immolate_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if ConROC:CheckBox(ConROC_SM_Debuff_Corruption) and _Corruption_RDY and not _Corruption_DEBUFF and currentSpell ~= _Corruption then
-						tinsert(ConROC.SuggestedSpells, _Corruption);
-						_Corruption_DEBUFF = true;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _ShadowCleave_RDY then
-						tinsert(ConROC.SuggestedSpells, _ShadowCleave);
-						_ShadowCleave_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _SearingPain_RDY then
-						tinsert(ConROC.SuggestedSpells, _SearingPain);
-						_Queue = _Queue + 1;
-						break;
-					end
-				else
-					if ConROC_AoEButton:IsVisible() then
-						if _enemies_in_30yrds >= 6 then
-							if _Incinerate_RDY and not _Incinerate_BUFF then
-								tinsert(ConROC.SuggestedSpells, _Incinerate);
-								_Incinerate_BUFF = true;
-								_Queue = _Queue + 1;
-								break;
-							end
-
-							if _RainofFire_RDY and ConROC:RuneEquipped(Engrave.LakeofFire , "chest") then
-								tinsert(ConROC.SuggestedSpells, _RainofFire);
-								_RainofFire_RDY = false;
-								_Queue = _Queue + 1;
-								break;
-							end
-
-							if _CurseoftheElements_RDY and not _CurseoftheElements_DEBUFF then
-								tinsert(ConROC.SuggestedSpells, _CurseoftheElements);
-								_CurseoftheElements_DEBUFF = true;
-								_Queue = _Queue + 1;
-								break;
-							end
-
-							if _Shadowflame_RDY and currentSpell ~= _Shadowflame and not _Immolate_DEBUFF and not _Shadowflame_DEBUFF then
-								tinsert(ConROC.SuggestedSpells, _Shadowflame);
-								_Shadowflame_DEBUFF = true;
-								_Queue = _Queue + 1;
-								break;
-							end
-
-							if _Hellfire_RDY and _enemies_in_10yrds >= 3 and _Player_Percent_Health >= 30 then
-								tinsert(ConROC.SuggestedSpells, _Hellfire);
-								_Hellfire_RDY = false;
-								_Queue = _Queue + 1;
-								break;
-							end
-						elseif _enemies_in_30yrds >= 3 then
-							if _Corruption_RDY and ConROC:TalentChosen(Spec.Affliction, Aff_Talent.Nightfall) and not _Corruption_DEBUFF and currentSpell ~= _Corruption then
-								tinsert(ConROC.SuggestedSpells, _Corruption);
-								_Corruption_DEBUFF = true;
-								_Queue = _Queue + 1;
-								break;
-							end
-
-							if _ShadowBolt_RDY and ConROC:RuneEquipped(Engrave.ShadowBoltVolley, "hands") then
-								tinsert(ConROC.SuggestedSpells, _ShadowBolt);
-								_Queue = _Queue + 1;
-								break;
-							end
-						end
-					else
-						if _Shadowburn_RDY and ((_Target_Percent_Health <= 5 and ConROC:Raidmob()) or (_Target_Percent_Health <= 20 and not ConROC:Raidmob())) then
-							tinsert(ConROC.SuggestedSpells, _Shadowburn);
-							_Shadowburn_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _Incinerate_RDY and not _Incinerate_BUFF then
-							tinsert(ConROC.SuggestedSpells, _Incinerate);
-							_Incinerate_BUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Debuff_Shadowflame) and _Shadowflame_RDY and currentSpell ~= _Shadowflame and not _Immolate_DEBUFF and not _Shadowflame_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _Shadowflame);
-							_Shadowflame_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Debuff_Corruption) and _Corruption_RDY and not _Corruption_DEBUFF and currentSpell ~= _Corruption and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _Corruption);
-							_Corruption_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Debuff_UnstableAffliction) and _UnstableAffliction_RDY and currentSpell ~= _UnstableAffliction and not _Immolate_DEBUFF and not _UnstableAffliction_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _UnstableAffliction);
-							_UnstableAffliction_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						--Curses--
-						if ConROC:CheckBox(ConROC_SM_Curse_Weakness) and _CurseofWeakness_RDY and not _CurseofWeakness_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofWeakness);
-							_CurseofWeakness_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Agony) and _CurseofAgony_RDY and not _CurseofAgony_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofAgony);
-							_CurseofAgony_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Recklessness) and _CurseofRecklessness_RDY and not _CurseofRecklessness_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofRecklessness);
-							_CurseofRecklessness_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Tongues) and _CurseofTongues_RDY and not _CurseofTongues_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofTongues);
-							_CurseofTongues_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Exhaustion) and _CurseofExhaustion_RDY and not _CurseofExhaustion_DEBUFF then
-							tinsert(ConROC.SuggestedSpells, _CurseofExhaustion);
-							_CurseofExhaustion_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Elements) and _CurseoftheElements_RDY and not _CurseoftheElements_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseoftheElements);
-							_CurseoftheElements_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Shadow) and _CurseofShadow_RDY and not _CurseofShadow_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofShadow);
-							_CurseofShadow_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Curse_Doom) and _CurseofDoom_RDY and not _CurseofDoom_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 75) or (not ConROC:Raidmob() and _Target_Percent_Health == 100)) then
-							tinsert(ConROC.SuggestedSpells, _CurseofDoom);
-							_CurseofDoom_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _Haunt_RDY and not _Haunt_DEBUFF then
-							tinsert(ConROC.SuggestedSpells, _Haunt);
-							_Haunt_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Debuff_Immolate) and _Immolate_RDY and currentSpell ~= _Immolate and not _Immolate_DEBUFF and not _Shadowflame_DEBUFF and not _UnstableAffliction_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _Immolate);
-							_Immolate_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Debuff_SiphonLife) and _SiphonLife_RDY and not _SiphonLife_DEBUFF and ((ConROC:Raidmob() and _Target_Percent_Health >= 5) or (not ConROC:Raidmob() and _Target_Percent_Health >= 20)) then
-							tinsert(ConROC.SuggestedSpells, _SiphonLife);
-							_SiphonLife_DEBUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _DrainLife_RDY and ConROC:RuneEquipped(Engrave.MasterChanneler, "chest") and not _DrainLife_DEBUFF and not ConROC:CreatureType("Mechanical") then
-							tinsert(ConROC.SuggestedSpells, _DrainLife);
-							_DrainLife_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _Conflagrate_RDY and _Immolate_DEBUFF and ConROC:RuneEquipped(Engrave.Backdraft, "head") and not _Backdraft_BUFF then
-							tinsert(ConROC.SuggestedSpells, _Conflagrate);
-							_Backdraft_BUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _SoulFire_RDY and ConROC:RuneEquipped(Engrave.Decimation, "feet") and _Decimation_BUFF then
-							tinsert(ConROC.SuggestedSpells, _SoulFire);
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if _ChaosBolt_RDY then
-							tinsert(ConROC.SuggestedSpells, _ChaosBolt);
-							_ChaosBolt_RDY = false;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Filler_ShadowBolt) and _ShadowBolt_RDY then
-							tinsert(ConROC.SuggestedSpells, _ShadowBolt);
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Filler_Incinerate) and _Incinerate_RDY then
-							tinsert(ConROC.SuggestedSpells, _Incinerate);
-							_Incinerate_BUFF = true;
-							_Queue = _Queue + 1;
-							break;
-						end
-
-						if ConROC:CheckBox(ConROC_SM_Filler_SearingPain) and _SearingPain_RDY then
-							tinsert(ConROC.SuggestedSpells, _SearingPain);
-							_Queue = _Queue + 1;
-							break;
-						end
-					end
-				end
-			else --not SoD
-				--PVP Defensive & Interrupts (high priority)--
+			--PVP Defensive & Interrupts (high priority)--
 				if _is_PC and _is_Enemy then
 					-- Death Coil for survivability when enemies in melee
 					if _DeathCoil_RDY and _enemies_in_melee >= 1 and _Player_Percent_Health < 50 then
@@ -934,7 +542,6 @@ function ConROC.Warlock.Damage(_, timeShift, currentSpell, gcd)
 					_Queue = _Queue + 1;
 					break;
 				end
-			end
 
 			tinsert(ConROC.SuggestedSpells, 26008); --Waiting Spell Icon
 			_Queue = _Queue + 3;
@@ -957,9 +564,8 @@ function ConROC.Warlock.Defense(_, timeShift, currentSpell, gcd)
 	local _SoulLink, _SoulLink_RDY = ConROC:AbilityReady(Ability.SoulLink, timeShift);
 		local _SoulLink_BUFF = ConROC:Aura(_SoulLink, timeShift);
 
-	local _FelArmor, _FelArmor_RDY = ConROC:AbilityReady(Runes.FelArmor, timeShift);
+	local _FelArmor, _FelArmor_RDY = ConROC:AbilityReady(Ability.FelArmor, timeShift);
 		local _FelArmor_BUFF = ConROC:Aura(_FelArmor, timeShift);
-	local _InfernalArmor, _InfernalArmor_RDY = ConROC:AbilityReady(Runes.InfernalArmor, timeShift);
 
 --Conditions
 	local petPh = ConROC:PercentHealth('pet');

@@ -48,6 +48,7 @@ ids.Ability = {
 	DetectInvisibility = 132,
 	EnslaveDemon = 1098,
 	EyeofKilrogg = 126,
+	FelArmor = 28176,
 	FelDomination = 18708,
 	HealthFunnel = 755,
 	Inferno = 1122,
@@ -56,6 +57,8 @@ ids.Ability = {
 	ShadowWard = 6229,
 	SenseDemons = 5500,
 	SoulLink = 19028,
+	Soulshatter = 29858,
+	SummonFelguard = 30146,
 	SummonFelhunter = 691,
 	SummonImp = 688,
 	SummonSuccubus = 712,
@@ -82,21 +85,25 @@ ids.Rank = {
 	CorruptionRank5 = 11671,
 	CorruptionRank6 = 11672,
 	CorruptionRank7 = 25311,
+	CorruptionRank8 = 27216,
 	CurseofAgonyRank1 = 980,
 	CurseofAgonyRank2 = 1014,
 	CurseofAgonyRank3 = 6217,
 	CurseofAgonyRank4 = 11711,
 	CurseofAgonyRank5 = 11712,
 	CurseofAgonyRank6 = 11713,
+	CurseofAgonyRank7 = 27218,
 	CurseofRecklessnessRank1 = 704,
 	CurseofRecklessnessRank2 = 7658,
 	CurseofRecklessnessRank3 = 7659,
 	CurseofRecklessnessRank4 = 11717,
+	CurseofRecklessnessRank5 = 27226,
 	CurseofShadowRank1 = 17862,
 	CurseofShadowRank2 = 17937,
 	CurseoftheElementsRank1 = 1490,
 	CurseoftheElementsRank2 = 11721,
 	CurseoftheElementsRank3 = 11722,
+	CurseoftheElementsRank4 = 27228,
 	CurseofTonguesRank1 = 1714,
 	CurseofTonguesRank2 = 11719,
 	CurseofWeaknessRank1 = 702,
@@ -105,24 +112,23 @@ ids.Rank = {
 	CurseofWeaknessRank4 = 7646,
 	CurseofWeaknessRank5 = 11707,
 	CurseofWeaknessRank6 = 11708,
+	CurseofWeaknessRank7 = 30909,
 	DarkPactRank1 = 18220,
 	DarkPactRank2 = 18937,
 	DarkPactRank3 = 18938,
+	DarkPactRank4 = 27265,
 	DeathCoilRank1 = 6789,
 	DeathCoilRank2 = 17925,
 	DeathCoilRank3 = 17926,
+	DeathCoilRank4 = 27223,
 	DrainLifeRank1 = 689,
 	DrainLifeRank2 = 699,
 	DrainLifeRank3 = 709,
 	DrainLifeRank4 = 7651,
 	DrainLifeRank5 = 11699,
 	DrainLifeRank6 = 11700,
-	DrainLifeSoDRank1 = 403677,
-	DrainLifeSoDRank2 = 403685,
-	DrainLifeSoDRank3 = 403686,
-	DrainLifeSoDRank4 = 403687,
-	DrainLifeSoDRank5 = 403688,
-	DrainLifeSoDRank6 = 403689,
+	DrainLifeRank7 = 27219,
+	DrainLifeRank8 = 27220,
 	DrainManaRank1 = 5138,
 	DrainManaRank2 = 6226,
 	DrainManaRank3 = 11703,
@@ -131,12 +137,10 @@ ids.Rank = {
 	DrainSoulRank2 = 8288,
 	DrainSoulRank3 = 8289,
 	DrainSoulRank4 = 11675,
+	DrainSoulRank5 = 27217,
 	FearRank1 = 5782,
 	FearRank2 = 6213,
 	FearRank3 = 6215,
-	MenaceRank1 = 403828,
-	MenaceRank2 = 442226,
-	MenaceRank3 = 442233,
 	HowlofTerrorRank1 = 5484,
 	HowlofTerrorRank2 = 17928,
 	LifeTapRank1 = 1454,
@@ -145,11 +149,13 @@ ids.Rank = {
 	LifeTapRank4 = 11687,
 	LifeTapRank5 = 11688,
 	LifeTapRank6 = 11689,
+	LifeTapRank7 = 27222,
 	SeedofCorruptionRank1 = 27243,
 	SiphonLifeRank1 = 18265,
 	SiphonLifeRank2 = 18879,
 	SiphonLifeRank3 = 18880,
 	SiphonLifeRank4 = 18881,
+	SiphonLifeRank5 = 27264,
 	UnstableAfflictionRank1 = 30108,
 	UnstableAfflictionRank2 = 30404,
 	UnstableAfflictionRank3 = 30405,
@@ -160,19 +166,23 @@ ids.Rank = {
 	CreateFirestoneRank2 = 17951,		--CreateFirestone
 	CreateFirestoneRank3 = 17952,		--CreateFirestoneGreater
 	CreateFirestoneRank4 = 17953,		--CreateFirestoneMajor
+	CreateFirestoneRank5 = 27250,		--CreateFirestoneMaster
 	CreateHealthstoneRank1 = 6201,
 	CreateHealthstoneRank2 = 6202,
 	CreateHealthstoneRank3 = 5699,
 	CreateHealthstoneRank4 = 11729,
 	CreateHealthstoneRank5 = 11730,
+	CreateHealthstoneRank6 = 27230,
 	CreateSoulstoneRank1 = 693,
 	CreateSoulstoneRank2 = 20752,
 	CreateSoulstoneRank3 = 20755,
 	CreateSoulstoneRank4 = 20756,
 	CreateSoulstoneRank5 = 20757,
+	CreateSoulstoneRank6 = 27240,
 	CreateSpellstoneRank1 = 2362,
 	CreateSpellstoneRank2 = 17727,
 	CreateSpellstoneRank3 = 17728,
+	CreateSpellstoneRank4 = 28172,
 	DemonSkinRank1 = 687, --Just Demon Armor earlier ranks.
 	DemonSkinRank2 = 696,
 	DemonArmorRank1 = 706,
@@ -180,6 +190,7 @@ ids.Rank = {
 	DemonArmorRank3 = 11733,
 	DemonArmorRank4 = 11734,
 	DemonArmorRank5 = 11735,
+	DemonArmorRank6 = 27260,
 	DetectInvisibilityRank1 = 132,
 	DetectInvisibilityRank2 = 2970,
 	DetectInvisibilityRank3 = 11743,
@@ -193,18 +204,24 @@ ids.Rank = {
 	HealthFunnelRank5 = 11693,
 	HealthFunnelRank6 = 11684,
 	HealthFunnelRank7 = 11685,
+	HealthFunnelRank8 = 27259,
 	ShadowWardRank1 = 6229,
 	ShadowWardRank2 = 11739,
 	ShadowWardRank3 = 11740,
+	FelArmorRank1 = 28176,
+	FelArmorRank2 = 28189,
 	ShadowWardRank4 = 28610,
 --Destruction
 	ConflagrateRank1 = 17962,
 	ConflagrateRank2 = 18930,
 	ConflagrateRank3 = 18931,
 	ConflagrateRank4 = 18932,
+	ConflagrateRank5 = 27266,
+	ConflagrateRank6 = 30912,
 	HellfireRank1 = 1949,
 	HellfireRank2 = 11683,
 	HellfireRank3 = 11684,
+	HellfireRank4 = 27213,
 	ImmolateRank1 = 348,
 	ImmolateRank2 = 707,
 	ImmolateRank3 = 1094,
@@ -213,20 +230,20 @@ ids.Rank = {
 	ImmolateRank6 = 11667,
 	ImmolateRank7 = 11668,
 	ImmolateRank8 = 25309,
+	ImmolateRank9 = 27215,
 	RainofFireRank1 = 5740,
 	RainofFireRank2 = 6219,
 	RainofFireRank3 = 11677,
 	RainofFireRank4 = 11678,
-	RainofFireSoDRank1 = 460692,
-	RainofFireSoDRank2 = 460698,
-	RainofFireSoDRank3 = 460699,
-	RainofFireSoDRank4 = 460700,
+	RainofFireRank5 = 27212,
 	SearingPainRank1 = 5676,
 	SearingPainRank2 = 17919,
 	SearingPainRank3 = 17920,
 	SearingPainRank4 = 17921,
 	SearingPainRank5 = 17922,
 	SearingPainRank6 = 17923,
+	SearingPainRank7 = 27210,
+	SearingPainRank8 = 30459,
 	ShadowBoltRank1 = 686,
 	ShadowBoltRank2 = 695,
 	ShadowBoltRank3 = 705,
@@ -237,22 +254,14 @@ ids.Rank = {
 	ShadowBoltRank8 = 11660,
 	ShadowBoltRank9 = 11661,
 	ShadowBoltRank10 = 25307,
-	ShadowCleaveRank1 = 403835,
-	ShadowCleaveRank2 = 403839,
-	ShadowCleaveRank3 = 403840,
-	ShadowCleaveRank4 = 403841,
-	ShadowCleaveRank5 = 403842,
-	ShadowCleaveRank6 = 403843,
-	ShadowCleaveRank7 = 403844,
-	ShadowCleaveRank8 = 403848,
-	ShadowCleaveRank9 = 403851,
-	ShadowCleaveRank10 = 403852,
+	ShadowBoltRank11 = 27209,
 	ShadowburnRank1 = 17877,
 	ShadowburnRank2 = 18867,
 	ShadowburnRank3 = 18868,
 	ShadowburnRank4 = 18869,
 	ShadowburnRank5 = 18870,
 	ShadowburnRank6 = 18871,
+	ShadowburnRank7 = 30546,
 	IncinerateRank1 = 29722,
 	IncinerateRank2 = 32231,
 	SoulFireRank1 = 6353,
@@ -330,40 +339,6 @@ ids.Destruction_Talent = {
 	ShadowandFlame = 20,
 	Shadowfury = 21,
 }
-ids.Engrave = {
-	--Head--
-	Backdraft = 7115,
-	--Chest--
-	LakeofFire = 6815,
-	MasterChanneler = 6811,
-	--Waist--
-	Invocation = 7053,
-	--Feet--
-	DanceoftheWicked = 6957,
-	Decimation = 7643,
-	--Hands--
-	Metamorphosis = 6816,
-	ShadowBoltVolley = 6814,
-	--Back--
-	SoulSiphon = 7590,
-}
-ids.Runes = {
-	ChaosBolt = 403629,
-	DemonicGrace = 425463,
-	FelArmor = 403619,
-	Haunt = 403501,
-	ImmolationAura = 427726,
-	Incinerate = 412758,
-	InfernalArmor = 440882,
-	Metamorphosis = 403789,
-		DemonCharge = 412788,
-		DemonicHowl = 412789,
-		Menace = 403828,
-		ShadowCleave = 403835,
-	Shadowflame = 426320,
-	SummonFelguard = 427733,
-	UnstableAffliction = 427717,
-}
 --Pet
 ids.Pet = {
 	SpellLock = 19244,
@@ -372,9 +347,7 @@ ids.Pet = {
 }
 -- Auras
 ids.Buff = {
-	Backdraft = 427714,
 	BurningWish = 18789,
-	Decimation = 440873,
 	FelEnergy = 18792,
 	FelStamina = 18790,
 	ShadowTrance = 17941,
@@ -387,20 +360,23 @@ ids.Debuff = {
 function ConROC:UpdateSpellID()
 --Ranks
 --Affliction
-	if IsSpellKnown(ids.Rank.CorruptionRank7) then ids.Ability.Corruption = ids.Rank.CorruptionRank7;
+	if IsSpellKnown(ids.Rank.CorruptionRank8) then ids.Ability.Corruption = ids.Rank.CorruptionRank8;
+	elseif IsSpellKnown(ids.Rank.CorruptionRank7) then ids.Ability.Corruption = ids.Rank.CorruptionRank7;
 	elseif IsSpellKnown(ids.Rank.CorruptionRank6) then ids.Ability.Corruption = ids.Rank.CorruptionRank6;
 	elseif IsSpellKnown(ids.Rank.CorruptionRank5) then ids.Ability.Corruption = ids.Rank.CorruptionRank5;
 	elseif IsSpellKnown(ids.Rank.CorruptionRank4) then ids.Ability.Corruption = ids.Rank.CorruptionRank4;
 	elseif IsSpellKnown(ids.Rank.CorruptionRank3) then ids.Ability.Corruption = ids.Rank.CorruptionRank3;
 	elseif IsSpellKnown(ids.Rank.CorruptionRank2) then ids.Ability.Corruption = ids.Rank.CorruptionRank2; end
 
-	if IsSpellKnown(ids.Rank.CurseofAgonyRank6) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank6;
+	if IsSpellKnown(ids.Rank.CurseofAgonyRank7) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank7;
+	elseif IsSpellKnown(ids.Rank.CurseofAgonyRank6) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank6;
 	elseif IsSpellKnown(ids.Rank.CurseofAgonyRank5) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank5;
 	elseif IsSpellKnown(ids.Rank.CurseofAgonyRank4) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank4;
 	elseif IsSpellKnown(ids.Rank.CurseofAgonyRank3) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank3;
 	elseif IsSpellKnown(ids.Rank.CurseofAgonyRank2) then ids.Ability.CurseofAgony = ids.Rank.CurseofAgonyRank2; end
 
-	if IsSpellKnown(ids.Rank.CurseofRecklessnessRank4) then ids.Ability.CurseofRecklessness = ids.Rank.CurseofRecklessnessRank4;
+	if IsSpellKnown(ids.Rank.CurseofRecklessnessRank5) then ids.Ability.CurseofRecklessness = ids.Rank.CurseofRecklessnessRank5;
+	elseif IsSpellKnown(ids.Rank.CurseofRecklessnessRank4) then ids.Ability.CurseofRecklessness = ids.Rank.CurseofRecklessnessRank4;
 	elseif IsSpellKnown(ids.Rank.CurseofRecklessnessRank3) then ids.Ability.CurseofRecklessness = ids.Rank.CurseofRecklessnessRank3;
 	elseif IsSpellKnown(ids.Rank.CurseofRecklessnessRank2) then ids.Ability.CurseofRecklessness = ids.Rank.CurseofRecklessnessRank2; end
 
@@ -408,57 +384,57 @@ function ConROC:UpdateSpellID()
 
 	if IsSpellKnown(ids.Rank.CurseofTonguesRank2) then ids.Ability.CurseofTongues = ids.Rank.CurseofTonguesRank2; end
 
-	if IsSpellKnown(ids.Rank.CurseoftheElementsRank3) then ids.Ability.CurseoftheElements = ids.Rank.CurseoftheElementsRank3;
+	if IsSpellKnown(ids.Rank.CurseoftheElementsRank4) then ids.Ability.CurseoftheElements = ids.Rank.CurseoftheElementsRank4;
+	elseif IsSpellKnown(ids.Rank.CurseoftheElementsRank3) then ids.Ability.CurseoftheElements = ids.Rank.CurseoftheElementsRank3;
 	elseif IsSpellKnown(ids.Rank.CurseoftheElementsRank2) then ids.Ability.CurseoftheElements = ids.Rank.CurseoftheElementsRank2; end
 
-	if IsSpellKnown(ids.Rank.CurseofWeaknessRank6) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank6;
+	if IsSpellKnown(ids.Rank.CurseofWeaknessRank7) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank7;
+	elseif IsSpellKnown(ids.Rank.CurseofWeaknessRank6) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank6;
 	elseif IsSpellKnown(ids.Rank.CurseofWeaknessRank5) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank5;
 	elseif IsSpellKnown(ids.Rank.CurseofWeaknessRank4) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank4;
 	elseif IsSpellKnown(ids.Rank.CurseofWeaknessRank3) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank3;
 	elseif IsSpellKnown(ids.Rank.CurseofWeaknessRank2) then ids.Ability.CurseofWeakness = ids.Rank.CurseofWeaknessRank2; end
 
-	if IsSpellKnown(ids.Rank.DarkPactRank3) then ids.Ability.DarkPact = ids.Rank.DarkPactRank3;
+	if IsSpellKnown(ids.Rank.DarkPactRank4) then ids.Ability.DarkPact = ids.Rank.DarkPactRank4;
+	elseif IsSpellKnown(ids.Rank.DarkPactRank3) then ids.Ability.DarkPact = ids.Rank.DarkPactRank3;
 	elseif IsSpellKnown(ids.Rank.DarkPactRank2) then ids.Ability.DarkPact = ids.Rank.DarkPactRank2; end
 
-	if IsSpellKnown(ids.Rank.DeathCoilRank3) then ids.Ability.DeathCoil = ids.Rank.DeathCoilRank3;
+	if IsSpellKnown(ids.Rank.DeathCoilRank4) then ids.Ability.DeathCoil = ids.Rank.DeathCoilRank4;
+	elseif IsSpellKnown(ids.Rank.DeathCoilRank3) then ids.Ability.DeathCoil = ids.Rank.DeathCoilRank3;
 	elseif IsSpellKnown(ids.Rank.DeathCoilRank2) then ids.Ability.DeathCoil = ids.Rank.DeathCoilRank2; end
 
-	if ConROC.Seasons.IsSoD and ConROC:RuneEquipped(ids.Engrave.MasterChanneler, "chest") then
-		if IsSpellKnown(ids.Rank.DrainLifeRank6) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank6;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank5) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank5;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank4) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank4;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank3) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank3;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank2) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank2;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank1) then ids.Ability.DrainLife = ids.Rank.DrainLifeSoDRank1; end
-	else
-		if IsSpellKnown(ids.Rank.DrainLifeRank6) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank6;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank5) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank5;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank4) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank4;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank3) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank3;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank2) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank2;
-		elseif IsSpellKnown(ids.Rank.DrainLifeRank1) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank1; end
-	end
+	if IsSpellKnown(ids.Rank.DrainLifeRank8) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank8;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank7) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank7;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank6) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank6;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank5) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank5;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank4) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank4;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank3) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank3;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank2) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank2;
+	elseif IsSpellKnown(ids.Rank.DrainLifeRank1) then ids.Ability.DrainLife = ids.Rank.DrainLifeRank1; end
 
 	if IsSpellKnown(ids.Rank.DrainManaRank4) then ids.Ability.DrainMana = ids.Rank.DrainManaRank4;
 	elseif IsSpellKnown(ids.Rank.DrainManaRank3) then ids.Ability.DrainMana = ids.Rank.DrainManaRank3;
 	elseif IsSpellKnown(ids.Rank.DrainManaRank2) then ids.Ability.DrainMana = ids.Rank.DrainManaRank2; end
 
-	if IsSpellKnown(ids.Rank.DrainSoulRank4) then ids.Ability.DrainSoul = ids.Rank.DrainSoulRank4;
+	if IsSpellKnown(ids.Rank.DrainSoulRank5) then ids.Ability.DrainSoul = ids.Rank.DrainSoulRank5;
+	elseif IsSpellKnown(ids.Rank.DrainSoulRank4) then ids.Ability.DrainSoul = ids.Rank.DrainSoulRank4;
 	elseif IsSpellKnown(ids.Rank.DrainSoulRank3) then ids.Ability.DrainSoul = ids.Rank.DrainSoulRank3;
 	elseif IsSpellKnown(ids.Rank.DrainSoulRank2) then ids.Ability.DrainSoul = ids.Rank.DrainSoulRank2; end
 
-	if IsSpellKnown(ids.Rank.FearRank3) then ids.Ability.Fear = ids.Rank.FearRank3; ids.Runes.Menace = ids.Rank.MenaceRank2;
-	elseif IsSpellKnown(ids.Rank.FearRank2) then ids.Ability.Fear = ids.Rank.FearRank2; ids.Runes.Menace = ids.Rank.MenaceRank2; end
+	if IsSpellKnown(ids.Rank.FearRank3) then ids.Ability.Fear = ids.Rank.FearRank3;
+	elseif IsSpellKnown(ids.Rank.FearRank2) then ids.Ability.Fear = ids.Rank.FearRank2; end
 
 	if IsSpellKnown(ids.Rank.HowlofTerrorRank2) then ids.Ability.HowlofTerror = ids.Rank.HowlofTerrorRank2; end
 
-	if IsSpellKnown(ids.Rank.LifeTapRank6) then ids.Ability.LifeTap = ids.Rank.LifeTapRank6;
+	if IsSpellKnown(ids.Rank.LifeTapRank7) then ids.Ability.LifeTap = ids.Rank.LifeTapRank7;
+	elseif IsSpellKnown(ids.Rank.LifeTapRank6) then ids.Ability.LifeTap = ids.Rank.LifeTapRank6;
 	elseif IsSpellKnown(ids.Rank.LifeTapRank5) then ids.Ability.LifeTap = ids.Rank.LifeTapRank5;
 	elseif IsSpellKnown(ids.Rank.LifeTapRank4) then ids.Ability.LifeTap = ids.Rank.LifeTapRank4;
 	elseif IsSpellKnown(ids.Rank.LifeTapRank3) then ids.Ability.LifeTap = ids.Rank.LifeTapRank3;
 	elseif IsSpellKnown(ids.Rank.LifeTapRank2) then ids.Ability.LifeTap = ids.Rank.LifeTapRank2; end
 
-	if IsSpellKnown(ids.Rank.SiphonLifeRank4) then ids.Ability.SiphonLife = ids.Rank.SiphonLifeRank4;
+	if IsSpellKnown(ids.Rank.SiphonLifeRank5) then ids.Ability.SiphonLife = ids.Rank.SiphonLifeRank5;
+	elseif IsSpellKnown(ids.Rank.SiphonLifeRank4) then ids.Ability.SiphonLife = ids.Rank.SiphonLifeRank4;
 	elseif IsSpellKnown(ids.Rank.SiphonLifeRank3) then ids.Ability.SiphonLife = ids.Rank.SiphonLifeRank3;
 	elseif IsSpellKnown(ids.Rank.SiphonLifeRank2) then ids.Ability.SiphonLife = ids.Rank.SiphonLifeRank2; end
 
@@ -469,29 +445,36 @@ function ConROC:UpdateSpellID()
 --Demonology
 	if IsSpellKnown(ids.Rank.BanishRank2) then ids.Ability.Banish = ids.Rank.BanishRank2; end
 
-	if IsSpellKnown(ids.Rank.CreateFirestoneRank4) then ids.Ability.CreateFirestone = ids.Rank.CreateFirestoneRank4;
+	if IsSpellKnown(ids.Rank.CreateFirestoneRank5) then ids.Ability.CreateFirestone = ids.Rank.CreateFirestoneRank5;
+	elseif IsSpellKnown(ids.Rank.CreateFirestoneRank4) then ids.Ability.CreateFirestone = ids.Rank.CreateFirestoneRank4;
 	elseif IsSpellKnown(ids.Rank.CreateFirestoneRank3) then ids.Ability.CreateFirestone = ids.Rank.CreateFirestoneRank3;
 	elseif IsSpellKnown(ids.Rank.CreateFirestoneRank2) then ids.Ability.CreateFirestone = ids.Rank.CreateFirestoneRank2; end
 
-	if IsSpellKnown(ids.Rank.CreateHealthstoneRank5) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank5;
+	if IsSpellKnown(ids.Rank.CreateHealthstoneRank6) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank6;
+	elseif IsSpellKnown(ids.Rank.CreateHealthstoneRank5) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank5;
 	elseif IsSpellKnown(ids.Rank.CreateHealthstoneRank4) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank4;
 	elseif IsSpellKnown(ids.Rank.CreateHealthstoneRank3) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank3;
 	elseif IsSpellKnown(ids.Rank.CreateHealthstoneRank2) then ids.Ability.CreateHealthstone = ids.Rank.CreateHealthstoneRank2; end
 
-	if IsSpellKnown(ids.Rank.CreateSoulstoneRank5) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank5;
+	if IsSpellKnown(ids.Rank.CreateSoulstoneRank6) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank6;
+	elseif IsSpellKnown(ids.Rank.CreateSoulstoneRank5) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank5;
 	elseif IsSpellKnown(ids.Rank.CreateSoulstoneRank4) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank4;
 	elseif IsSpellKnown(ids.Rank.CreateSoulstoneRank3) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank3;
 	elseif IsSpellKnown(ids.Rank.CreateSoulstoneRank2) then ids.Ability.CreateSoulstone = ids.Rank.CreateSoulstoneRank2; end
 
-	if IsSpellKnown(ids.Rank.CreateSpellstoneRank3) then ids.Ability.CreateSpellstone = ids.Rank.CreateSpellstoneRank3;
+	if IsSpellKnown(ids.Rank.CreateSpellstoneRank4) then ids.Ability.CreateSpellstone = ids.Rank.CreateSpellstoneRank4;
+	elseif IsSpellKnown(ids.Rank.CreateSpellstoneRank3) then ids.Ability.CreateSpellstone = ids.Rank.CreateSpellstoneRank3;
 	elseif IsSpellKnown(ids.Rank.CreateSpellstoneRank2) then ids.Ability.CreateSpellstone = ids.Rank.CreateSpellstoneRank2; end
 
-	if IsSpellKnown(ids.Rank.DemonArmorRank5) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank5;
+	if IsSpellKnown(ids.Rank.DemonArmorRank6) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank6;
+	elseif IsSpellKnown(ids.Rank.DemonArmorRank5) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank5;
 	elseif IsSpellKnown(ids.Rank.DemonArmorRank4) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank4;
 	elseif IsSpellKnown(ids.Rank.DemonArmorRank3) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank3;
 	elseif IsSpellKnown(ids.Rank.DemonArmorRank2) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank2;
 	elseif IsSpellKnown(ids.Rank.DemonArmorRank1) then ids.Ability.DemonArmor = ids.Rank.DemonArmorRank1;
 	elseif IsSpellKnown(ids.Rank.DemonSkinRank2) then ids.Ability.DemonArmor = ids.Rank.DemonSkinRank2; end
+
+	if IsSpellKnown(ids.Rank.FelArmorRank2) then ids.Ability.FelArmor = ids.Rank.FelArmorRank2; end
 
 	if IsSpellKnown(ids.Rank.DetectInvisibilityRank3) then ids.Ability.DetectInvisibility = ids.Rank.DetectInvisibilityRank3;
 	elseif IsSpellKnown(ids.Rank.DetectInvisibilityRank2) then ids.Ability.DetectInvisibility = ids.Rank.DetectInvisibilityRank2; end
@@ -499,7 +482,8 @@ function ConROC:UpdateSpellID()
 	if IsSpellKnown(ids.Rank.EnslaveDemonRank3) then ids.Ability.EnslaveDemon = ids.Rank.EnslaveDemonRank3;
 	elseif IsSpellKnown(ids.Rank.EnslaveDemonRank2) then ids.Ability.EnslaveDemon = ids.Rank.EnslaveDemonRank2; end
 
-	if IsSpellKnown(ids.Rank.HealthFunnelRank7) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank7;
+	if IsSpellKnown(ids.Rank.HealthFunnelRank8) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank8;
+	elseif IsSpellKnown(ids.Rank.HealthFunnelRank7) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank7;
 	elseif IsSpellKnown(ids.Rank.HealthFunnelRank6) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank6;
 	elseif IsSpellKnown(ids.Rank.HealthFunnelRank5) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank5;
 	elseif IsSpellKnown(ids.Rank.HealthFunnelRank4) then ids.Ability.HealthFunnel = ids.Rank.HealthFunnelRank4;
@@ -511,14 +495,18 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.ShadowWardRank2) then ids.Ability.ShadowWard = ids.Rank.ShadowWardRank2; end
 
 --Destruction
-	if IsSpellKnown(ids.Rank.ConflagrateRank4) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank4;
+	if IsSpellKnown(ids.Rank.ConflagrateRank6) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank6;
+	elseif IsSpellKnown(ids.Rank.ConflagrateRank5) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank5;
+	elseif IsSpellKnown(ids.Rank.ConflagrateRank4) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank4;
 	elseif IsSpellKnown(ids.Rank.ConflagrateRank3) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank3;
 	elseif IsSpellKnown(ids.Rank.ConflagrateRank2) then ids.Ability.Conflagrate = ids.Rank.ConflagrateRank2; end
 
-	if IsSpellKnown(ids.Rank.HellfireRank3) then ids.Ability.Hellfire = ids.Rank.HellfireRank3;
+	if IsSpellKnown(ids.Rank.HellfireRank4) then ids.Ability.Hellfire = ids.Rank.HellfireRank4;
+	elseif IsSpellKnown(ids.Rank.HellfireRank3) then ids.Ability.Hellfire = ids.Rank.HellfireRank3;
 	elseif IsSpellKnown(ids.Rank.HellfireRank2) then ids.Ability.Hellfire = ids.Rank.HellfireRank2; end
 
-	if IsSpellKnown(ids.Rank.ImmolateRank8) then ids.Ability.Immolate = ids.Rank.ImmolateRank8;
+	if IsSpellKnown(ids.Rank.ImmolateRank9) then ids.Ability.Immolate = ids.Rank.ImmolateRank9;
+	elseif IsSpellKnown(ids.Rank.ImmolateRank8) then ids.Ability.Immolate = ids.Rank.ImmolateRank8;
 	elseif IsSpellKnown(ids.Rank.ImmolateRank7) then ids.Ability.Immolate = ids.Rank.ImmolateRank7;
 	elseif IsSpellKnown(ids.Rank.ImmolateRank6) then ids.Ability.Immolate = ids.Rank.ImmolateRank6;
 	elseif IsSpellKnown(ids.Rank.ImmolateRank5) then ids.Ability.Immolate = ids.Rank.ImmolateRank5;
@@ -526,35 +514,33 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.ImmolateRank3) then ids.Ability.Immolate = ids.Rank.ImmolateRank3;
 	elseif IsSpellKnown(ids.Rank.ImmolateRank2) then ids.Ability.Immolate = ids.Rank.ImmolateRank2; end
 
-	if ConROC.Seasons.IsSoD and ConROC:RuneEquipped(ids.Engrave.LakeofFire, "chest") then
-		if IsSpellKnown(ids.Rank.RainofFireRank4) then ids.Ability.RainofFire = ids.Rank.RainofFireSoDRank4;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank3) then ids.Ability.RainofFire = ids.Rank.RainofFireSoDRank3;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank2) then ids.Ability.RainofFire = ids.Rank.RainofFireSoDRank2;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank1) then ids.Ability.RainofFire = ids.Rank.RainofFireSoDRank1; end
-	else
-		if IsSpellKnown(ids.Rank.RainofFireRank4) then ids.Ability.RainofFire = ids.Rank.RainofFireRank4;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank3) then ids.Ability.RainofFire = ids.Rank.RainofFireRank3;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank2) then ids.Ability.RainofFire = ids.Rank.RainofFireRank2;
-		elseif IsSpellKnown(ids.Rank.RainofFireRank1) then ids.Ability.RainofFire = ids.Rank.RainofFireRank1; end
-	end
+	if IsSpellKnown(ids.Rank.RainofFireRank5) then ids.Ability.RainofFire = ids.Rank.RainofFireRank5;
+	elseif IsSpellKnown(ids.Rank.RainofFireRank4) then ids.Ability.RainofFire = ids.Rank.RainofFireRank4;
+	elseif IsSpellKnown(ids.Rank.RainofFireRank3) then ids.Ability.RainofFire = ids.Rank.RainofFireRank3;
+	elseif IsSpellKnown(ids.Rank.RainofFireRank2) then ids.Ability.RainofFire = ids.Rank.RainofFireRank2;
+	elseif IsSpellKnown(ids.Rank.RainofFireRank1) then ids.Ability.RainofFire = ids.Rank.RainofFireRank1; end
 
-	if IsSpellKnown(ids.Rank.SearingPainRank6) then ids.Ability.SearingPain = ids.Rank.SearingPainRank6;
+	if IsSpellKnown(ids.Rank.SearingPainRank8) then ids.Ability.SearingPain = ids.Rank.SearingPainRank8;
+	elseif IsSpellKnown(ids.Rank.SearingPainRank7) then ids.Ability.SearingPain = ids.Rank.SearingPainRank7;
+	elseif IsSpellKnown(ids.Rank.SearingPainRank6) then ids.Ability.SearingPain = ids.Rank.SearingPainRank6;
 	elseif IsSpellKnown(ids.Rank.SearingPainRank5) then ids.Ability.SearingPain = ids.Rank.SearingPainRank5;
 	elseif IsSpellKnown(ids.Rank.SearingPainRank4) then ids.Ability.SearingPain = ids.Rank.SearingPainRank4;
 	elseif IsSpellKnown(ids.Rank.SearingPainRank3) then ids.Ability.SearingPain = ids.Rank.SearingPainRank3;
 	elseif IsSpellKnown(ids.Rank.SearingPainRank2) then ids.Ability.SearingPain = ids.Rank.SearingPainRank2; end
 
-	if IsSpellKnown(ids.Rank.ShadowBoltRank10) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank10; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank10;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank9) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank9; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank9;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank8) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank8; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank8;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank7) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank7; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank7;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank6) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank6; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank6;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank5) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank5; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank5;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank4) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank4; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank4;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank3) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank3; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank3;
-	elseif IsSpellKnown(ids.Rank.ShadowBoltRank2) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank2; ids.Runes.ShadowCleave = ids.Rank.ShadowCleaveRank2; end
+	if IsSpellKnown(ids.Rank.ShadowBoltRank11) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank11;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank10) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank10;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank9) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank9;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank8) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank8;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank7) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank7;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank6) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank6;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank5) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank5;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank4) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank4;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank3) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank3;
+	elseif IsSpellKnown(ids.Rank.ShadowBoltRank2) then ids.Ability.ShadowBolt = ids.Rank.ShadowBoltRank2; end
 
-	if IsSpellKnown(ids.Rank.ShadowburnRank6) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank6;
+	if IsSpellKnown(ids.Rank.ShadowburnRank7) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank7;
+	elseif IsSpellKnown(ids.Rank.ShadowburnRank6) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank6;
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank5) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank5;
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank4) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank4;
 	elseif IsSpellKnown(ids.Rank.ShadowburnRank3) then ids.Ability.Shadowburn = ids.Rank.ShadowburnRank3;

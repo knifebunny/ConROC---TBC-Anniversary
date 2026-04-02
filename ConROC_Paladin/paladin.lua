@@ -26,7 +26,7 @@ function ConROC:UNIT_SPELLCAST_SUCCEEDED(event, unitID, lineID, spellID)
 	ConROC:JustCasted(spellID);
 end
 
-local Racial, Spec, Ability, Rank, Holy_Talent, Prot_Talent, Ret_Talent, Engrave, Runes, Buff, Debuff = ids.Racial, ids.Spec, ids.Ability, ids.Rank, ids.Holy_Talent, ids.Protection_Talent, ids.Retribution_Talent, ids.Engrave, ids.Runes, ids.Buff, ids.Debuff;
+local Racial, Spec, Ability, Rank, Holy_Talent, Prot_Talent, Ret_Talent, Buff, Debuff = ids.Racial, ids.Spec, ids.Ability, ids.Rank, ids.Holy_Talent, ids.Protection_Talent, ids.Retribution_Talent, ids.Buff, ids.Debuff;
 local consecEXP = 0;
 
 --Info
@@ -148,21 +148,10 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 	local _HammerofJustice, _HammerofJustice_RDY = ConROC:AbilityReady(Ability.HammerofJustice, timeShift);
 	local _HammerofWrath, _HammerofWrath_RDY = ConROC:AbilityReady(Ability.HammerofWrath, timeShift);
 
---Runes
-	local _AvengersShield, _AvengersShield_RDY = ConROC:AbilityReady(Runes.AvengersShield, timeShift);
-	local _CrusaderStrike, _CrusaderStrike_RDY = ConROC:AbilityReady(Runes.CrusaderStrike, timeShift);
-	local _DivineStorm, _DivineStorm_RDY = ConROC:AbilityReady(Runes.DivineStorm, timeShift);
-	local _, _Exorcist_Passive = ConROC:AbilityReady(Runes.Exorcist, timeShift);
-	local _HammeroftheRighteous, _HammeroftheRighteous_RDY = ConROC:AbilityReady(Runes.HammeroftheRighteous, timeShift);
-	local _Rebuke, _Rebuke_RDY = ConROC:AbilityReady(Runes.Rebuke, timeShift);
-	local _SealofMartyrdom, _SealofMartyrdom_RDY = ConROC:AbilityReady(Runes.SealofMartyrdom, timeShift);
-		local _SealofMartyrdom_BUFF, _, _SealofMartyrdom_DUR = ConROC:Aura(_SealofMartyrdom, timeShift);
-	local _ShieldoftheRighteousness, _ShieldoftheRighteousness_RDY = ConROC:AbilityReady(Runes.ShieldoftheRighteousness, timeShift);
-
-	local _HornofLordaeron, _HornofLordaeron_RDY = ConROC:AbilityReady(Runes.HornofLordaeron, timeShift);
-	local _BeaconofLight, _BeaconofLight_RDY = ConROC:AbilityReady(Runes.BeaconofLight, timeShift);
-	local _InspirationExemplar, _InspirationExemplar_RDY = ConROC:AbilityReady(Runes.InspirationExemplar, timeShift);
-	local _HandofReckoning, _HandofReckoning_RDY = ConROC:AbilityReady(Runes.HandofReckoning, timeShift);
+--TBC Abilities
+	local _AvengersShield, _AvengersShield_RDY = ConROC:AbilityReady(Ability.AvengersShield, timeShift);
+	local _CrusaderStrike, _CrusaderStrike_RDY = ConROC:AbilityReady(Ability.CrusaderStrike, timeShift);
+	local _RighteousDefense, _RighteousDefense_RDY = ConROC:AbilityReady(Ability.RighteousDefense, timeShift);
 
 --Conditions
 	local _Can_Exorcist = ConROC:CreatureType("Undead") or ConROC:CreatureType("Demon");
@@ -194,9 +183,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 		end
 	end
 
-	if _Exorcist_Passive then
-		_Can_Exorcist = true;
-	end
 	
 	-- Determine optimal seal based on spec and faction
 	local _OptimalSeal = nil
@@ -319,8 +305,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 	ConROC:AbilityRaidBuffs(_BlessingofSanctuary, ConROC:CheckBox(ConROC_SM_Bless_Sanctuary) and _BlessingofSanctuary_RDY and not _BlessingofSanctuary_BUFF);
 	ConROC:AbilityRaidBuffs(_GreaterBlessingofSanctuary, ConROC:CheckBox(ConROC_SM_Bless_GreaterSanctuary) and _GreaterBlessingofSanctuary_RDY and not _GreaterBlessingofSanctuary_BUFF);
 	ConROC:AbilityRaidBuffs(_BlessingofLight, ConROC:CheckBox(ConROC_SM_Bless_Light) and _BlessingofLight_RDY and not _BlessingofLight_BUFF);
-
-    ConROC:AbilityInterrupt(_Rebuke, ConROC:Interrupt() and _Rebuke_RDY)
 
 --Warnings
 
@@ -467,9 +451,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 					elseif ConROC:CheckBox(ConROC_SM_Seal_Wisdom) and _SealofWisdom_RDY then
 						prioritySealOOC = _SealofWisdom
 						prioritySealBuffOOC = _SealofWisdom_BUFF
-					elseif ConROC:CheckBox(ConROC_SM_Seal_Martyrdom) and _SealofMartyrdom_RDY then
-						prioritySealOOC = _SealofMartyrdom
-						prioritySealBuffOOC = _SealofMartyrdom_BUFF
 					end
 				end
 				
@@ -620,9 +601,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 				elseif ConROC:CheckBox(ConROC_SM_Seal_Wisdom) and _SealofWisdom_RDY then
 					manualSeal = _SealofWisdom
 					hasManualSealBuff = _SealofWisdom_BUFF
-				elseif ConROC:CheckBox(ConROC_SM_Seal_Martyrdom) and _SealofMartyrdom_RDY then
-					manualSeal = _SealofMartyrdom
-					hasManualSealBuff = _SealofMartyrdom_BUFF
 				end
 				
 				-- Maintain your seal (reapply after judging or if missing)
@@ -658,7 +636,7 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 					break;
 				end
 				
-				-- Exorcism - instant cast, good damage with Exorcist rune
+				-- Exorcism - good damage vs Undead/Demons
 				if _Exorcism_RDY and _Can_Exorcist then
 					tinsert(ConROC.SuggestedSpells, _Exorcism);
 					_Exorcism_RDY = false;
@@ -668,13 +646,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 				
 				-- AoE abilities - only when high mana and multiple targets
 				if _High_Mana and _enemies_in_melee >= 3 then
-					if _DivineStorm_RDY then
-						tinsert(ConROC.SuggestedSpells, _DivineStorm);
-						_DivineStorm_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-					
 					if _Consecration_RDY then
 						tinsert(ConROC.SuggestedSpells, _Consecration);
 						_Consecration_RDY = false;
@@ -692,20 +663,6 @@ function ConROC.Paladin.Damage(_, timeShift, currentSpell, gcd)
 				
 				-- Protection specific abilities
 				if _Player_Spec_ID == Spec.Protection then
-					if _HammeroftheRighteous_RDY then
-						tinsert(ConROC.SuggestedSpells, _HammeroftheRighteous);
-						_HammeroftheRighteous_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-
-					if _ShieldoftheRighteousness_RDY and hasShield then
-						tinsert(ConROC.SuggestedSpells, _ShieldoftheRighteousness);
-						_ShieldoftheRighteousness_RDY = false;
-						_Queue = _Queue + 1;
-						break;
-					end
-					
 					if _AvengersShield_RDY and hasShield then
 						tinsert(ConROC.SuggestedSpells, _AvengersShield);
 						_AvengersShield_RDY = false;

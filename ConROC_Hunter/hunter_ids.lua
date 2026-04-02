@@ -65,6 +65,10 @@ ids.Ability = {
 	TrackUndead = 19884,
 	WingClip = 2974,
 	WyvernSting = 19386,
+--TBC
+	KillCommand = 34026,
+	Misdirection = 34477,
+	SnakeTrap = 34600,
 }
 ids.Rank = {
 --Beast Mastery
@@ -94,6 +98,7 @@ ids.Rank = {
 	AimedShotRank4 = 20902,
 	AimedShotRank5 = 20903,
 	AimedShotRank6 = 20904,
+	AimedShotRank7 = 27065,
 	ArcaneShotRank1 = 3044,
 	ArcaneShotRank2 = 14281,
 	ArcaneShotRank3 = 14282,
@@ -153,11 +158,13 @@ ids.Rank = {
 	ExplosiveTrapRank1 = 13813,
 	ExplosiveTrapRank2 = 14316,
 	ExplosiveTrapRank3 = 14317,
+	ExplosiveTrapRank4 = 27025,
 	ImmolationTrapRank1 = 13795,
 	ImmolationTrapRank2 = 14302,
 	ImmolationTrapRank3 = 14303,
 	ImmolationTrapRank4 = 14304,
 	ImmolationTrapRank5 = 14305,
+	ImmolationTrapRank6 = 27023,
 	FreezingTrapRank1 = 1499,
 	FreezingTrapRank2 = 14310,
 	FreezingTrapRank3 = 14311,
@@ -173,6 +180,7 @@ ids.Rank = {
 	RaptorStrikeRank6 = 14264,
 	RaptorStrikeRank7 = 14265,
 	RaptorStrikeRank8 = 14266,
+	RaptorStrikeRank9 = 27014,
 	WingClipRank1 = 2974,
 	WingClipRank2 = 14267,
 	WingClipRank3 = 14268,
@@ -285,7 +293,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.MendPetRank2) then ids.Ability.MendPet = ids.Rank.MendPetRank2; end
 
 --Marksmanship
-	if IsSpellKnown(ids.Rank.AimedShotRank6) then ids.Ability.AimedShot = ids.Rank.AimedShotRank6;
+	if IsSpellKnown(ids.Rank.AimedShotRank7) then ids.Ability.AimedShot = ids.Rank.AimedShotRank7;
+	elseif IsSpellKnown(ids.Rank.AimedShotRank6) then ids.Ability.AimedShot = ids.Rank.AimedShotRank6;
 	elseif IsSpellKnown(ids.Rank.AimedShotRank5) then ids.Ability.AimedShot = ids.Rank.AimedShotRank5;
 	elseif IsSpellKnown(ids.Rank.AimedShotRank4) then ids.Ability.AimedShot = ids.Rank.AimedShotRank4;
 	elseif IsSpellKnown(ids.Rank.AimedShotRank3) then ids.Ability.AimedShot = ids.Rank.AimedShotRank3;
@@ -346,7 +355,8 @@ function ConROC:UpdateSpellID()
 	if IsSpellKnown(ids.Rank.DisengageRank3) then ids.Ability.Disengage = ids.Rank.DisengageRank3;
 	elseif IsSpellKnown(ids.Rank.DisengageRank2) then ids.Ability.Disengage = ids.Rank.DisengageRank2; end
 
-	if IsSpellKnown(ids.Rank.ExplosiveTrapRank3) then ids.Ability.ExplosiveTrap = ids.Rank.ExplosiveTrapRank3;
+	if IsSpellKnown(ids.Rank.ExplosiveTrapRank4) then ids.Ability.ExplosiveTrap = ids.Rank.ExplosiveTrapRank4;
+	elseif IsSpellKnown(ids.Rank.ExplosiveTrapRank3) then ids.Ability.ExplosiveTrap = ids.Rank.ExplosiveTrapRank3;
 	elseif IsSpellKnown(ids.Rank.ExplosiveTrapRank2) then ids.Ability.ExplosiveTrap = ids.Rank.ExplosiveTrapRank2;
 	elseif IsSpellKnown(ids.Rank.ExplosiveTrapRank1) then ids.Ability.ExplosiveTrap = ids.Rank.ExplosiveTrapRank1; end
 
@@ -354,7 +364,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.FreezingTrapRank2) then ids.Ability.FreezingTrap = ids.Rank.FreezingTrapRank2;
 	elseif IsSpellKnown(ids.Rank.FreezingTrapRank1) then ids.Ability.FreezingTrap = ids.Rank.FreezingTrapRank1; end
 
-	if IsSpellKnown(ids.Rank.ImmolationTrapRank5) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank5;
+	if IsSpellKnown(ids.Rank.ImmolationTrapRank6) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank6;
+	elseif IsSpellKnown(ids.Rank.ImmolationTrapRank5) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank5;
 	elseif IsSpellKnown(ids.Rank.ImmolationTrapRank4) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank4;
 	elseif IsSpellKnown(ids.Rank.ImmolationTrapRank3) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank3;
 	elseif IsSpellKnown(ids.Rank.ImmolationTrapRank2) then ids.Ability.ImmolationTrap = ids.Rank.ImmolationTrapRank2;
@@ -364,7 +375,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.MongooseBiteRank3) then ids.Ability.MongooseBite = ids.Rank.MongooseBiteRank3;
 	elseif IsSpellKnown(ids.Rank.MongooseBiteRank2) then ids.Ability.MongooseBite = ids.Rank.MongooseBiteRank2; end
 
-	if IsSpellKnown(ids.Rank.RaptorStrikeRank8) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank8;
+	if IsSpellKnown(ids.Rank.RaptorStrikeRank9) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank9;
+	elseif IsSpellKnown(ids.Rank.RaptorStrikeRank8) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank8;
 	elseif IsSpellKnown(ids.Rank.RaptorStrikeRank7) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank7;
 	elseif IsSpellKnown(ids.Rank.RaptorStrikeRank6) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank6;
 	elseif IsSpellKnown(ids.Rank.RaptorStrikeRank5) then ids.Ability.RaptorStrike = ids.Rank.RaptorStrikeRank5;

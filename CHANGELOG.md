@@ -6,6 +6,61 @@ This project began as a fork of [ConROC by Vae2009](https://github.com/Vae2009/C
 
 ---
 
+## [2.12.0] – Final Six Class Module Overhauls
+
+### Fixed
+
+- **Warlock – Nearly all spells capped at Classic-era ranks (level 56–60)** – The entire `ids.Rank` table and `UpdateSpellID()` function only covered spell ranks trainable up to level 60. Added approximately 40 missing TBC-level ranks across all three trees: Shadow Bolt R11, Immolate R9, Corruption R8, Curse of Agony R7, Life Tap R7, Drain Life R8, Drain Soul R5, Fear R3, Howl of Terror R2, Death Coil R4, Rain of Fire R5, Hellfire R4, Soul Fire R4, Searing Pain R8, Shadowburn R8, Seed of Corruption R1, Unstable Affliction R3, Health Funnel R8, Drain Mana R5, Siphon Life R6, Curse of Doom R2, Curse of the Elements R4, Curse of Recklessness R5, Curse of Tongues R2, Curse of Weakness R8, Banish R2, Create Healthstone / Soulstone / Firestone / Spellstone TBC ranks. All rank chains in `UpdateSpellID()` extended to TBC maximum.
+- **Warlock – SoD rotation branch was dead code** – `ConROC.Seasons.IsSoD` is always `false` on TBC client. Approximately 155 lines of SoD-specific rotation logic (Metamorphosis, Lake of Fire, Demonic Grace, Chaos Bolt, Haunt, etc.) never executed. Removed along with `ids.Engrave`, `ids.Runes`, and all SoD buff/debuff references.
+- **Warlock – Multiple abilities missing checkbox guards** – Several `tinsert(ConROC.SuggestedSpells, ...)` calls had no corresponding `ConROC:CheckBox()` guard, meaning those abilities were always suggested regardless of user preference. Added guards where missing.
+- **Warrior – Nearly all spells capped at Classic-era ranks** – Added TBC ranks: Heroic Strike R10, Bloodthirst R5–6, Mortal Strike R6, Shield Slam R5–6, Revenge R7–8, Sunder Armor R6, Thunder Clap R7, Execute R6–7, Whirlwind R1, Slam R5–6, Overpower R4, Hamstring R4, Rend R8–9, Battle Shout R8–9, Commanding Shout R2–3, Demoralizing Shout R7, Shield Block R1, Shield Wall R1, Disarm R1, and more. All `UpdateSpellID()` chains extended.
+- **Warrior – SoD rotation branch was dead code** – Approximately 127 lines of SoD logic (Flagellation, Single-Minded Fury, Quick Strike, etc.) removed along with `ids.Engrave`, `ids.Runes`, and SoD references.
+- **Warrior – Whirlwind missing checkbox guard** – Whirlwind was always suggested in the rotation with no user control. Added `ConROC:CheckBox()` guard.
+- **Paladin – SoD abilities in rotation (SealofMartyrdom, DivineStorm, HammeroftheRighteous, ShieldoftheRighteousness)** – These are SoD rune abilities that don't exist in TBC. Removed from all rotation paths (OOC seal selection, combat seal selection, AoE rotation, Protection rotation). Also removed Rebuke interrupt indicator (SoD-only).
+- **Paladin – Resistance Auras and RetributionAura missing TBC ranks** – FireResistanceAura R4, FrostResistanceAura R4, ShadowResistanceAura R4, RetributionAura R6 were absent from `ids.Rank` and `UpdateSpellID()`. Added all missing TBC ranks and extended chains.
+- **Paladin – Avenger's Shield missing from UpdateSpellID** – Rank chain for Avenger's Shield (R1–3) was not present in `UpdateSpellID()`. The ability always used the Rank 1 spell ID regardless of character level. Added the full chain.
+- **Mage – SoD rotation branch was dead code (~80 lines)** – IcyVeins rune, LivingFlame, LivingBomb, ArcaneBlast rune, ArcaneSurge, FrostfireBolt, and SoD fillers never executed. Removed along with `ids.Engrave`, `ids.Runes` (14 SoD spells), and `ids.Buff.FingersofFrost`.
+- **Mage – Nearly all spells capped at Classic-era ranks** – Added TBC ranks: Fireball R14, Frostbolt R14, Pyroblast R9–10, Scorch R8–9, Cone of Cold R6, Arcane Missiles R10–11, Fire Blast R8–9, Blast Wave R6–7, and more. All `UpdateSpellID()` chains extended.
+- **Mage – FireBlast had SoD-specific branch in UpdateSpellID** – The `if/else` chain checked for a `FireBlastSoD` rank that never existed in TBC. Replaced with a clean standard rank chain.
+- **Hunter – Arcane Shot missing checkbox guard (2 locations)** – Both the AoE rotation and single-target rotation inserted Arcane Shot without checking `ConROC:CheckBox(ConROC_SM_Ability_ArcaneShot)`. Players could not disable Arcane Shot via the UI. Added guards to both locations.
+- **Priest – Multiple spell rank chains capped at Classic-era ranks** – Extended UpdateSpellID chains for: GreaterHeal R6–7, Renew R11–12, ShadowWordPain R9–10, MindBlast R10–11, HolyFire R9, DevouringPlague R7, Smite R9–10, FlashHeal R8–9, HolyNova R7, Fade R7, Lightwell R4, DesperatePrayer R8, PrayerofFortitude R3, PrayerofSpirit R2, HexofWeakness R7, Shadowguard R7, TouchofWeakness R7. All existing chains now start from TBC maximum rank.
+- **Priest – DesperatePrayer, PrayerofSpirit missing from UpdateSpellID** – These abilities had rank entries but no rank resolution chain. Added full chains.
+- **Druid – Cat form rotation only shows Tiger's Fury and Mangle (user-reported)** – Six bugs combined to prevent Shred and Rip from ever appearing:
+  - Shred gated by `not ConROC:TarYou()` — returns false whenever mob targets you (solo/aggro), so Shred was never suggested in normal play. Removed the gate; player controls Shred via new checkbox.
+  - Mangle debuff maintenance had no energy cost check — suggested Mangle with 0 energy, creating a stuck recommendation consuming a rotation slot every evaluation.
+  - Mangle debuff duration returned nil — `nil <= 1.5` caused Mangle to always be top priority. Added nil-safety check. Also corrected simulated duration from 60s to 12s (TBC value).
+  - Mangle combo builder had no energy cost check — same stuck recommendation issue.
+  - Shred completely missing from spellmenu — players had no way to enable/disable it.
+  - Ferocious Bite had no checkbox guard — always fired at 5 combo points with no user control.
+  - Stealth opener Ravage also gated by `TarYou()` — same fix applied.
+  - Claw fallback used `TarYou()` as OR condition — now properly falls back only when Mangle is not talented.
+
+### Added
+
+- **Warlock – TBC abilities: Seed of Corruption, Unstable Affliction, Incinerate, Soulshatter** – Added spell IDs to `ids.Ability`. Soulshatter (29858) added to defense rotation with checkbox guard for threat management.
+- **Warrior – TBC abilities: Spell Reflection, Victory Rush, Commanding Shout, Intervene, Devastate** – Added spell IDs, TBC ranks, and `UpdateSpellID()` chains. Spell Reflection and Commanding Shout added to defense rotation. Victory Rush integrated into combat rotation. Devastate added as Protection combo filler.
+- **Paladin – TBC abilities: Crusader Strike, Avenger's Shield, Righteous Defense** – Moved CrusaderStrike (35395) from SoD `Runes` table to proper `ids.Ability`. Added full ability declarations and rotation integration. AvengersShield R1–3 chain added.
+- **Mage – TBC abilities: Arcane Blast, Ice Lance, Molten Armor** – Arcane Blast (30451) added as filler option (radio button, level 64). Ice Lance (30455) added with frozen-target check after Cone of Cold. Molten Armor (30482) added to defense rotation.
+- **Hunter – TBC abilities: Kill Command, Misdirection, Snake Trap** – Kill Command (34026) added to rotation after Bestial Wrath with pet-summoned check. Misdirection and Snake Trap spell IDs added for future use.
+- **Hunter – Arcane Shot spellmenu entry** – ArcaneShot was in the rotation but had no checkbox in the UI. Added to Abilities section (reqLevel=6).
+- **Priest – TBC abilities: Prayer of Mending, Binding Heal, Mass Dispel** – PrayerofMending (33076, level 68), BindingHeal (32546, level 64), and MassDispel (32375, level 70) added to `ids.Ability`. Prayer of Mending and Binding Heal integrated into defense rotation with checkbox guards. Added to spellmenu Spells section with role-appropriate defaults (enabled for Healer, disabled for Caster/PvP).
+- **Druid – Shred and Ferocious Bite spellmenu entries** – Added new "Abilities" section with Shred (level 22) and Ferocious Bite (level 32) checkboxes. Defaults: enabled for Melee role, disabled for Caster/Tank/Healer.
+- **Druid – Mangle Cat energy cost tracking** – Added `_MangleCat_COST` variable (45 base, reduced by Ferocity talent) so both Mangle debuff maintenance and Mangle combo builder properly check and deduct energy.
+
+### Removed
+
+- **Warlock – `ids.Engrave`, `ids.Runes`, SoD rotation branch** – All Season of Discovery dead code removed.
+- **Warrior – `ids.Engrave`, `ids.Runes`, SoD rotation branch** – All Season of Discovery dead code removed.
+- **Paladin – `ids.Engrave`, `ids.Runes`, SoD rotation references** – SealofMartyrdom, DivineStorm, HammeroftheRighteous, ShieldoftheRighteousness, Rebuke removed from rotation and spellmenu.
+- **Mage – `ids.Engrave`, `ids.Runes`, SoD rotation branch** – 14 SoD spells, FingersofFrost buff, FireBlastSoD ranks, and ~80 lines of SoD rotation logic removed.
+
+### Notes
+
+- This release completes the module overhaul process for all 9 playable classes. Every class now has full TBC spell rank coverage (61–70), proper `UpdateSpellID()` chains, checkbox guards on all suggested spells, and zero Season of Discovery dead code.
+- Net code change: −607 lines (577 added, 1184 removed) across 20 files.
+
+---
+
 ## [2.11.0] – TBC Talent Tree Indices for All Remaining Classes
 
 ### Fixed

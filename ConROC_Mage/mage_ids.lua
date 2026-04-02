@@ -17,6 +17,7 @@ ids.Caster = {
 ids.Ability = {
 --Arcane
 	AmplifyMagic = 1008,
+	ArcaneBlast = 30451,
 	ArcaneBrilliance = 23028,
 	ArcaneExplosion = 1449,
 	ArcaneIntellect = 1459,
@@ -33,6 +34,7 @@ ids.Ability = {
 	DampenMagic = 604,
 	DetectMagic = 2855,
 	Evocation = 12051,
+	Invisibility = 66,
 	MageArmor = 6117,
 	ManaShield = 1463,
 	PresenceofMind = 12043,
@@ -49,6 +51,7 @@ ids.Ability = {
 	Fireball = 133,
 	Flamestrike = 2120,
 	FlamestrikeDR = 2120,
+	MoltenArmor = 30482,
 	Pyroblast = 11366,
 	Scorch = 2948,
 --Frost
@@ -61,6 +64,7 @@ ids.Ability = {
 	IceArmor = 168,
 	IceBarrier = 11426,
 	IceBlock = 45438,
+	IceLance = 30455,
 	IcyVeins = 12472,
 	SummonWaterElemental = 31687,
 }
@@ -95,6 +99,8 @@ ids.Rank = {
 	ArcaneMissilesRank7 = 10212,
 	ArcaneMissilesRank8 = 25345,
 	ArcaneMissilesRank9 = 27075,
+	ArcaneMissilesRank10 = 38699,
+	ArcaneMissilesRank11 = 38704,
 	ConjureFoodRank1 = 587,
 	ConjureFoodRank2 = 597,
 	ConjureFoodRank3 = 990,
@@ -135,6 +141,8 @@ ids.Rank = {
 	BlastWaveRank3 = 13019,
 	BlastWaveRank4 = 13020,
 	BlastWaveRank5 = 13021,
+	BlastWaveRank6 = 27133,
+	BlastWaveRank7 = 33933,
 	DragonBreathRank1 = 31661,
 	DragonBreathRank2 = 33041,
 	DragonBreathRank3 = 33042,
@@ -146,13 +154,8 @@ ids.Rank = {
 	FireBlastRank5 = 8413,
 	FireBlastRank6 = 10197,
 	FireBlastRank7 = 10199,
-	FireBlastSoDRank1 = 400618,
-	FireBlastSoDRank2 = 400619,
-	FireBlastSoDRank3 = 400616,
-	FireBlastSoDRank4 = 400620,
-	FireBlastSoDRank5 = 400621,
-	FireBlastSoDRank6 = 400622,
-	FireBlastSoDRank7 = 400623,
+	FireBlastRank8 = 27078,
+	FireBlastRank9 = 27079,
 	FireWardRank1 = 543,
 	FireWardRank2 = 8457,
 	FireWardRank3 = 8458,
@@ -172,6 +175,7 @@ ids.Rank = {
 	FireballRank11 = 10151,
 	FireballRank12 = 25306,
 	FireballRank13 = 27070,
+	FireballRank14 = 38692,
 	FlamestrikeRank1 = 2120,
 	FlamestrikeRank2 = 2121,
 	FlamestrikeRank3 = 8422,
@@ -187,6 +191,8 @@ ids.Rank = {
 	PyroblastRank6 = 12525,
 	PyroblastRank7 = 12526,
 	PyroblastRank8 = 18809,
+	PyroblastRank9 = 27132,
+	PyroblastRank10 = 33938,
 	ScorchRank1 = 2948,
 	ScorchRank2 = 8444,
 	ScorchRank3 = 8445,
@@ -194,6 +200,8 @@ ids.Rank = {
 	ScorchRank5 = 10205,
 	ScorchRank6 = 10206,
 	ScorchRank7 = 10207,
+	ScorchRank8 = 27073,
+	ScorchRank9 = 27074,
 --Frost
 	BlizzardRank1 = 10,
 	BlizzardRank2 = 6141,
@@ -207,6 +215,7 @@ ids.Rank = {
 	ConeofColdRank3 = 10159,
 	ConeofColdRank4 = 10160,
 	ConeofColdRank5 = 10161,
+	ConeofColdRank6 = 27087,
 	FrostArmorRank1 = 168,
 	FrostArmorRank2 = 7300,
 	FrostArmorRank3 = 7301,
@@ -233,6 +242,7 @@ ids.Rank = {
 	FrostboltRank11 = 25304,
 	FrostboltRank12 = 27071,
 	FrostboltRank13 = 27072,
+	FrostboltRank14 = 38697,
 	IceBarrierRank1 = 11426,
 	IceBarrierRank2 = 13031,
 	IceBarrierRank3 = 13032,
@@ -317,30 +327,7 @@ ids.Frost_Talent = {
 	IceFloes =  20,
 	DeepFreeze =  21,
 }
--- SoD-only engraving system. Dead code on TBC servers.
-ids.Engrave = {
-	Overheat = 6734,
-}
--- SoD-only runes. Dead code on TBC servers.
-ids.Runes = {
-	ArcaneBlast = 400574,
-	ArcaneSurge = 425124,
-	FrostfireBolt = 401502,
-	FrozenOrb = 440802,
-	IceLance = 400640,
-	IcyVeins = 425121,
-	LivingBomb = 400613,
-	LivingFlame = 401556,
-	MassRegeneration = 412510,
-	MoltenArmor = 428741,
-	Regeneration = 401417,
-	RewindTime = 401462,
-	MissileBarrage = 400589,
-	SpellfrostBolt = 412532,
-}
--- Auras
 ids.Buff = {
-	FingersofFrost = 400647, -- SoD only, dead code on TBC
 }
 ids.Debuff = {
 	Chilled = 6136,
@@ -370,7 +357,9 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.ArcaneIntellectRank3) then ids.Ability.ArcaneIntellect = ids.Rank.ArcaneIntellectRank3;
 	elseif IsSpellKnown(ids.Rank.ArcaneIntellectRank2) then ids.Ability.ArcaneIntellect = ids.Rank.ArcaneIntellectRank2; end
 
-	if IsSpellKnown(ids.Rank.ArcaneMissilesRank9) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank9;
+	if IsSpellKnown(ids.Rank.ArcaneMissilesRank11) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank11;
+	elseif IsSpellKnown(ids.Rank.ArcaneMissilesRank10) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank10;
+	elseif IsSpellKnown(ids.Rank.ArcaneMissilesRank9) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank9;
 	elseif IsSpellKnown(ids.Rank.ArcaneMissilesRank8) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank8;
 	elseif IsSpellKnown(ids.Rank.ArcaneMissilesRank7) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank7;
 	elseif IsSpellKnown(ids.Rank.ArcaneMissilesRank6) then ids.Ability.ArcaneMissiles = ids.Rank.ArcaneMissilesRank6;
@@ -384,7 +373,9 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.DampenMagicRank3) then ids.Ability.DampenMagic = ids.Rank.DampenMagicRank3;
 	elseif IsSpellKnown(ids.Rank.DampenMagicRank2) then ids.Ability.DampenMagic = ids.Rank.DampenMagicRank2; end
 
-	if IsSpellKnown(ids.Rank.BlastWaveRank5) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank5;
+	if IsSpellKnown(ids.Rank.BlastWaveRank7) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank7;
+	elseif IsSpellKnown(ids.Rank.BlastWaveRank6) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank6;
+	elseif IsSpellKnown(ids.Rank.BlastWaveRank5) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank5;
 	elseif IsSpellKnown(ids.Rank.BlastWaveRank4) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank4;
 	elseif IsSpellKnown(ids.Rank.BlastWaveRank3) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank3;
 	elseif IsSpellKnown(ids.Rank.BlastWaveRank2) then ids.Ability.BlastWave = ids.Rank.BlastWaveRank2; end
@@ -394,22 +385,14 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.DragonBreathRank2) then ids.Ability.DragonBreath = ids.Rank.DragonBreathRank2;
 	elseif IsSpellKnown(ids.Rank.DragonBreathRank1) then ids.Ability.DragonBreath = ids.Rank.DragonBreathRank1; end
 
-	if ConROC.Seasons.IsSoD and ConROC:RuneEquipped(ids.Engrave.Overheat, "back") then
-		if IsSpellKnown(ids.Rank.FireBlastRank7) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank7;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank6) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank6;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank5) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank5;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank4) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank4;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank3) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank3;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank2) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank2;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank1) then ids.Ability.FireBlast = ids.Rank.FireBlastSoDRank1; end
-	else
-		if IsSpellKnown(ids.Rank.FireBlastRank7) then ids.Ability.FireBlast = ids.Rank.FireBlastRank7;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank6) then ids.Ability.FireBlast = ids.Rank.FireBlastRank6;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank5) then ids.Ability.FireBlast = ids.Rank.FireBlastRank5;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank4) then ids.Ability.FireBlast = ids.Rank.FireBlastRank4;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank3) then ids.Ability.FireBlast = ids.Rank.FireBlastRank3;
-		elseif IsSpellKnown(ids.Rank.FireBlastRank2) then ids.Ability.FireBlast = ids.Rank.FireBlastRank2; end
-	end
+	if IsSpellKnown(ids.Rank.FireBlastRank9) then ids.Ability.FireBlast = ids.Rank.FireBlastRank9;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank8) then ids.Ability.FireBlast = ids.Rank.FireBlastRank8;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank7) then ids.Ability.FireBlast = ids.Rank.FireBlastRank7;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank6) then ids.Ability.FireBlast = ids.Rank.FireBlastRank6;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank5) then ids.Ability.FireBlast = ids.Rank.FireBlastRank5;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank4) then ids.Ability.FireBlast = ids.Rank.FireBlastRank4;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank3) then ids.Ability.FireBlast = ids.Rank.FireBlastRank3;
+	elseif IsSpellKnown(ids.Rank.FireBlastRank2) then ids.Ability.FireBlast = ids.Rank.FireBlastRank2; end
 
 	if IsSpellKnown(ids.Rank.FireWardRank6) then ids.Ability.FireWard = ids.Rank.FireWardRank6;
 	elseif IsSpellKnown(ids.Rank.FireWardRank5) then ids.Ability.FireWard = ids.Rank.FireWardRank5;
@@ -418,7 +401,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.FireWardRank2) then ids.Ability.FireWard = ids.Rank.FireWardRank2; end
 
 	-- BUG FIX: Original code had Rank8 and Rank9 assignments swapped.
-	if IsSpellKnown(ids.Rank.FireballRank13) then ids.Ability.Fireball = ids.Rank.FireballRank13;
+	if IsSpellKnown(ids.Rank.FireballRank14) then ids.Ability.Fireball = ids.Rank.FireballRank14;
+	elseif IsSpellKnown(ids.Rank.FireballRank13) then ids.Ability.Fireball = ids.Rank.FireballRank13;
 	elseif IsSpellKnown(ids.Rank.FireballRank12) then ids.Ability.Fireball = ids.Rank.FireballRank12;
 	elseif IsSpellKnown(ids.Rank.FireballRank11) then ids.Ability.Fireball = ids.Rank.FireballRank11;
 	elseif IsSpellKnown(ids.Rank.FireballRank10) then ids.Ability.Fireball = ids.Rank.FireballRank10;
@@ -446,7 +430,9 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.FlamestrikeRank3) then ids.Ability.FlamestrikeDR = ids.Rank.FlamestrikeRank2;
 	elseif IsSpellKnown(ids.Rank.FlamestrikeRank2) then ids.Ability.FlamestrikeDR = ids.Rank.FlamestrikeRank1; end
 
-	if IsSpellKnown(ids.Rank.PyroblastRank8) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank8;
+	if IsSpellKnown(ids.Rank.PyroblastRank10) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank10;
+	elseif IsSpellKnown(ids.Rank.PyroblastRank9) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank9;
+	elseif IsSpellKnown(ids.Rank.PyroblastRank8) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank8;
 	elseif IsSpellKnown(ids.Rank.PyroblastRank7) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank7;
 	elseif IsSpellKnown(ids.Rank.PyroblastRank6) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank6;
 	elseif IsSpellKnown(ids.Rank.PyroblastRank5) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank5;
@@ -454,7 +440,9 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.PyroblastRank3) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank3;
 	elseif IsSpellKnown(ids.Rank.PyroblastRank2) then ids.Ability.Pyroblast = ids.Rank.PyroblastRank2; end
 
-	if IsSpellKnown(ids.Rank.ScorchRank7) then ids.Ability.Scorch = ids.Rank.ScorchRank7;
+	if IsSpellKnown(ids.Rank.ScorchRank9) then ids.Ability.Scorch = ids.Rank.ScorchRank9;
+	elseif IsSpellKnown(ids.Rank.ScorchRank8) then ids.Ability.Scorch = ids.Rank.ScorchRank8;
+	elseif IsSpellKnown(ids.Rank.ScorchRank7) then ids.Ability.Scorch = ids.Rank.ScorchRank7;
 	elseif IsSpellKnown(ids.Rank.ScorchRank6) then ids.Ability.Scorch = ids.Rank.ScorchRank6;
 	elseif IsSpellKnown(ids.Rank.ScorchRank5) then ids.Ability.Scorch = ids.Rank.ScorchRank5;
 	elseif IsSpellKnown(ids.Rank.ScorchRank4) then ids.Ability.Scorch = ids.Rank.ScorchRank4;
@@ -468,7 +456,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.BlizzardRank3) then ids.Ability.Blizzard = ids.Rank.BlizzardRank3;
 	elseif IsSpellKnown(ids.Rank.BlizzardRank2) then ids.Ability.Blizzard = ids.Rank.BlizzardRank2; end
 
-	if IsSpellKnown(ids.Rank.ConeofColdRank5) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank5;
+	if IsSpellKnown(ids.Rank.ConeofColdRank6) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank6;
+	elseif IsSpellKnown(ids.Rank.ConeofColdRank5) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank5;
 	elseif IsSpellKnown(ids.Rank.ConeofColdRank4) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank4;
 	elseif IsSpellKnown(ids.Rank.ConeofColdRank3) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank3;
 	elseif IsSpellKnown(ids.Rank.ConeofColdRank2) then ids.Ability.ConeofCold = ids.Rank.ConeofColdRank2; end
@@ -479,7 +468,8 @@ function ConROC:UpdateSpellID()
 	elseif IsSpellKnown(ids.Rank.FrostWardRank3) then ids.Ability.FrostWard = ids.Rank.FrostWardRank3;
 	elseif IsSpellKnown(ids.Rank.FrostWardRank2) then ids.Ability.FrostWard = ids.Rank.FrostWardRank2; end
 
-	if IsSpellKnown(ids.Rank.FrostboltRank13) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank13;
+	if IsSpellKnown(ids.Rank.FrostboltRank14) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank14;
+	elseif IsSpellKnown(ids.Rank.FrostboltRank13) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank13;
 	elseif IsSpellKnown(ids.Rank.FrostboltRank12) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank12;
 	elseif IsSpellKnown(ids.Rank.FrostboltRank11) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank11;
 	elseif IsSpellKnown(ids.Rank.FrostboltRank10) then ids.Ability.Frostbolt = ids.Rank.FrostboltRank10;

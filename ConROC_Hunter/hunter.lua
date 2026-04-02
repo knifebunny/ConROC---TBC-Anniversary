@@ -131,6 +131,9 @@ function ConROC.Hunter.Damage(_, timeShift, currentSpell, gcd)
 	local _WyvernSting, _WyvernSting_RDY = ConROC:AbilityReady(Ability.WyvernSting, timeShift);
 		local _WyvernSting_DEBUFF = ConROC:TargetAura(_WyvernSting, timeShift);
 
+--TBC Abilities
+	local _KillCommand, _KillCommand_RDY = ConROC:AbilityReady(Ability.KillCommand, timeShift);
+
 	local _AspectoftheHawk, _AspectoftheHawk_RDY = ConROC:AbilityReady(Ability.AspectoftheHawk, timeShift);
 		local _AspectoftheHawk_FORM = ConROC:Form(_AspectoftheHawk);
 	local _AspectoftheCheetah, _AspectoftheCheetah_RDY = ConROC:AbilityReady(Ability.AspectoftheCheetah, timeShift);
@@ -285,6 +288,13 @@ function ConROC.Hunter.Damage(_, timeShift, currentSpell, gcd)
 						break;
 					end
 
+					if ConROC:CheckBox(ConROC_SM_Ability_KillCommand) and _KillCommand_RDY and _in_combat and _Pet_summoned then
+						tinsert(ConROC.SuggestedSpells, _KillCommand);
+						_KillCommand_RDY = false;
+						_Queue = _Queue + 1;
+						break;
+					end
+
 					if ConROC:CheckBox(ConROC_SM_Ability_RapidFire) and _RapidFire_RDY and _in_combat then
 						tinsert(ConROC.SuggestedSpells, _RapidFire);
 						_RapidFire_RDY = false;
@@ -308,7 +318,7 @@ function ConROC.Hunter.Damage(_, timeShift, currentSpell, gcd)
 							break;
 						end
 
-						if _ArcaneShot_RDY and currentSpell ~= _AimedShot then
+						if ConROC:CheckBox(ConROC_SM_Ability_ArcaneShot) and _ArcaneShot_RDY and currentSpell ~= _AimedShot then
 							tinsert(ConROC.SuggestedSpells, _ArcaneShot);
 							_ArcaneShot_RDY = false;
 							_Queue = _Queue + 1;
@@ -363,7 +373,7 @@ function ConROC.Hunter.Damage(_, timeShift, currentSpell, gcd)
 						break;
 					end
 
-					if _ArcaneShot_RDY and currentSpell ~= _AimedShot then
+					if ConROC:CheckBox(ConROC_SM_Ability_ArcaneShot) and _ArcaneShot_RDY and currentSpell ~= _AimedShot then
 						tinsert(ConROC.SuggestedSpells, _ArcaneShot);
 						_ArcaneShot_RDY = false;
 						_Queue = _Queue + 1;
